@@ -1,0 +1,28 @@
+
+cycle de vie de DepotImageWeb
+
+
+pour main
+--- maven-resources-plugin:3.2.0:resources (default-resources) @ depot-image-web ---   => build angular
+			
+					https://github.com/eirslett/frontend-maven-plugin
+
+--- maven-compiler-plugin:3.8.1:compile (default-compile) @ depot-image-web ---
+
+
+pour test
+--- maven-resources-plugin:3.2.0:testResources (default-testResources) @ depot-image-web ---
+
+--- maven-compiler-plugin:3.8.1:testCompile (default-testCompile) @ depot-image-web ---
+
+tests unitaires
+--- maven-surefire-plugin:2.22.2:test (default-test) @ depot-image-web ---
+
+
+-- construction du war (pour tomcat)
+--- maven-war-plugin:3.3.1:war (default-war) @ depot-image-web ---
+
+--- spring-boot-maven-plugin:2.4.3:repackage (repackage) @ depot-image-web ---
+
+
+--- maven-install-plugin:2.5.2:install (default-install) @ depot-image-web ---

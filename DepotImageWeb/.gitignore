@@ -32,3 +32,5 @@ build/
 .vscode/
 /bin/
 /.mvn/
+/.attach_pid7730
+/.attach_pid13236
