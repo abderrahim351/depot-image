@@ -124,5 +124,8 @@
       }
     }
   },
-  "defaultProject": "DepotImageWeb"
+  "defaultProject": "DepotImageWeb",
+  "cli": {
+    "analytics": false
+  }
 }

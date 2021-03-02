@@ -1,0 +1,111 @@
+<p-toast></p-toast>
+
+<div class="card">
+  <p-toolbar styleClass="p-mb-4">
+    <ng-template pTemplate="left">
+      <button pButton pRipple label="New" icon="pi pi-plus" class="p-button-success p-mr-2" (click)="openNew()"></button>
+      <button pButton pRipple [label]="Delete" icon="pi pi-trash" class="p-button-danger" (click)="deleteSelectedProducts()" [disabled]="!selectedProducts || !selectedProducts.length"></button>
+    </ng-template>
+
+
+  </p-toolbar>
+
+  <p-table #dt [value]="utilisateurs" [rows]="5" [paginator]="true" [globalFilterFields]="['name','country.name','representative.name','status']"
+           [(selection)]="selectedProducts" [rowHover]="true" dataKey="id"
+           currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [showCurrentPageReport]="true">
+    <ng-template pTemplate="caption">
+      <div class="p-d-flex p-ai-center p-jc-between">
+        <h5 class="p-m-0">Liste d'utlisateur</h5>
+        <span class="p-input-icon-left">
+                    <i class="pi pi-search"></i>
+                    <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')" placeholder="Search..." />
+                </span>
+      </div>
+    </ng-template>
+    <ng-template pTemplate="header">
+      <tr>
+        <th style="width: 3rem">
+          <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+        </th>
+        <th pSortableColumn="name">nom <p-sortIcon field="name"></p-sortIcon></th>
+        <th pSortableColumn="price">prenom <p-sortIcon field="price"></p-sortIcon></th>
+        <th pSortableColumn="category">email <p-sortIcon field="category"></p-sortIcon></th>
+        <th pSortableColumn="rating">date de naissance <p-sortIcon field="rating"></p-sortIcon></th>
+        <th></th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-utilisateur >
+
+      <tr  >
+        <td>
+          <p-tableCheckbox [value]="utilisateurs"></p-tableCheckbox>
+        </td>
+        <td >{{utilisateur.nom}}</td>
+        <td >{{utilisateur.prenom }}</td>
+        <td >{{utilisateur.email}}</td>
+        <td >{{utilisateur.date_naissance}}</td>
+
+        <td>
+          <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success p-mr-2" (click)="editProduct(product)"></button>
+          <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning" (click)="deleteProduct(utilisateur)"></button>
+        </td>
+       </tr>
+     </ng-template>
+     <ng-template pTemplate="summary">
+       <div class="p-d-flex p-ai-center p-jc-between">
+         Ona on totale {{utilisateurs ? utilisateurs.length : 0 }} tilisateurs.
+       </div>
+     </ng-template>
+   </p-table>
+ </div>
+
+ <p-dialog [(visible)]="productDialog" [style]="{width: '450px'}" header="Nouveeau Utilisateur" [modal]="true" styleClass="p-fluid">
+   <ng-template pTemplate="content">
+     <div class="p-field">
+       <label for="name">nom</label>
+       <input type="text" pInputText id="name" [(ngModel)]="product.name" required autofocus />
+       <small class="p-invalid" *ngIf="submitted && !product.name">le champ nom est obligatoire.</small>
+     </div>
+     <div class="p-field">
+       <label for="name">prenom</label>
+       <input type="text" pInputText id="prenom" [(ngModel)]="product.name" required autofocus />
+       <small class="p-invalid" *ngIf="submitted && !product.name">le champ prenom est obligatoire.</small>
+     </div>
+     <div class="p-field">
+       <label for="name">email</label>
+       <input type="text" pInputText id="email" [(ngModel)]="product.name" required autofocus />
+       <small class="p-invalid" *ngIf="submitted && !product.name">le champ email est obligatoire</small>
+     </div>
+     <div class="p-field">
+       <label for="name">date_naissance</label>
+       <input type="text" pInputText id="date_naissance" [(ngModel)]="product.name" required autofocus />
+       <small class="p-invalid" *ngIf="submitted && !product.name">le champ date_naissance est obligatoire</small>
+     </div>
+
+
+     <div class="p-field">
+       <label class="p-mb-3">sex</label>
+       <div class="p-formgrid p-grid">
+         <div class="p-field-radiobutton p-col-6">
+           <p-radioButton id="category1" name="sex" value="Accessories" [(ngModel)]="product.category"></p-radioButton>
+           <label for="category1">Homme</label>
+         </div>
+         <div class="p-field-radiobutton p-col-6">
+           <p-radioButton id="category2" name="sex" value="Clothing" [(ngModel)]="product.category"></p-radioButton>
+           <label for="category2">Femme</label>
+         </div>
+
+
+       </div>
+     </div>
+
+
+   </ng-template>
+
+   <ng-template pTemplate="footer">
+     <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="hideDialog()"></button>
+     <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text" (click)="saveProduct()"></button>
+   </ng-template>
+ </p-dialog>
+
+ <p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>

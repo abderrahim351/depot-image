@@ -1,22 +1,20 @@
+<app-liste-utilisateur></app-liste-utilisateur>
 
-<p-card header="Simple Card" [style]="{'width': '25rem', 'margin-bottom': '2em'}">
+<!-- <p-table [value]="utilisateurs">
   <ng-template pTemplate="header">
-      
+    <tr>
+      <th>Code</th>
+      <th>Name</th>
+      <th>Category</th>
+      <th>Quantity</th>
+    </tr>
   </ng-template>
-  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore sed consequuntur error repudiandae numquam deserunt
-      quisquam repellat libero asperiores earum nam nobis, culpa ratione quam perferendis esse, cupiditate neque quas!</p>
-</p-card>
-
-<p-card header="Advanced Card" subheader="Card Subheader" [style]="{width: '360px'}" styleClass="p-card-shadow">
-  <ng-template pTemplate="header">
-      
+  <ng-template pTemplate="body" let-utilisateur>
+    <tr>
+      <td>{{utilisateur.nom}}</td>
+     <td>{{product.name}}</td>
+      <td>{{product.category}}</td>
+      <td>{{product.quantity}}</td>
+    </tr>
   </ng-template>
-  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore sed consequuntur error repudiandae numquam deserunt
-      quisquam repellat libero asperiores earum nam nobis, culpa ratione quam perferendis esse, cupiditate neque quas!</p>
-  <ng-template pTemplate="footer">
-    <button pButton label="Save" icon="pi pi-check"></button>
-      <button pButton  label="Cancel" icon="pi pi-times" styleClass="p-button-secondary" [style]="{'margin-left': '.5em'}">
-
-      </button>
-  </ng-template>
-</p-card>
+</p-table>-->
