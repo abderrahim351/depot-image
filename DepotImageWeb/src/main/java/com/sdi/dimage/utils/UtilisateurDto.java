@@ -1,8 +1,7 @@
 package com.sdi.dimage.utils;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import javax.xml.crypto.Data;
 
 @Entity
 @Table(name = "utilisateur")
@@ -10,21 +9,37 @@ import javax.persistence.Table;
 
 public class UtilisateurDto {
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id ;
+
     private String nom;
     private String prenom ;
     private String email;
     private String mot_de_passe;
+    private String sex;
+    private String date_naissance;
 
+    public String getSex() {
+        return sex;
+    }
 
+    public void setSex(String sex) {
+        this.sex = sex;
+    }
+
+    public String getDate_naissance() {
+        return date_naissance;
+    }
+
+    public void setDate_naissance(String date_naissance) {
+        this.date_naissance = date_naissance;
+    }
 
     public Integer getId() {
         return id;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
+
 
     public String getNom() {
         return nom;

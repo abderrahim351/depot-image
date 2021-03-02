@@ -28,10 +28,16 @@ public class TestService {
         }
         return null;
     }
-    public UtilisateurDto enregistrer(UtilisateurDto utl){
+    //enregistrer utilisateur
+    public String enregistrer(UtilisateurDto utl){
         UtilisateurDto uti=this.ut.save(utl);
-        return uti;
+        return "user enregistrer";
 
+    }
+    //supprimer_utilisateur_par_son_id
+    public String SupprimerUtilisateur(Integer id){
+        this.ut.deleteById(id);
+        return "supprimé";
     }
 }
 

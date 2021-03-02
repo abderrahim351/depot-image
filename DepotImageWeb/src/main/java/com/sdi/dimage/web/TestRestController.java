@@ -28,9 +28,15 @@ public class TestRestController {
         return this.service.testconnexion(email,passe);
     }
     @PostMapping("/utilisateur/enregistrer")
-    public UtilisateurDto enregistrer(@RequestBody UtilisateurDto util){
+    public String enregistrer(@RequestBody UtilisateurDto util){
        return this.service.enregistrer(util);
 
+
+    }
+
+    @GetMapping("/utilisateur/supprimer/{id}")
+    public String SupprimerUtilisateur(@PathVariable Integer id ){
+      return   this.service.SupprimerUtilisateur(id);
 
     }
 }
