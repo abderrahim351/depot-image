@@ -29,16 +29,24 @@ import { MessageService } from 'primeng/api';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { ListeUtilisateurComponent } from './admin/liste-utilisateur/liste-utilisateur.component';
 import {ProductService} from './admin/liste-utilisateur/productservice';
+import { HeaderComponent } from './vues/header/header.component';
+import { FooterComponent } from './vues/footer/footer.component';
+import { LoginComponent } from './login/login.component';
+import { AppRoutingModule } from './app-routing.module';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    ListeUtilisateurComponent
+    ListeUtilisateurComponent,
+    HeaderComponent,
+    FooterComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    AppRoutingModule,
     TableModule,
     CalendarModule,
     SliderModule,
