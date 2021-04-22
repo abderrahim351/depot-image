@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { LoginService } from './login.service';
 
 @Component({
@@ -11,7 +12,9 @@ import { LoginService } from './login.service';
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
 
-  constructor(private fb: FormBuilder, private service: LoginService) {}
+  constructor(private fb: FormBuilder,
+    private router: Router,
+    private service: LoginService) {}
 
   ngOnInit(): void {
     this.loginForm = this.fb.group({
@@ -21,7 +24,6 @@ export class LoginComponent implements OnInit {
   }
 
   login(): void {
-    console.log('Debut Login');
 
     this.service
       .login({
@@ -30,9 +32,8 @@ export class LoginComponent implements OnInit {
       })
       .toPromise()
       .then(() => {
-        console.log('Login OK');
+        this.router.navigate(['/accueil']);
       });
 
-    console.log('FIN Login');
   }
 }

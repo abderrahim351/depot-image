@@ -1,4 +1,6 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Router } from '@angular/router';
+import { CurrentUser, LoginService } from 'src/app/login/login.service';
 
 @Component({
   selector: 'app-header',
@@ -8,9 +10,23 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor() { }
+  currentUser: CurrentUser;
+
+  constructor(private loginService: LoginService,
+    private router: Router,) { }
 
   ngOnInit(): void {
+
+    this.loginService.currentUserSession().subscribe(u => this.currentUser = u);
+
+  }
+
+  deconnexion(){
+    this.loginService.logout()
+    .toPromise()
+    .then(() => {
+      this.router.navigate(['/login']);
+    });
   }
 
 }

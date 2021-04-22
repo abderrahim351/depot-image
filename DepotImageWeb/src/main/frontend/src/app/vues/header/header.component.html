@@ -1,4 +1,15 @@
-<div class="dmage-header">
+<div class="dmage-header p-d-flex p-jc-between p-ai-center">
+  <div>
+    LOGO
+  </div>
+  <div class="p-d-flex">
+    <div>Menu</div>
 
-  header work
+    <div *ngIf="currentUser">
+      Bonjour {{currentUser.prenoms}} {{currentUser.nom}} !
+
+      <button pButton pRipple (click)="deconnexion()" type="button" label="Déconnexion" icon="pi pi-power-off" iconPos="right" class="p-button-rounded p-button-danger p-button-raised"></button>
+
+    </div>
+  </div>
 </div>

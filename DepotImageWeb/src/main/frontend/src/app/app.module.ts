@@ -35,15 +35,17 @@ import { LoginComponent } from './login/login.component';
 import { AppRoutingModule } from './app-routing.module';
 import { CardModule } from 'primeng/card';
 import { PasswordModule } from 'primeng/password';
+import { AccueilComponent } from './accueil/accueil.component';
 
 @NgModule({
-  declarations: [
+  declarations: [	
     AppComponent,
     ListeUtilisateurComponent,
     HeaderComponent,
     FooterComponent,
     LoginComponent,
-  ],
+      AccueilComponent
+   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
