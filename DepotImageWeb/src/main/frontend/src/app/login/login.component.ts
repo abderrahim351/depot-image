@@ -30,10 +30,14 @@ export class LoginComponent implements OnInit {
         username: this.loginForm.get('username').value,
         password: this.loginForm.get('password').value,
       })
-      .toPromise()
-      .then(() => {
+      .subscribe((data:any)=>{
+        console.log(data);
         this.router.navigate(['/accueil']);
-      });
+      })
+      
+        ;
 
   }
+
+
 }

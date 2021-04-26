@@ -38,6 +38,7 @@ public class UtilisateurService {
 		usd.setId(ut.getId());
 		usd.setNom(ut.getNom());
 		usd.setPrenoms(ut.getPrenoms());
+		usd.setAdresseEmail(ut.getAdresseEmail());
 		//TODO complte
 		
 		return usd;

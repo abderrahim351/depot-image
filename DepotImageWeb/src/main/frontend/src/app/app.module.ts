@@ -4,6 +4,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
+import {ToggleButtonModule} from 'primeng/togglebutton';
+
+import {CheckboxModule} from 'primeng/checkbox';
 
 import { AppComponent } from './app.component';
 
@@ -36,6 +39,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { CardModule } from 'primeng/card';
 import { PasswordModule } from 'primeng/password';
 import { AccueilComponent } from './accueil/accueil.component';
+import { NouveauImageComponent } from './nouveau-image/nouveau-image.component';
 
 @NgModule({
   declarations: [	
@@ -44,7 +48,8 @@ import { AccueilComponent } from './accueil/accueil.component';
     HeaderComponent,
     FooterComponent,
     LoginComponent,
-      AccueilComponent
+      AccueilComponent,
+      NouveauImageComponent
    ],
   imports: [
     BrowserModule,
@@ -73,6 +78,8 @@ import { AccueilComponent } from './accueil/accueil.component';
     InputTextareaModule,
     CardModule,
     PasswordModule,
+    CheckboxModule,
+    ToggleButtonModule,
   ],
   providers: [ProductService, MessageService, ConfirmationService],
   bootstrap: [AppComponent],

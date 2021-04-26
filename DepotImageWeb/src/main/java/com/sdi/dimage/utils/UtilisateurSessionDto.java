@@ -11,6 +11,19 @@ public class UtilisateurSessionDto {
     
     private String groupe;
 
+	@Override
+	public String toString() {
+		return "UtilisateurSessionDto{" +
+				"id=" + id +
+				", identifiant='" + identifiant + '\'' +
+				", nom='" + nom + '\'' +
+				", prenoms='" + prenoms + '\'' +
+				", civilite='" + civilite + '\'' +
+				", adresseEmail='" + adresseEmail + '\'' +
+				", groupe='" + groupe + '\'' +
+				'}';
+	}
+
 	public Integer getId() {
 		return id;
 	}

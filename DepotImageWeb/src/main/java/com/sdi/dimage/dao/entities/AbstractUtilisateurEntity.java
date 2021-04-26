@@ -14,16 +14,18 @@ public abstract class AbstractUtilisateurEntity {
     @GeneratedValue(strategy = GenerationType.AUTO)
 
     private Integer id;
+    @Column(name = "identifiant")
     private String identifiant;
     private String nom;
     private String prenoms;
     private String civilite;
+    @Column(name = "date_naissance")
     private String dateNaissance;
     private String adresseEmail;
     private String telMobile;
     private String telFix;
     private String adresse;
-
+@Column(name = "mot_de_passe")
     private String motDePasse;
     
     public String getMotDePasse() {

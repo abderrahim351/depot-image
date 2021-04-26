@@ -6,23 +6,32 @@ import com.drew.imaging.ImageProcessingException;
 import com.drew.metadata.Directory;
 import com.drew.metadata.Metadata;
 import com.drew.metadata.Tag;
-import com.sdi.dimage.dao.entities.AbstractUtilisateurEntity;
+import com.sdi.dimage.dao.entities.DocumentEntity;
 import com.sdi.dimage.dao.entities.ImageEntity;
 import com.sdi.dimage.dao.entities.UtilisateurEntity;
+import com.sdi.dimage.dao.repositories.DocumentRepositery;
 import com.sdi.dimage.dao.repositories.ImageRepository;
+import com.sdi.dimage.dao.repositories.UtlisateurRepository;
+import com.sdi.dimage.utils.DocumentModel;
+import com.sdi.dimage.utils.UtilisateurSessionDto;
+import com.sun.tools.jconsole.JConsoleContext;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
 public class ImageService {
     @Autowired
     private ImageRepository imageRepo;
+    @Autowired
+    private DocumentRepositery documentRepositery;
+    @Autowired
+    private UtlisateurRepository utlisateurRepository;
     private ImageEntity img =new ImageEntity();
     private int S;
     private String ch;
@@ -97,6 +106,32 @@ imageRepo.save(this.img);
     //liste des images
     public List<ImageEntity> getphoto(){
        return this.imageRepo.findAll();
+
+    }
+
+
+    public void enregistrerImage(DocumentModel document, UtilisateurSessionDto user){
+
+        DocumentEntity doc =new DocumentEntity();
+        doc.setTitre(document.getTitre());
+        doc.setSousTitre(document.getSousTitre());
+        doc.setDescription(document.getDescription());
+        doc.setEstPublique(document.getPublique());
+        doc.setStatut(null);
+        doc.setImages(null);
+        doc.setImagePrincipal(null);
+        UtilisateurEntity utl =new UtilisateurEntity();
+        String ch=user.getIdentifiant();
+
+        doc.setCreePar(utl);
+        doc.setCommentaires(null);
+        doc.setCreeLe(LocalDateTime.now());
+        doc.setId(1);
+
+        documentRepositery.save(doc) ;
+        System.out.println(doc.getCreeLe());
+        System.out.println(user);
+
 
     }
 }

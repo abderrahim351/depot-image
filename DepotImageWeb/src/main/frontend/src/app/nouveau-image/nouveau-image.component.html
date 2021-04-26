@@ -1,0 +1,34 @@
+<div class="p-grid">
+    <div class="p-col-8 p-offset-2">
+        <form [formGroup]="ImageForm" (ngSubmit)="ajouter()">
+             <p-card  header="+nouveau-image">
+            
+            <div class="p-fluid">
+                <div class="p-field">
+                    <label for="titre">Titre</label>
+                    <input id="titre" type="text" formControlName="titre" pInputText> 
+                </div>
+                <div class="p-field">
+                    <label for="soustitre">Sous titre</label>
+                    <input id="soustitre" type="text" formControlName="soustitre" pInputText> 
+                </div>
+                <div class="p-field p-col-12">
+                    <label for="description">Description</label>
+                    <textarea id="description" type="text" rows="4" formControlName="description" pInputTextarea></textarea>
+                </div>
+                <div class="p-field-checkbox">
+
+                    <p-checkbox [(ngModel)]="checked" binary="true" inputId="binary"formControlName="publique" (onChange)="publique()"></p-checkbox>
+                    <label for="binary">{{publique1}}</label>
+                </div>
+            </div>
+            <footer>
+            <button pButton pRipple type="button" (click)="ajouter()" label="Enregistrer" class="p-button-raised"></button>
+            </footer>    
+        </p-card>
+        </form>
+        </div>
+    </div>
+
+
+
