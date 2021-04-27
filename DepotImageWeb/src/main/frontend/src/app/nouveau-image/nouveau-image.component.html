@@ -1,16 +1,25 @@
 <div class="p-grid">
-    <div class="p-col-8 p-offset-2">
-        <form [formGroup]="ImageForm" (ngSubmit)="ajouter()">
+  <div class="p-col-5">
+
+    <p-fileUpload name="demo[]" url="./upload.php" (onUpload)="onUpload($event)" [showUploadButton]="false"
+    accept="image/*" maxFileSize="1000000" previewWidth="400" chooseLabel="Choisir image" cancelLabel="Annuler">
+
+
+  </p-fileUpload>
+
+  </div>
+    <div class="p-col-7">
+        <form [formGroup]="imageForm" (ngSubmit)="ajouter()">
              <p-card  header="+nouveau-image">
-            
+
             <div class="p-fluid">
                 <div class="p-field">
                     <label for="titre">Titre</label>
-                    <input id="titre" type="text" formControlName="titre" pInputText> 
+                    <input id="titre" type="text" formControlName="titre" pInputText>
                 </div>
                 <div class="p-field">
                     <label for="soustitre">Sous titre</label>
-                    <input id="soustitre" type="text" formControlName="soustitre" pInputText> 
+                    <input id="soustitre" type="text" formControlName="soustitre" pInputText>
                 </div>
                 <div class="p-field p-col-12">
                     <label for="description">Description</label>
@@ -24,7 +33,7 @@
             </div>
             <footer>
             <button pButton pRipple type="button" (click)="ajouter()" label="Enregistrer" class="p-button-raised"></button>
-            </footer>    
+            </footer>
         </p-card>
         </form>
         </div>

@@ -6,7 +6,7 @@ import { LoginComponent } from './login/login.component';
 import { NouveauImageComponent } from './nouveau-image/nouveau-image.component';
 
 const routes: Routes = [
-  {path : '' , redirectTo : 'accueil', pathMatch: 'full'} ,
+  {path : '' , redirectTo : 'nouveau-image', pathMatch: 'full'} ,
   {path : 'login' , component : LoginComponent },
   {path : 'accueil' , component : AccueilComponent , canActivate :  [AuthGuard]},
   {path : 'nouveau-image' , component : NouveauImageComponent , canActivate :  [AuthGuard]}

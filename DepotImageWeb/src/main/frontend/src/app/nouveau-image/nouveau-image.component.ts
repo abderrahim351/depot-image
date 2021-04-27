@@ -9,29 +9,35 @@ import { ImageService } from './image.service';
 })
 export class NouveauImageComponent implements OnInit {
   checked: boolean = false;
-  ImageForm:FormGroup;
+  imageForm:FormGroup;
    publique1:string;
+
+   uploadedFiles: any[] = [];
+
   constructor(private fb:FormBuilder, private service: ImageService) { }
 
   ngOnInit(): void {
-    this.ImageForm = this.fb.group({
-      titre: ['', [Validators.required, Validators.email]],
-      soustitre: ['', Validators.required],
-      description: ['', Validators.required],
-      publique: ['', Validators.required],
-    
+    this.imageForm = this.fb.group({
+      titre: [null, [Validators.required, Validators.email]],
+      soustitre: [null, Validators.required],
+      description: [null, Validators.required],
+      publique: [false, Validators.required],
+
     });
     this.publique();
   }
   ajouter(){
     this.service.ajouter({
-      titre: this.ImageForm.get('titre').value,
-      soustitre: this.ImageForm.get('soustitre').value,
-      description: this.ImageForm.get('description').value,
-      publique: this.ImageForm.get('publique').value,
+      titre: this.imageForm.get('titre').value,
+      soustitre: this.imageForm.get('soustitre').value,
+      description: this.imageForm.get('description').value,
+      publique: this.imageForm.get('publique').value,
 
     }).subscribe((data:any)=>{
       console.log(data);
+
+      //upload image
+
     });
   }
   publique(){
@@ -41,5 +47,10 @@ export class NouveauImageComponent implements OnInit {
       this.publique1='privé';
     }
   }
-  
+
+  onUpload(event) {
+    console.log('on upload!!');
+
+}
+
 }

@@ -42,7 +42,7 @@ import { AccueilComponent } from './accueil/accueil.component';
 import { NouveauImageComponent } from './nouveau-image/nouveau-image.component';
 
 @NgModule({
-  declarations: [	
+  declarations: [
     AppComponent,
     ListeUtilisateurComponent,
     HeaderComponent,
