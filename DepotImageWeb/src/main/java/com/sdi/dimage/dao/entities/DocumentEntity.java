@@ -3,7 +3,9 @@ package com.sdi.dimage.dao.entities;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 @Entity
 @Table(name = "document")
@@ -11,7 +13,9 @@ import java.util.Set;
 public class DocumentEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id")
     private Integer id;
+    
     private LocalDateTime creeLe;
     private String titre;
     @Column(name ="sous_titre" )
@@ -19,9 +23,18 @@ public class DocumentEntity {
     private String description;
     private Boolean estPublique;
     private String statut;
-
+    
+    @JoinColumn(name = "id_image_principal", referencedColumnName = "id" )
+    @OneToOne
+    private ImageEntity imagePrincipal;
+    
     @OneToMany
-    private Set<ImageEntity> images = new HashSet<>();
+    private Set<CommentaireEntity> commentaires;
+    @ManyToOne
+    private AbstractUtilisateurEntity creePar;
+    
+    @OneToMany(mappedBy = "document")
+    private List<ImageEntity> images = new ArrayList<>();
 
     public Integer getId() {
         return id;
@@ -79,14 +92,6 @@ public class DocumentEntity {
         this.statut = statut;
     }
 
-    public Set<ImageEntity> getImages() {
-        return images;
-    }
-
-    public void setImages(Set<ImageEntity> images) {
-        this.images = images;
-    }
-
     public ImageEntity getImagePrincipal() {
         return imagePrincipal;
     }
@@ -111,11 +116,12 @@ public class DocumentEntity {
         this.creePar = creePar;
     }
 
-    @OneToOne
-    private ImageEntity imagePrincipal;
-    @OneToMany
-    private Set<CommentaireEntity> commentaires;
-    @ManyToOne
-    private AbstractUtilisateurEntity creePar;
+    public List<ImageEntity> getImages() {
+		return images;
+	}
+    
+    public void setImages(List<ImageEntity> images) {
+		this.images = images;
+	}
 
 }

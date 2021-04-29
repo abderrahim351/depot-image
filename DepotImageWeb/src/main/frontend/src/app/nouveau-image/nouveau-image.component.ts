@@ -11,6 +11,9 @@ import { ImageService } from './image.service';
   styleUrls: ['./nouveau-image.component.scss']
 })
 export class NouveauImageComponent implements OnInit {
+
+  block = false;
+
   checked: boolean = false;
   imageForm:FormGroup;
    publique1:string;
@@ -37,6 +40,9 @@ export class NouveauImageComponent implements OnInit {
   }
 
   ajouter(){
+
+    this.block = true;
+
     console.log(this.imageForm.get('publique').value);
 
     this.service.ajouter({
@@ -54,16 +60,10 @@ export class NouveauImageComponent implements OnInit {
       this.pFileUpload.upload();
 
       console.log("document ajouter");
-      this.service.uploadimg(this.formdata1).subscribe((data:any)=>{
-        console.log("image ajouter");
-      })
-
-
-
-
 
     });
   }
+
   publiquefn(){
     if (this.checked==true)
     this.publique1='publique';
@@ -72,25 +72,11 @@ export class NouveauImageComponent implements OnInit {
     }
   }
 
-  onUpload(files) {
+  onUpload($event) {
 
-
-    let image = files.item(0);
-
-    console.log(files)
-
-    // console.log("test1");
-    // console.log(event.target.files[0]);
-    // console.log(event.target.files[0].type);
-    let formData = new FormData();
-  formData.append('file',image);
-
-      this.formdata1=new FormData();
-      this.formdata1=formData;
-
-
-
-
+    console.log('upload done !');
+    this.block = false;
+    this.messageService.add({severity: 'info', summary: 'File Uploaded', detail: ''});
 }
 
 }

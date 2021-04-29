@@ -32,6 +32,8 @@ public class ImageService {
     private DocumentRepositery documentRepositery;
     @Autowired
     private UtlisateurRepository utlisateurRepository;
+    
+    
     private ImageEntity img =new ImageEntity();
     private int S;
     private String ch;
@@ -48,7 +50,7 @@ public class ImageService {
         Metadata metadata = ImageMetadataReader.readMetadata(new File("C:\\Users\\abder\\OneDrive\\Desktop\\depot-image\\DepotImageWeb\\src\\main\\frontend\\src\\assets\\" + file.getOriginalFilename()));
         this.utl.setNom("jamaaoui");
         this.utl.setAdresseEmail("abderrahim@gmail");
-        this.img.setCheminFichier("assets/" + file.getOriginalFilename());
+        //this.img.setCheminFichier("assets/" + file.getOriginalFilename());
         this.img.setCreePar(null);
         this.img.setDescription("azerty");
         this.img.setaPartirDe(null);
@@ -84,11 +86,11 @@ public class ImageService {
                         this.ch=tag.getDescription().substring(0,this.S);
                         this.taille=Integer.parseInt(this.ch);
                         System.out.println(this.taille);
-                        this.img.setTailleFichier(this.taille);
+                        //this.img.setTailleFichier(this.taille);
                         break;
                     }
                     case "File Modified Date":
-                        this.img.setCreeLe(tag.getDescription());
+                        //this.img.setCreeLe(tag.getDescription());
                         break;
                     case "Detected File Type Long Name":
                         this.img.setAppareil(tag.getDescription());
@@ -126,8 +128,8 @@ imageRepo.save(this.img);
         doc.setEstPublique(document.getPublique());
         System.out.print(document.getPublique());
         doc.setStatut(null);
-        doc.setImages(null);
-        doc.setImagePrincipal(null);
+        //doc.setImages(null);
+        //doc.setImagePrincipal(null);
         
 
 
@@ -142,4 +144,35 @@ imageRepo.save(this.img);
 
 
     }
+
+	public void uplodfile(Integer idDoc, MultipartFile imageFile,
+			UtilisateurSessionDto user) throws IOException {
+
+		DocumentEntity doc = documentRepositery.getOne(idDoc);
+		
+		ImageEntity img = new ImageEntity();
+		
+		img.setDocument(doc);
+		img.setContenu(imageFile.getBytes());
+		img.setTailleFichier(imageFile.getSize());
+		img.setTypeFichier(imageFile.getContentType());
+
+		img.setDescription(doc.getDescription());
+		
+		img.setCreePar(utlisateurRepository.getOne(user.getId()));
+		img.setCreeLe(LocalDateTime.now());
+		
+		imageRepo.save(img);
+		
+		doc.setImagePrincipal(img);
+		
+		documentRepositery.save(doc);
+		
+	}
+
+	public ImageEntity getImagePrincipale(Integer idDoc) {
+
+		
+		return documentRepositery.getOne(idDoc).getImagePrincipal();
+	}
 }

@@ -11,16 +11,40 @@ public class ImageEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id")
     private Integer id;
     private String name ;
-    private String cheminFichier;
+    
+	@Column(name = "contenu_fichier")
+	private byte[] contenu;
+	
     private String typeFichier;
-    private Integer tailleFichier;
-    private String creeLe;
+    private Long tailleFichier;
+    
+    private LocalDateTime creeLe;
     private String type;
     private String resolution;
     private String largeur;
     private String hauteur;
+    private String appareil;
+    private String lieu;
+    private String description;
+    private String metadata;
+    
+    @ManyToOne
+    private AbstractUtilisateurEntity creePar;
+    
+    // id of document
+    @JoinColumn(name = "fk_id_document", referencedColumnName = "id")
+    @ManyToOne
+    private DocumentEntity document;
+    
+    @OneToMany
+    private Set<CommentaireEntity> commentaires;
+    
+    @OneToOne
+    private ImageEntity aPartirDe ;
+
 
     public String getName() {
         return name;
@@ -30,19 +54,6 @@ public class ImageEntity {
         this.name = name;
     }
 
-    private String appareil;
-    private String lieu;
-    private String description;
-    private String metadata;
-    @ManyToOne
-    private AbstractUtilisateurEntity creePar;
-    @ManyToOne
-    private DocumentEntity document;
-    @OneToMany
-    private Set<CommentaireEntity> commentaires;
-    @OneToOne
-    private ImageEntity aPartirDe ;
-
     public Integer getId() {
         return id;
     }
@@ -51,15 +62,15 @@ public class ImageEntity {
         this.id = id;
     }
 
-    public String getCheminFichier() {
-        return cheminFichier;
-    }
+    public byte[] getContenu() {
+		return contenu;
+	}
 
-    public void setCheminFichier(String cheminFichier) {
-        this.cheminFichier = cheminFichier;
-    }
+	public void setContenu(byte[] contenu) {
+		this.contenu = contenu;
+	}
 
-    public String getTypeFichier() {
+	public String getTypeFichier() {
         return typeFichier;
     }
 
@@ -67,19 +78,19 @@ public class ImageEntity {
         this.typeFichier = typeFichier;
     }
 
-    public Integer getTailleFichier() {
+    public Long getTailleFichier() {
         return tailleFichier;
     }
 
-    public void setTailleFichier(Integer tailleFichier) {
+    public void setTailleFichier(Long tailleFichier) {
         this.tailleFichier = tailleFichier;
     }
 
-    public String getCreeLe() {
+    public LocalDateTime getCreeLe() {
         return creeLe;
     }
 
-    public void setCreeLe(String creeLe) {
+    public void setCreeLe(LocalDateTime creeLe) {
         this.creeLe = creeLe;
     }
 
