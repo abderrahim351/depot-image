@@ -5,7 +5,7 @@ public class DocumentModel {
     private String titre;
     private String sousTitre;
     private String description;
-    private Boolean publique ;
+    private Boolean publique=false ;
     public String getTitre() {
         return titre;
     }

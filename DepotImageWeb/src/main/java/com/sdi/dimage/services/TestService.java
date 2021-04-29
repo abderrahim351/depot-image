@@ -1,6 +1,7 @@
 package com.sdi.dimage.services;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,9 +11,11 @@ import org.springframework.stereotype.Service;
 
 import com.sdi.dimage.dao.entities.AbstractUtilisateurEntity;
 import com.sdi.dimage.dao.entities.AdministrateurEntity;
+import com.sdi.dimage.dao.entities.DocumentEntity;
 import com.sdi.dimage.dao.entities.GestionnaireEntity;
 import com.sdi.dimage.dao.entities.UtilisateurEntity;
 import com.sdi.dimage.dao.repositories.CommentaireRepositery;
+import com.sdi.dimage.dao.repositories.DocumentRepositery;
 import com.sdi.dimage.dao.repositories.ImageRepository;
 import com.sdi.dimage.dao.repositories.UtlisateurRepository;
 
@@ -23,12 +26,17 @@ public class TestService {
     @Autowired
     private  JavaMailSender javaMailSender;
     @Autowired
+    private  DocumentRepositery  doc;
+    @Autowired
         private UtlisateurRepository userRepo;
     @Autowired
         private ImageRepository imageRepo;
     @Autowired
     private CommentaireRepositery commentairerepo ;
 //fonctions utilisateur
+    public DocumentEntity test() {
+    	return doc.findById(2).get();
+    }
 
     //listes des utilisateurs
     public List<AbstractUtilisateurEntity> getUser() {

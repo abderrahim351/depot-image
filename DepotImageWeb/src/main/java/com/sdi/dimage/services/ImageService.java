@@ -39,8 +39,11 @@ public class ImageService {
     private UtilisateurEntity utl =new UtilisateurEntity();
 
     private int taille ;
-    public void uplodfile(MultipartFile file) throws IOException, ImageProcessingException {
+    
+    public void uplodfile(MultipartFile file ) throws IOException, ImageProcessingException {
         File f =new File("C:\\Users\\abder\\OneDrive\\Desktop\\depot-image\\DepotImageWeb\\src\\main\\frontend\\src\\assets\\"+file.getOriginalFilename());
+        f.createNewFile();
+        System.out.println(file.toString());
         file.transferTo(f);
         Metadata metadata = ImageMetadataReader.readMetadata(new File("C:\\Users\\abder\\OneDrive\\Desktop\\depot-image\\DepotImageWeb\\src\\main\\frontend\\src\\assets\\" + file.getOriginalFilename()));
         this.utl.setNom("jamaaoui");
@@ -49,8 +52,10 @@ public class ImageService {
         this.img.setCreePar(null);
         this.img.setDescription("azerty");
         this.img.setaPartirDe(null);
+        
         this.img.setCommentaires(null);
-        this.img.setDocument(null);
+        
+        this.img.setDocument(this.documentRepositery.findById(2).get());
         this.img.setLieu("kairouan");
         this.img.setMetadata("metadata");
         this.img.setResolution("500");
@@ -108,29 +113,32 @@ imageRepo.save(this.img);
        return this.imageRepo.findAll();
 
     }
+    public List<DocumentEntity> getdoc(){
+        return this.documentRepositery.findAll();
+    }
 
-
-    public void enregistrerImage(DocumentModel document, UtilisateurSessionDto user){
+    public Integer enregistrerdoc(DocumentModel document, UtilisateurSessionDto user){
 
         DocumentEntity doc =new DocumentEntity();
         doc.setTitre(document.getTitre());
         doc.setSousTitre(document.getSousTitre());
         doc.setDescription(document.getDescription());
         doc.setEstPublique(document.getPublique());
+        System.out.print(document.getPublique());
         doc.setStatut(null);
         doc.setImages(null);
         doc.setImagePrincipal(null);
-        UtilisateurEntity utl =new UtilisateurEntity();
-        String ch=user.getIdentifiant();
+        
 
-        doc.setCreePar(utl);
+
+        doc.setCreePar(null);
         doc.setCommentaires(null);
         doc.setCreeLe(LocalDateTime.now());
-        doc.setId(1);
+       
 
         documentRepositery.save(doc) ;
-        System.out.println(doc.getCreeLe());
-        System.out.println(user);
+        return doc.getId();
+       
 
 
     }

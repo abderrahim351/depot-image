@@ -2,6 +2,7 @@ package com.sdi.dimage.web;
 
 import com.sdi.dimage.dao.entities.AbstractUtilisateurEntity;
 import com.sdi.dimage.dao.entities.AdministrateurEntity;
+import com.sdi.dimage.dao.entities.DocumentEntity;
 import com.sdi.dimage.dao.entities.GestionnaireEntity;
 import com.sdi.dimage.dao.entities.UtilisateurEntity;
 import com.sdi.dimage.services.TestService;
@@ -14,6 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 
 @RestController
@@ -22,7 +24,7 @@ public class TestRestController {
 
    @Autowired
     private TestService service;
-
+   
 
 
 
@@ -33,6 +35,12 @@ public class TestRestController {
     public void sendSimpleMessage() {
 
       // service.sendmail("abderrahimjamaaoui4@gmail.com");
+
+    }
+    @GetMapping("/user")
+    public DocumentEntity user() {
+
+    return this.service.test();
 
     }
  //enregistrer image

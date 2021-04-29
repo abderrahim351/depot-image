@@ -9,7 +9,6 @@ import {ToggleButtonModule} from 'primeng/togglebutton';
 import {CheckboxModule} from 'primeng/checkbox';
 
 import { AppComponent } from './app.component';
-
 import { TableModule } from 'primeng/table';
 import { ToastModule } from 'primeng/toast';
 import { CalendarModule } from 'primeng/calendar';
@@ -80,6 +79,7 @@ import { NouveauImageComponent } from './nouveau-image/nouveau-image.component';
     PasswordModule,
     CheckboxModule,
     ToggleButtonModule,
+   
   ],
   providers: [ProductService, MessageService, ConfirmationService],
   bootstrap: [AppComponent],
