@@ -29,6 +29,7 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ConfirmationService } from 'primeng/api';
 import { MessageService } from 'primeng/api';
 import { InputTextareaModule } from 'primeng/inputtextarea';
+import {PanelModule} from 'primeng/panel';
 import { ListeUtilisateurComponent } from './admin/liste-utilisateur/liste-utilisateur.component';
 import { ProductService } from './admin/liste-utilisateur/productservice';
 import { HeaderComponent } from './vues/header/header.component';
@@ -79,7 +80,7 @@ import { NouveauImageComponent } from './nouveau-image/nouveau-image.component';
     PasswordModule,
     CheckboxModule,
     ToggleButtonModule,
-   
+    PanelModule
   ],
   providers: [ProductService, MessageService, ConfirmationService],
   bootstrap: [AppComponent],

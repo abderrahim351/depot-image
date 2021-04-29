@@ -1,45 +1,49 @@
-<div class="p-grid">
-    
-  <div class="p-col-3">
 
-    
-
-  </div>
-    <div class="p-col-7">
-        <form [formGroup]="imageForm" (ngSubmit)="ajouter()">
-             <p-card  header="+nouveau-image">
-
-            <div class="p-fluid">
-                <div class="p-field">
-                    <label for="titre">Titre</label>
-                    <input id="titre" type="text" formControlName="titre" pInputText>
-                </div>
-                <div class="p-field">
-                    <label for="sousTitre">Sous titre</label>
-                    <input id="soustitre" type="text" formControlName="sousTitre" pInputText>
-                </div>
-                <div class="p-field p-col-12">
-                    <label for="description">Description</label>
-                    <textarea id="description" type="text" rows="4" formControlName="description" pInputTextarea></textarea>
-                </div>
-                <div class="p-field-checkbox">
-
-                    <p-checkbox [(ngModel)]="checked" binary="true" inputId="binary" (onChange)="publiquefn()"formControlName="publique"></p-checkbox>
-                    <label for="binary">{{publique1}}</label>
-                </div>
-                <div class="p-field p-col-12">
-                    <input type="file" (change)="onUpload($event.target.files)"  >
-                </div>            
-              
-            </div>
-            <footer>
-            <button pButton pRipple type="button" (click)="ajouter()" label="Enregistrer" class="p-button-raised"></button>
-            </footer>
-        </p-card>
-       
-        </form>
-        </div>
+<p-card  >
+  <p-header>
+    <div class="p-text-center">
+      <h2>Nouvelle image</h2>
     </div>
 
+  </p-header>
+  <div class="p-grid">
+    <div class="p-col-6">
 
+      <p-panel>
 
+      <form [formGroup]="imageForm" (ngSubmit)="ajouter()">
+
+       <div class="p-fluid p-formgrid p-grid">
+           <div class="p-col-12 p-field">
+               <label for="titre">Titre</label>
+               <input id="titre" type="text" formControlName="titre" pInputText>
+           </div>
+           <div class="p-col-12 p-field">
+               <label for="sousTitre">Sous titre</label>
+               <input id="soustitre" type="text" formControlName="sousTitre" pInputText>
+           </div>
+           <div class="p-field p-col-12">
+               <label for="description">Description</label>
+               <textarea id="description" type="text" rows="4" formControlName="description" pInputTextarea></textarea>
+           </div>
+           <div class="p-col-12 p-field-checkbox">
+
+               <p-checkbox [(ngModel)]="checked" binary="true" inputId="binary" (onChange)="publiquefn()"formControlName="publique"></p-checkbox>
+               <label for="binary">{{publique1}}</label>
+           </div>
+       </div>
+       </form>
+      </p-panel>
+
+    </div>
+    <div class="p-col-6">
+      <p-fileUpload #pFileUpload name="demo[]" url="./upload.php" accept="image/*" maxFileSize="1000000" ></p-fileUpload>
+
+    </div>
+
+  </div>
+  <p-footer>
+    <button pButton type="button" label="Enregistrer" (click)="ajouter()" ></button>
+  </p-footer>
+</p-card>
+<div class="p-grid">
