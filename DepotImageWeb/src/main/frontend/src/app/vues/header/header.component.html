@@ -1,4 +1,4 @@
-<div class="dmage-header p-d-flex p-jc-between p-ai-center">
+<!--<div class="dmage-header p-d-flex p-jc-between p-ai-center">
   <div>
     LOGO
   </div>
@@ -12,4 +12,21 @@
 
     </div>
   </div>
+</div>
+
+  <ng-template pTemplate="end" style="margin-left: unset;">
+    <div *ngIf="currentUser" class="p-ml-3">
+      Bonjour {{currentUser.prenoms}} {{currentUser.nom}} !
+      <button pButton pRipple (click)="deconnexion()" type="button" label="Déconnexion" icon="pi pi-power-off" iconPos="right" class="p-button-rounded p-button-danger p-button-raised"></button>
+    </div>
+  </ng-template>
+
+-->
+<div class="dmage-header">
+<p-menubar [model]="items">
+  <ng-template pTemplate="start" style="margin-right: auto;">
+      <img src="assets/showcase/images/primeng.svg" height="40" class="p-mr-2">
+  </ng-template>
+
+</p-menubar>
 </div>

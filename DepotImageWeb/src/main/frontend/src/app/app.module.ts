@@ -31,6 +31,9 @@ import { ConfirmationService } from 'primeng/api';
 import { MessageService } from 'primeng/api';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import {PanelModule} from 'primeng/panel';
+import {MenubarModule} from 'primeng/menubar';
+import {MenuItem} from 'primeng/api';
+
 import { ListeUtilisateurComponent } from './admin/liste-utilisateur/liste-utilisateur.component';
 import { ProductService } from './admin/liste-utilisateur/productservice';
 import { HeaderComponent } from './vues/header/header.component';
@@ -85,7 +88,8 @@ import {DataViewModule} from 'primeng/dataview';
     ToggleButtonModule,
     PanelModule,
     CarouselModule,
-    DataViewModule
+    DataViewModule,
+    MenubarModule
   ],
   providers: [ProductService, MessageService, ConfirmationService,acceuilservice],
   bootstrap: [AppComponent],
