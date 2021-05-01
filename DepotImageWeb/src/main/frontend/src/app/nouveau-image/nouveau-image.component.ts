@@ -21,6 +21,7 @@ export class NouveauImageComponent implements OnInit {
    uploadedFiles: any[] = [];
   b:boolean=false;
   formdata1;
+  url="api/document/img/12";
 
   @ViewChild('pFileUpload') pFileUpload : FileUpload;
 
@@ -60,6 +61,7 @@ export class NouveauImageComponent implements OnInit {
       this.pFileUpload.upload();
 
       console.log("document ajouter");
+
 
     });
   }

@@ -39,26 +39,15 @@ public class UtilisateurController {
 	
 
 	//afficher tous les utilisateurs
-	@CrossOrigin(origins = "http://localhost:4200")
 	@GetMapping("/utilisateur")
 	public List<AbstractUtilisateurEntity> getuser() {
 
 
 		return this.service.getUser();
 	}
-	@GetMapping("/utilisateur1")
-	public AbstractUtilisateurEntity getutl() {
-
-
-		return this.service.getUser().get(0);
-	}
-
-
-
 
 
 	//ajouter utilisateur
-	//@CrossOrigin(origins = "http://localhost:4200")
 	@PostMapping("/utilisateur")
 	public String AddUser(@RequestBody UtilisateurEntity utl) {
 
@@ -66,7 +55,6 @@ public class UtilisateurController {
 
 	}
 	//ajouter gestionnaire
-	//@CrossOrigin(origins = "http://localhost:4200")
 	@PostMapping("/gestionnaire")
 	public String AddGestionnaire(@RequestBody GestionnaireEntity utl) {
 
@@ -74,7 +62,6 @@ public class UtilisateurController {
 
 	}
 	//ajouter administrateur
-	//@CrossOrigin(origins = "http://localhost:4200")
 	@PostMapping("/admin")
 	public String AddAdministrateur(@RequestBody AdministrateurEntity utl) {
 
@@ -82,7 +69,6 @@ public class UtilisateurController {
 
 	}
 	//supprimer utilisateur
-	@CrossOrigin(origins = "http://localhost:4200")
 	@GetMapping("/utilisateur/{id}")
 	public void   SupprimerUtilisateur(@PathVariable Integer id) {
 		  this.service.SupprimerUtilisateur(id);

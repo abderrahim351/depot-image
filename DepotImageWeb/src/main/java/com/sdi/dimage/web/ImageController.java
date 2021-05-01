@@ -35,8 +35,11 @@ public class ImageController extends AbstractController{
 			HttpServletRequest request) {
 		UtilisateurSessionDto user = getUserSession(request);
 		return this.service.enregistrerdoc(img, user);
-
 	}
+
+   
+    
+  
 
 	//enregistrer image
 	@PostMapping("/document/{idDoc}/upload")

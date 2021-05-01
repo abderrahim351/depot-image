@@ -5,7 +5,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
 import {ToggleButtonModule} from 'primeng/togglebutton';
-
+import {CarouselModule} from 'primeng/carousel';
+import { acceuilservice } from '../app/accueil/acceuilservice';
 import {CheckboxModule} from 'primeng/checkbox';
 
 import { AppComponent } from './app.component';
@@ -40,6 +41,8 @@ import { CardModule } from 'primeng/card';
 import { PasswordModule } from 'primeng/password';
 import { AccueilComponent } from './accueil/accueil.component';
 import { NouveauImageComponent } from './nouveau-image/nouveau-image.component';
+import {DataViewModule} from 'primeng/dataview';
+
 
 @NgModule({
   declarations: [
@@ -80,9 +83,12 @@ import { NouveauImageComponent } from './nouveau-image/nouveau-image.component';
     PasswordModule,
     CheckboxModule,
     ToggleButtonModule,
-    PanelModule
+    PanelModule,
+    CarouselModule,
+    DataViewModule
   ],
-  providers: [ProductService, MessageService, ConfirmationService],
+  providers: [ProductService, MessageService, ConfirmationService,acceuilservice],
   bootstrap: [AppComponent],
+
 })
 export class AppModule {}

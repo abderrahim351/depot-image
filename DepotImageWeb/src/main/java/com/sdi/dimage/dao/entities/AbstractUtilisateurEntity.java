@@ -27,6 +27,10 @@ public abstract class AbstractUtilisateurEntity {
     private String adresse;
 @Column(name = "mot_de_passe")
     private String motDePasse;
+	private String codePostale;
+	private String ville;
+	private String pays;
+
     
     public String getMotDePasse() {
         return motDePasse;
@@ -44,10 +48,7 @@ public abstract class AbstractUtilisateurEntity {
         this.dateNaissance = dateNaissance;
     }
 
-    private String codePostale;
-    private String ville;
-    private String pays;
-
+   
     public Integer getId() {
         return id;
     }

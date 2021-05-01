@@ -1,4 +1,4 @@
-
+<<
 <p-card  >
   <p-header>
     <div class="p-text-center">
@@ -37,11 +37,11 @@
 
     </div>
     <div class="p-col-6">
-      <p-fileUpload #pFileUpload name="image-file" accept="image/*"
+      <p-fileUpload #pFileUpload name="image-file" 
       (onUpload)="onUpload($event)" ></p-fileUpload>
 
     </div>
-
+    <img [src]=url />
   </div>
   <p-footer>
     <button pButton type="button" label="Enregistrer" (click)="ajouter()" ></button>

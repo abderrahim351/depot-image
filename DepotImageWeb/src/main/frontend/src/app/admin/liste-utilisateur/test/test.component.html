@@ -1,0 +1,61 @@
+<div class="p-col-8 p-offset-2">
+    <p-card header="Gestion des utilisateurs" subheader="Card Subheader" styleClass="p-card-shadow">
+        <ng-template pTemplate="header">
+
+        </ng-template>
+        <p-dialog header="Nouveau Utilisateur" [(visible)]="ajouter" [modal]="true" [style]="{width: '50vw'}"
+            [baseZIndex]="10000" [draggable]="false" [resizable]="false">
+            <form>
+                <hr>
+    <div class="p-grid p-formgrid p-fluid">
+        <div class="p-col-12 p-mb-2 p-lg-6 p-mb-lg-0">
+            <input type="text" placeholder="Prénom" pInputText>
+        </div>
+        <div class="p-col-12 p-mb-2 p-lg-6 p-mb-lg-0">
+            <input type="text" placeholder="Nom de famille" pInputText>
+        </div>
+        
+        <div class="p-col-12 p-mb-2 p-lg-12 p-mb-lg-0">
+
+            <input type="email" placeholder="adresse email" pInputText>
+        </div>
+        <div class="p-col-12 p-mb-2 p-lg-12 p-mb-lg-0">
+            
+            <input type="date" pInputText>
+            <label for="pseudo">date de naissance</label>
+            
+        </div>
+        
+<div class="p-field-radiobutton">
+    <p-radioButton name="city" value="Chicago" inputId="city1"></p-radioButton>
+    <label for="city1">homme</label>
+</div>
+<div class="p-field-radiobutton">
+    <p-radioButton name="city" value="Los Angeles" inputId="city2"></p-radioButton>
+    <label for="city2">femme</label>
+</div></div>
+
+
+
+
+
+        
+    
+
+
+
+            </form>
+        </p-dialog>
+
+        <p-button (click)="ajouter_utl()" label="New" icon="pi pi-plus" class="p-mr-2"></p-button>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore sed consequuntur error repudiandae
+            numquam deserunt
+            quisquam repellat libero asperiores earum nam nobis, culpa ratione quam perferendis esse, cupiditate neque
+            quas!</p>
+        <ng-template pTemplate="footer">
+            <p-button label="Save" icon="pi pi-check"></p-button>
+            <p-button label="Cancel" icon="pi pi-times" styleClass="p-button-secondary"
+                [style]="{'margin-left': '.5em'}"></p-button>
+        </ng-template>
+    </p-card>
+</div>

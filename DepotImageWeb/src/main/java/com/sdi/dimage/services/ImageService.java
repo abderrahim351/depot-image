@@ -42,7 +42,7 @@ public class ImageService {
 
     private int taille ;
     
-    public void uplodfile(MultipartFile file ) throws IOException, ImageProcessingException {
+    /*public void uplodfile(MultipartFile file ) throws IOException, ImageProcessingException {
         File f =new File("C:\\Users\\abder\\OneDrive\\Desktop\\depot-image\\DepotImageWeb\\src\\main\\frontend\\src\\assets\\"+file.getOriginalFilename());
         f.createNewFile();
         System.out.println(file.toString());
@@ -108,7 +108,7 @@ public class ImageService {
 
 
 imageRepo.save(this.img);
-    }
+    }*/
 
     //liste des images
     public List<ImageEntity> getphoto(){
