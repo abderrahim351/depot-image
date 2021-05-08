@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MessageService } from 'primeng/api';
 import { FileUpload } from 'primeng/fileupload';
 import { ImageService } from './image.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-nouveau-image',
@@ -17,20 +18,17 @@ export class NouveauImageComponent implements OnInit {
   checked: boolean = false;
   imageForm:FormGroup;
    publique1:string;
-   f1:File;
-   uploadedFiles: any[] = [];
-  b:boolean=false;
-  formdata1;
-  url="api/document/img/12";
+   
+  
 
   @ViewChild('pFileUpload') pFileUpload : FileUpload;
 
 
-  constructor(private fb:FormBuilder, private service: ImageService,private messageService: MessageService ) { }
+  constructor(private fb:FormBuilder, private service: ImageService,private messageService: MessageService , private router: Router) { }
 
   ngOnInit(): void {
     this.imageForm = this.fb.group({
-      titre: ["", [Validators.required, Validators.email]],
+      titre: ["", [Validators.required]],
       sousTitre: ["", Validators.required],
       description: ["", Validators.required],
       publique: [false, Validators.required],
@@ -41,11 +39,6 @@ export class NouveauImageComponent implements OnInit {
   }
 
   ajouter(){
-
-    this.block = true;
-
-    console.log(this.imageForm.get('publique').value);
-
     this.service.ajouter({
       titre: this.imageForm.get('titre').value,
       sousTitre: this.imageForm.get('sousTitre').value,
@@ -61,9 +54,19 @@ export class NouveauImageComponent implements OnInit {
       this.pFileUpload.upload();
 
       console.log("document ajouter");
+      setTimeout(
+        ()=>{
+          this.router.navigate(['/accueil']);
+        },2000
+      )
+      
 
 
     });
+    
+  }
+  annuler(){
+    this.router.navigate(['/accueil']);
   }
 
   publiquefn(){

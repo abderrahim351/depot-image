@@ -11,9 +11,8 @@ export interface ajouterutl {
   nom: string;
   prenom: string;
   email:string;
-  date_naissance:string;
-  sex:string;
-  passe:any;
+  role:string;
+  
 }
 @Injectable({
   providedIn: 'root'

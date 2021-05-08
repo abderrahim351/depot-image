@@ -133,7 +133,7 @@ imageRepo.save(this.img);
         
 
 
-        doc.setCreePar(null);
+        doc.setCreePar(utlisateurRepository.getOne(user.getId()));
         doc.setCommentaires(null);
         doc.setCreeLe(LocalDateTime.now());
        

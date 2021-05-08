@@ -37,14 +37,18 @@
 
     </div>
     <div class="p-col-6">
-      <p-fileUpload #pFileUpload name="image-file"
+      <p-fileUpload #pFileUpload name="image-file"[showUploadButton]="false"[showCancelButton]="false"
       (onUpload)="onUpload($event)" ></p-fileUpload>
 
     </div>
-    <img [src]=url />
   </div>
-  <p-footer>
-    <button pButton type="button" label="Enregistrer" (click)="ajouter()" ></button>
+  <p-footer >
+    <div class="p-d-flex p-jc-center">
+      <button pButton type="button" label="Enregistrer" (click)="ajouter()"  class="p-mr-2 p-mb-2"></button>
+    <button pButton type="button" label="annuler" (click)="annuler()" class="p-mr-2 p-mb-2"></button>
+    </div>
+    
+    
   </p-footer>
 </p-card>
 <div class="p-grid">

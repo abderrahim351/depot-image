@@ -4,14 +4,18 @@ import {SelectItem} from 'primeng/api';
 import { PrimeNGConfig } from 'primeng/api';
 import { acceuilservice } from './acceuilservice';
 import { Product } from './product';
+import {Document} from './document';
+import { documentservice } from './document.service';
 @Component({
   selector: 'app-accueil',
   templateUrl: './accueil.component.html',
   styleUrls: ['./accueil.component.scss']
 })
 export class AccueilComponent implements OnInit {
-  
+  url="api/document/img/2";
+    a=2;
   products: Product[];
+  documents:Document[];
 
   sortOptions: SelectItem[];
 
@@ -19,9 +23,13 @@ export class AccueilComponent implements OnInit {
 
   sortField: string;
 
-  constructor(private productService: acceuilservice, private primengConfig: PrimeNGConfig) { }
+  constructor(private productService: acceuilservice, private primengConfig: PrimeNGConfig,private docservice :documentservice) { }
 
   ngOnInit() {
+      this.docservice.getdoc().subscribe((data:any)=>{
+          this.documents=data;
+          console.log(this.documents);
+      })
       this.productService.getProducts().then(data => this.products = data);
 
       this.sortOptions = [
