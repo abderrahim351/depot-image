@@ -30,10 +30,11 @@ public class DocumentEntity {
     
     @OneToMany
     private Set<CommentaireEntity> commentaires;
-    @ManyToOne
+    @JoinColumn(name = "cree_par_id", referencedColumnName = "id")
+    @ManyToOne()
     private AbstractUtilisateurEntity creePar;
     
-    @OneToMany(mappedBy = "document")
+    @OneToMany(mappedBy = "document",cascade = CascadeType.REMOVE)
     private List<ImageEntity> images = new ArrayList<>();
 
     public Integer getId() {

@@ -14,33 +14,41 @@ export interface ajouterutl {
   role:string;
   
 }
+export interface modifierutl {
+  id:number;
+  nom: string;
+  prenom: string;
+  email:string;
+  role:string;
+  
+}
 @Injectable({
   providedIn: 'root'
 })
 export class AdminServiceService {
   constructor(private http: HttpClient) { }
-  // tslint:disable-next-line:typedef
+
   get_utilisateurs(){
     return this.http.get('api/utilisateur',optionRequete);
   }
-  // tslint:disable-next-line:typedef
+
   deletutilisateur(id: any){
     return this.http.get('api/utilisateur/'+id);
   }
   ajouter_utilisateur(x:ajouterutl){
     console.log(x);
-    return this.http.post('api/test/utilisateur/enregistrer',x,optionRequete);
+    return this.http.post('api/utilisateur',x,optionRequete);
   }
-  modifier_utilisateur(x:Utilisateur){
+  modifier_utilisateur(x:modifierutl){
     console.log(x);
-    return this.http.post('api/test/utilisateur/enregistrer',x,optionRequete);
+    return this.http.post('api/utilisateur/modifer',x,optionRequete);
   }
   test_ajouter(x : any){
-    return this.http.get('api/test/utilisateur/test_par_email/'+x);
+    return this.http.get('api/utilisateur/test/'+x);
     
   }
   test_modification(x : Utilisateur){
-    return this.http.post('api/test/utilisateur/test_modification',x);
+    return this.http.post('api/utilisateur/test_modification',x);
 
 }
 }

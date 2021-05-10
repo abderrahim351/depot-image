@@ -175,4 +175,9 @@ imageRepo.save(this.img);
 		
 		return documentRepositery.getOne(idDoc).getImagePrincipal();
 	}
+	public String supprimerdoc(int id) {
+		this.documentRepositery.deleteById(id);
+		return "supprimer";
+		
+	}
 }

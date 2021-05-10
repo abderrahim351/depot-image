@@ -2,6 +2,9 @@ package com.sdi.dimage.dao.entities;
 
 
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.*;
 
 @Entity
@@ -30,7 +33,9 @@ public abstract class AbstractUtilisateurEntity {
 	private String codePostale;
 	private String ville;
 	private String pays;
-
+	@OneToMany(mappedBy = "creePar",cascade = CascadeType.REMOVE)
+    private List<DocumentEntity> documents = new ArrayList<>();
+	
     
     public String getMotDePasse() {
         return motDePasse;

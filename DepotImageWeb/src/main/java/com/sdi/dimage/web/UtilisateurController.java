@@ -7,10 +7,14 @@ import javax.servlet.http.HttpServletRequest;
 import com.sdi.dimage.dao.entities.*;
 import com.sdi.dimage.dao.repositories.ImageRepository;
 import com.sdi.dimage.services.TestService;
+import com.sdi.dimage.services.UtilisateurService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import com.sdi.dimage.utils.LoginModel;
+import com.sdi.dimage.utils.UtilisateurModel;
+
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.view.RedirectView;
 
@@ -22,6 +26,8 @@ import java.util.List;
 public class UtilisateurController {
 	@Autowired
 	private TestService service;
+	@Autowired
+	private UtilisateurService ultservice;
 	@Autowired
 	private ImageRepository imageRepo;
 
@@ -45,35 +51,36 @@ public class UtilisateurController {
 
 		return this.service.getUser();
 	}
+	
+	//ajouter  utilisateur
+		@PostMapping("/utilisateur")
+		public void AddUser(@RequestBody UtilisateurModel utl) {
 
+			 service.role(utl);
 
-	//ajouter utilisateur
-	@PostMapping("/utilisateur")
-	public String AddUser(@RequestBody UtilisateurEntity utl) {
+		}
 
-		return service.adduser(utl);
-
-	}
-	//ajouter gestionnaire
-	@PostMapping("/gestionnaire")
-	public String AddGestionnaire(@RequestBody GestionnaireEntity utl) {
-
-		return service.addGestionnaire(utl);
-
-	}
-	//ajouter administrateur
-	@PostMapping("/admin")
-	public String AddAdministrateur(@RequestBody AdministrateurEntity utl) {
-
-		return service.addAdmin(utl);
-
-	}
 	//supprimer utilisateur
 	@GetMapping("/utilisateur/{id}")
 	public void   SupprimerUtilisateur(@PathVariable Integer id) {
 		  this.service.SupprimerUtilisateur(id);
 
 	}
-
 	
+	//tester l'existance d'une email
+	@GetMapping("/utilisateur/test/{email}")
+	public boolean test_par_mail(@PathVariable String email) {
+	      return   this.ultservice.test_par_email(email);
+	    }
+
+	//tester l'existance d'une email cas de modification
+	@PostMapping("/utilisateur/test_modification")
+	public boolean test_modification(@RequestBody UtilisateurEntity utl) {
+	      return   this.ultservice.test_modification(utl);
+	    }
+	//modifier utilisateur
+		@PostMapping("/utilisateur/modifer")
+		public void modofier(@RequestBody UtilisateurModel utl) {
+		         this.ultservice.modifier(utl);
+		    }
 }

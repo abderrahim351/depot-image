@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Product } from './product';
-import { ProductService } from './productservice';
+
 import { ConfirmationService } from 'primeng/api';
 import { MessageService } from 'primeng/api';
 import { AdminServiceService } from "../admin-service.service";
@@ -39,12 +38,9 @@ export class ListeUtilisateurComponent implements OnInit {
   utl: Utilisateur
 
   b: boolean;
-  products: Product[];
+  
 
-  product: Product;
-
-  selectedProducts: Product[];
-
+ 
   submitted: boolean;
 
   constructor(private fb: FormBuilder, private messageService: MessageService, private confirmationService: ConfirmationService, private service: AdminServiceService) { }
@@ -52,7 +48,7 @@ export class ListeUtilisateurComponent implements OnInit {
   ngOnInit() {
     this.roles=[
       {name:"admin"},
-      {name:"gesrtionnaire"},
+      {name:"gestionnaire"},
       {name:"utilisateur"}
 
     ];
@@ -68,14 +64,14 @@ export class ListeUtilisateurComponent implements OnInit {
         this.utilisateurs.values['b']=false;
       }
     })
+   
   }
   initUtiliateurForm() {
     this.utilisateurForm = this.fb.group({
       nom: ['', Validators.required],
-      prenom: ['', Validators.required],
+      prenoms: ['', Validators.required],
       email: ['', Validators.email],
-      date: ['', Validators.required],
-      role: ['', Validators.required],
+      role: ["utilisateur", Validators.required],
 
 
     });
@@ -84,10 +80,10 @@ export class ListeUtilisateurComponent implements OnInit {
   initialiserModification(utl: Utilisateur) {
     this.utilisateurForm = this.fb.group({
       nom: [utl.nom, Validators.required],
-      prenom: [utl.prenoms, Validators.required],
+      prenoms: [utl.prenoms, Validators.required],
       email: [utl.adresseEmail, Validators.email],
-      date: [utl.dateNaissance, Validators.required],
-      sex: [utl.sex, Validators.required],
+      role: [, Validators.required],
+      
 
 
     })
@@ -100,16 +96,18 @@ export class ListeUtilisateurComponent implements OnInit {
         if (this.b == true) {
           alert('utilisateur existe');
         }
+        
         else {
+          console.log(this.utilisateurForm.get('role').value["name"]);
           this.service.ajouter_utilisateur({
             nom: this.utilisateurForm.get('nom').value,
-            prenom: this.utilisateurForm.get('prenom').value,
+            prenom: this.utilisateurForm.get('prenoms').value,
             email: this.utilisateurForm.get('email').value,
-            date_naissance: this.utilisateurForm.get('date').value,
-            sex: this.utilisateurForm.get('sex').value,
-            passe: "aaaa"
+            role: this.utilisateurForm.get('role').value["name"],
+            
+            
           }).subscribe((data: any) => {
-            console.log(data);
+            console.log(data)
             this.utilisateurDialog=false;
             this.ngOnInit();
             
@@ -121,15 +119,19 @@ export class ListeUtilisateurComponent implements OnInit {
     }
     else {
       this.utl.nom = this.utilisateurForm.get('nom').value,
-        this.utl.prenoms = this.utilisateurForm.get('prenom').value,
+        this.utl.prenoms = this.utilisateurForm.get('prenoms').value,
         this.utl.adresseEmail = this.utilisateurForm.get('email').value,
-        this.utl.dateNaissance = this.utilisateurForm.get('date').value,
-        this.utl.sex = this.utilisateurForm.get('sex').value,
         this.service.test_modification(this.utl).subscribe((data:boolean)=>{
           if(data==true){
             alert("cette email existe deja pour un autre utilisateur");
           }
-          else{this.service.modifier_utilisateur(this.utl).subscribe((data: any) => {
+          else{this.service.modifier_utilisateur({
+            id:this.utl.id,
+            nom:this.utl.nom,
+            prenom:this.utl.prenoms,
+            email:this.utl.adresseEmail,
+            role:this.utilisateurForm.get('role').value["name"],
+          }).subscribe((data: any) => {
             console.log(data);
             this.utilisateurDialog=false;
             this.ngOnInit();
@@ -141,14 +143,14 @@ export class ListeUtilisateurComponent implements OnInit {
     
   }
   openNew() {
-    this.product = {};
+   
     this.submitted = false;
     this.utilisateurDialog = true;
   }
 
   deleteSelectedProducts() {
     this.confirmationService.confirm({
-      message: 'Are you sure you want to delete the selected products?',
+      message: 'vous étes sure de supprimer cette utilisateur?',
       header: 'Confirm',
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
@@ -156,12 +158,15 @@ export class ListeUtilisateurComponent implements OnInit {
           if(this.utilisateurs[i].b==true){
             this.service.deletutilisateur(this.utilisateurs[i].id).subscribe((data:any)=>{
               console.log(data);
-              this.ngOnInit();
+              
               
             })
           }
+          
 
-        }this.messageService.add({severity:'success', summary: 'Successful', detail: 'Products Deleted', life: 3000});
+        }this.messageService.add({severity:'success', summary: 'Successful', detail: 'Utilisateur Supprimé', life: 3000});
+        this.ngOnInit();
+        this.checked=false;
 
 
     }

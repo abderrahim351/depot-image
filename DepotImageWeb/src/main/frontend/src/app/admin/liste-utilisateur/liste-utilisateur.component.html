@@ -2,7 +2,7 @@
 <div class="card ">
 
   <p-table #dt [value]="utilisateurs" [rows]="5" [paginator]="true"
-    [globalFilterFields]="['name','country.name','representative.name','status']" [(selection)]="selectedProducts"
+    [globalFilterFields]="['name','country.name','representative.name','status']" 
     [rowHover]="true" dataKey="id" currentPageReportTemplate="De {first} a {last} des {totalRecords} utilisateurs"
     [showCurrentPageReport]="true">
     <ng-template pTemplate="caption">
@@ -53,7 +53,7 @@
     </ng-template>
     <ng-template pTemplate="summary">
       <div class="p-d-flex p-ai-center p-jc-between">
-        Ona on totale {{utilisateurs ? utilisateurs.length : 0 }} tilisateurs.
+        Ona on totale {{utilisateurs ? utilisateurs.length : 0 }} uilisateurs.
       </div>
     </ng-template>
   </p-table>
@@ -72,7 +72,11 @@
     </div>
     <div class="p-field">
       <label for="name">prenom</label>
-      <input type="text" pInputText formControlName="prenom"  />
+      <input type="text" pInputText formControlName="prenoms"  />
+    </div>
+    <div class="p-field">
+      <label >Role:</label>
+      <p-dropdown [options]="roles" optionLabel="name" [(ngModel)]="selectedrole"  formControlName="role" placeholder="role"></p-dropdown>
     </div>
     <div class="p-field">
       <label for="name">email</label>
@@ -83,9 +87,9 @@
     
     
 
-    <label >Role:</label>
+    
       
-    <p-dropdown [options]="roles" optionLabel="name" [(ngModel)]="selectedrole"  formControlName="role"></p-dropdown>
+    
 
  
   </form> 
@@ -96,7 +100,7 @@
 
   <ng-template pTemplate="footer">
     <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="hideDialog()"></button>
-    <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text" (click)="ajouter()"[disabled]="utilisateurForm.invalid"></button>
+    <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text" (click)="ajouter()"></button>
   </ng-template>
 </p-dialog>
 

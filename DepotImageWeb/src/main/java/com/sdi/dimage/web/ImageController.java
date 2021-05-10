@@ -62,6 +62,10 @@ public class ImageController extends AbstractController{
 	public List<ImageEntity> getimg() {
 		return this.service.getphoto();
 	}
+	@GetMapping("/doc/{id}")
+	public String supdoc(@PathVariable int id) {
+		return this.service.supprimerdoc(id);
+	}
 	//return image
 	@GetMapping("/document/img/{idDoc}")
 	@ResponseBody

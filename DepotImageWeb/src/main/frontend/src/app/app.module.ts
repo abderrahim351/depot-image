@@ -35,7 +35,6 @@ import {MenubarModule} from 'primeng/menubar';
 import {MenuItem} from 'primeng/api';
 
 import { ListeUtilisateurComponent } from './admin/liste-utilisateur/liste-utilisateur.component';
-import { ProductService } from './admin/liste-utilisateur/productservice';
 import { HeaderComponent } from './vues/header/header.component';
 import { FooterComponent } from './vues/footer/footer.component';
 import { LoginComponent } from './login/login.component';
@@ -91,7 +90,7 @@ import {DataViewModule} from 'primeng/dataview';
     DataViewModule,
     MenubarModule
   ],
-  providers: [ProductService, MessageService, ConfirmationService,acceuilservice],
+  providers: [ MessageService, ConfirmationService,acceuilservice],
   bootstrap: [AppComponent],
 
 })

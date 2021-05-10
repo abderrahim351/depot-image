@@ -9,7 +9,7 @@ export class acceuilservice {
     status: string[] = ['OUTOFSTOCK', 'INSTOCK', 'LOWSTOCK'];
 
     productNames: string[] = [
-        "Bamboo Watch", 
+        "Bamboo ", 
         "Black Watch", 
         "Blue Band", 
         "Blue T-Shirt", 

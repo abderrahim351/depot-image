@@ -1,18 +1,18 @@
 export interface Utilisateur{
-  id:undefined;
-  adresse:String;
-  adresseEmail:String;
-  civilite:String;
-  codePostale:String;
-  identifiant:String;
-  pays:String;
-  nom:String;
+  id:number;
+  adresse:string;
+  adresseEmail:string;
+  civilite:string;
+  codePostale:string;
+  identifiant:string;
+  pays:string;
+  nom:string;
   prenoms:string;
-  motDePasse:String;
-  dateNaissance:String;
-  sex:String;
+  motDePasse:string;
+  dateNaissance:string;
+  sex:string;
   b:boolean;
-  telFix:String;
-  telMobile:String;
-  ville:String;
+  telFix:string;
+  telMobile:string;
+  ville:string;
 }
