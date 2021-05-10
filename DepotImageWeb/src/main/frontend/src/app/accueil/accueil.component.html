@@ -11,42 +11,44 @@
             </div>
         </ng-template>
         <ng-template let-document pTemplate="listItem">
-            <div class="p-col-12">
+            <div class="p-col-12" >
                 <div class="product-list-item">
                     <img src="api/document/img/{{document.idDoc}}">
                     <div class="product-list-detail">
-                        <div class="product-name">{{document.titre}}</div>
+                        <div class="product-name">
+                          <a (click)="afficherDocument(document.idDoc)">{{document.titre}}</a>
+                          </div>
                         <div class="product-description"></div>
                         <i class="pi pi-pencil"></i><span class="product-category">{{document.nom}}  {{document.prenom}}</span>
                     </div>
-                    
-                
+
+
                 </div>
             </div>
         </ng-template>
         <ng-template let-document pTemplate="gridItem">
             <div class="p-col-12 p-md-4">
                 <div class="product-list-item">
-                    
-                
-                
+
+
+
                 <div class="product-grid-item card">
                     <div class="product-grid-item-top">
                         <div>
                             <i class="pi pi-pencil"></i>
                             <span class="product-category">{{document.nom}}     {{document.prenom}}</span>
                         </div>
-                        
+
                     </div>
                     <div class="product-grid-item-content">
                         <img src="api/document/img/{{document.idDoc}}">
-                        <div class="product-name">{{document.titre}}</div>
-                       
-                        
+                        <div class="product-name"><a (click)="afficherDocument(document.idDoc)">{{document.titre}}</a></div>
+
+
                     </div>
                     <div class="product-grid-item-bottom">
                         <span class="product-price">{{document.description}}</span>
-                        
+
                     </div>
                 </div>
             </div></div>

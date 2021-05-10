@@ -44,6 +44,7 @@ import { PasswordModule } from 'primeng/password';
 import { AccueilComponent } from './accueil/accueil.component';
 import { NouveauImageComponent } from './nouveau-image/nouveau-image.component';
 import {DataViewModule} from 'primeng/dataview';
+import { ImageDetailsComponent } from './image-details/image-details.component';
 
 
 @NgModule({
@@ -54,7 +55,8 @@ import {DataViewModule} from 'primeng/dataview';
     FooterComponent,
     LoginComponent,
       AccueilComponent,
-      NouveauImageComponent
+      NouveauImageComponent,
+      ImageDetailsComponent
    ],
   imports: [
     BrowserModule,

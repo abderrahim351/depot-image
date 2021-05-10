@@ -5,11 +5,13 @@ import { MessageService } from 'primeng/api';
 import { FileUpload } from 'primeng/fileupload';
 import { ImageService } from './image.service';
 import { Router } from '@angular/router';
+import { ViewEncapsulation } from '@angular/core';
 
 @Component({
   selector: 'app-nouveau-image',
   templateUrl: './nouveau-image.component.html',
-  styleUrls: ['./nouveau-image.component.scss']
+  styleUrls: ['./nouveau-image.component.scss'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class NouveauImageComponent implements OnInit {
 
@@ -18,8 +20,8 @@ export class NouveauImageComponent implements OnInit {
   checked: boolean = false;
   imageForm:FormGroup;
    publique1:string;
-   
-  
+
+
 
   @ViewChild('pFileUpload') pFileUpload : FileUpload;
 
@@ -59,11 +61,11 @@ export class NouveauImageComponent implements OnInit {
           this.router.navigate(['/accueil']);
         },2000
       )
-      
+
 
 
     });
-    
+
   }
   annuler(){
     this.router.navigate(['/accueil']);

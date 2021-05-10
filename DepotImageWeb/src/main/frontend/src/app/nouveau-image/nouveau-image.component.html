@@ -1,5 +1,4 @@
-
-<p-card  >
+<p-card>
   <p-header>
     <div class="p-text-center">
       <h2>Nouvelle image</h2>
@@ -9,46 +8,66 @@
   <div class="p-grid">
     <div class="p-col-6">
 
-      <p-panel>
 
       <form [formGroup]="imageForm" (ngSubmit)="ajouter()">
 
-       <div class="p-fluid p-formgrid p-grid">
-           <div class="p-col-12 p-field">
-               <label for="titre">Titre</label>
-               <input id="titre" type="text" formControlName="titre" pInputText>
-           </div>
-           <div class="p-col-12 p-field">
-               <label for="sousTitre">Sous titre</label>
-               <input id="soustitre" type="text" formControlName="sousTitre" pInputText>
-           </div>
-           <div class="p-field p-col-12">
-               <label for="description">Description</label>
-               <textarea id="description" type="text" rows="4" formControlName="description" pInputTextarea></textarea>
-           </div>
-           <div class="p-col-12 p-field-checkbox">
+        <div class="p-fluid p-formgrid p-grid">
+          <div class="p-col-12 p-field">
+            <label for="titre">Titre</label>
+            <input id="titre" type="text" formControlName="titre" pInputText>
+          </div>
+          <div class="p-col-12 p-field">
+            <label for="sousTitre">Sous titre</label>
+            <input id="soustitre" type="text" formControlName="sousTitre" pInputText>
+          </div>
+          <div class="p-field p-col-12">
+            <label for="description">Description</label>
+            <textarea id="description" type="text" rows="4" formControlName="description" pInputTextarea></textarea>
+          </div>
+          <div class="p-col-12 p-field-checkbox">
 
-               <p-checkbox [(ngModel)]="checked" binary="true" inputId="binary" (onChange)="publiquefn()"formControlName="publique"></p-checkbox>
-               <label for="binary">{{publique1}}</label>
-           </div>
-       </div>
-       </form>
-      </p-panel>
+            <p-checkbox [(ngModel)]="checked" binary="true" inputId="binary" (onChange)="publiquefn()"
+              formControlName="publique"></p-checkbox>
+            <label for="binary">{{publique1}}</label>
+          </div>
+        </div>
+      </form>
 
     </div>
     <div class="p-col-6">
-      <p-fileUpload #pFileUpload name="image-file"[showUploadButton]="false"[showCancelButton]="false"
-      (onUpload)="onUpload($event)" ></p-fileUpload>
+      <p-fileUpload #pFileUpload styleClass="dimage-fileUpload" name="image-file" [showUploadButton]="false"
+        [showCancelButton]="false" (onUpload)="onUpload($event)" [previewWidth]="300" chooseLabel="choisir une image">
+
+   <!-- <ng-template let-file pTemplate="file">
+      <div class="p-fileupload-row ng-star-inserted">
+        <div><img src="{{file}}" width="400"
+            class="ng-star-inserted">
+
+        </div>
+        <div>BNF-Paris.jpg</div>
+        <div>2.456 MB</div>
+        <div><button type="button" icon="pi pi-times" pbutton="" ng-reflect-icon="pi pi-times"
+            class="p-button p-component p-button-icon-only"><span class="p-button-icon pi pi-times"
+              aria-hidden="true"></span><span aria-hidden="true" class="p-button-label">&amp;nbsp;</span></button>
+        </div>
+      </div>
+    </ng-template>
+-->
+
+
+
+
+      </p-fileUpload>
 
     </div>
   </div>
-  <p-footer >
+  <p-footer>
     <div class="p-d-flex p-jc-center">
-      <button pButton type="button" label="Enregistrer" (click)="ajouter()"  class="p-mr-2 p-mb-2"></button>
-    <button pButton type="button" label="annuler" (click)="annuler()" class="p-mr-2 p-mb-2"></button>
+      <button pButton type="button" label="Enregistrer" (click)="ajouter()" class="p-mr-2 p-mb-2"></button>
+      <button pButton type="button" label="annuler" (click)="annuler()" class="p-mr-2 p-mb-2"></button>
     </div>
-    
-    
+
+
   </p-footer>
 </p-card>
 <div class="p-grid">
