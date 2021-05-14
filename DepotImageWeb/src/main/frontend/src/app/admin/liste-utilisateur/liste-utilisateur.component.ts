@@ -5,6 +5,7 @@ import { MessageService } from 'primeng/api';
 import { AdminServiceService } from "../admin-service.service";
 import { Utilisateur } from "./utilisateur";
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { CurrentUser, LoginService } from 'src/app/login/login.service';
 interface role {
   name: string
 }
@@ -23,7 +24,10 @@ interface role {
     `],
   styleUrls: ['./liste-utilisateur.component.scss']
 })
+
+
 export class ListeUtilisateurComponent implements OnInit {
+  
   roles:role[];
   
   selectedrole:role;
@@ -57,7 +61,6 @@ export class ListeUtilisateurComponent implements OnInit {
     this.service.get_utilisateurs().subscribe((data: any) => {
 
       this.utilisateurs = data;
-      console.log(this.utilisateurs);
       this.modifier = false;
       this.utl=null;
       for(let i=0;i<this.utilisateurs.length;i++){
@@ -82,7 +85,7 @@ export class ListeUtilisateurComponent implements OnInit {
       nom: [utl.nom, Validators.required],
       prenoms: [utl.prenoms, Validators.required],
       email: [utl.adresseEmail, Validators.email],
-      role: [, Validators.required],
+      role: [utl.role, Validators.required],
       
 
 
@@ -98,7 +101,6 @@ export class ListeUtilisateurComponent implements OnInit {
         }
         
         else {
-          console.log(this.utilisateurForm.get('role').value["name"]);
           this.service.ajouter_utilisateur({
             nom: this.utilisateurForm.get('nom').value,
             prenom: this.utilisateurForm.get('prenoms').value,
@@ -107,7 +109,6 @@ export class ListeUtilisateurComponent implements OnInit {
             
             
           }).subscribe((data: any) => {
-            console.log(data)
             this.utilisateurDialog=false;
             this.ngOnInit();
             
@@ -132,7 +133,6 @@ export class ListeUtilisateurComponent implements OnInit {
             email:this.utl.adresseEmail,
             role:this.utilisateurForm.get('role').value["name"],
           }).subscribe((data: any) => {
-            console.log(data);
             this.utilisateurDialog=false;
             this.ngOnInit();
           })
@@ -165,8 +165,9 @@ export class ListeUtilisateurComponent implements OnInit {
           
 
         }this.messageService.add({severity:'success', summary: 'Successful', detail: 'Utilisateur Supprimé', life: 3000});
-        this.ngOnInit();
-        this.checked=false;
+        
+        location.reload();
+        
 
 
     }

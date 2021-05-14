@@ -45,6 +45,8 @@ import { AccueilComponent } from './accueil/accueil.component';
 import { NouveauImageComponent } from './nouveau-image/nouveau-image.component';
 import {DataViewModule} from 'primeng/dataview';
 import { ImageDetailsComponent } from './image-details/image-details.component';
+import { InformationProfilComponent } from './information-profil/information-profil.component';
+import {ProgressSpinnerModule} from 'primeng/progressspinner';
 
 
 @NgModule({
@@ -56,7 +58,8 @@ import { ImageDetailsComponent } from './image-details/image-details.component';
     LoginComponent,
       AccueilComponent,
       NouveauImageComponent,
-      ImageDetailsComponent
+      ImageDetailsComponent,
+      InformationProfilComponent
    ],
   imports: [
     BrowserModule,
@@ -90,7 +93,8 @@ import { ImageDetailsComponent } from './image-details/image-details.component';
     PanelModule,
     CarouselModule,
     DataViewModule,
-    MenubarModule
+    MenubarModule,
+    ProgressSpinnerModule
   ],
   providers: [ MessageService, ConfirmationService,acceuilservice],
   bootstrap: [AppComponent],

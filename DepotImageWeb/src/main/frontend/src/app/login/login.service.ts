@@ -11,6 +11,7 @@ export interface LoginModel {
 export interface CurrentUser {
   identifiant: string;
   nom: string;
+  id:number;
   prenoms: string;
   civilite: string;
   adresseEmail: string;
@@ -33,6 +34,7 @@ export class LoginService {
 
   currentUserSession(): Observable<CurrentUser | null> {
     return this.currentUserState.asObservable();
+    
   }
 
   connexion(): Observable<CurrentUser | null> {

@@ -43,9 +43,10 @@
                     <div class="product-grid-item-content">
                         <img src="api/document/img/{{document.idDoc}}">
                         <div class="product-name"><a (click)="afficherDocument(document.idDoc)">{{document.titre}}</a></div>
-
+                       
 
                     </div>
+                    
                     <div class="product-grid-item-bottom">
                         <span class="product-price">{{document.description}}</span>
 
@@ -54,4 +55,5 @@
             </div></div>
         </ng-template>
     </p-dataView>
+    
 </div>

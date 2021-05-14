@@ -41,6 +41,7 @@ public class TestService {
 
     //listes des utilisateurs
     public List<AbstractUtilisateurEntity> getUser() {
+    	System.out.print(this.userRepo.findAll());
         return this.userRepo.findAll();
     }
     
@@ -52,6 +53,7 @@ public class TestService {
     		gest.setIdentifiant(utl.getEmail());
     		gest.setNom(utl.getNom());
     		gest.setPrenoms(utl.getPrenom());
+    		gest.setRole(utl.getRole());
     		return this.addGestionnaire(gest);
     	}
     	else if(utl.getRole().equals("utilisateur")) {
@@ -60,6 +62,7 @@ public class TestService {
     		utlis.setIdentifiant(utl.getEmail());
     		utlis.setNom(utl.getNom());
     		utlis.setPrenoms(utl.getPrenom());
+    		utlis.setRole(utl.getRole());
     		return this.adduser(utlis);
     		
     	}
@@ -69,6 +72,7 @@ public class TestService {
     		admin.setIdentifiant(utl.getEmail());
     		admin.setNom(utl.getNom());
     		admin.setPrenoms(utl.getPrenom());
+    		admin.setRole(utl.getRole());
     		return this.addAdmin(admin);
     	}
     	}

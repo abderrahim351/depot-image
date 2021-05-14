@@ -31,6 +31,23 @@ public abstract class AbstractUtilisateurEntity {
 @Column(name = "mot_de_passe")
     private String motDePasse;
 	private String codePostale;
+	private String role;
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
+	}
+
+	public List<DocumentEntity> getDocuments() {
+		return documents;
+	}
+
+	public void setDocuments(List<DocumentEntity> documents) {
+		this.documents = documents;
+	}
+
 	private String ville;
 	private String pays;
 	@OneToMany(mappedBy = "creePar",cascade = CascadeType.REMOVE)

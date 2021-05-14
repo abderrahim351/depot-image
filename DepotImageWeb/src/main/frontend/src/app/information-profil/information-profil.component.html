@@ -1,0 +1,60 @@
+<div class="p-grid">
+    <div class="p-col-8 p-offset-2" >
+        <form [formGroup]="profilForm" (ngSubmit)="enregistrer()">
+        <p-card header="Completer vos informations"  >
+            
+            <div class="p-fluid p-formgrid p-grid">
+                <div class="p-field p-col-12 p-md-6">
+                    <label for="firstname6">nom</label>
+                    <input id="firstname6" type="text" pInputText formControlName="nom"> 
+                </div>
+                <div class="p-field p-col-12 p-md-6">
+                    <label for="lastname6">prenom</label>
+                    <input id="lastname6" type="text" pInputText formControlName="prenom"> 
+                </div>
+                <div class="p-field p-col-12 p-md-4">
+                    <label for="navigators">Date de naissance</label>
+                    <p-calendar   [monthNavigator]="true" [yearNavigator]="true" yearRange="1960:2020"  inputId="navigators"formControlName="naissance" ></p-calendar>
+                </div>
+                <div class="p-field p-col-12">
+                    <label for="address">Addresse</label>
+                    <textarea id="address" type="text" rows="4" pInputTextarea formControlName="adresse" ></textarea>
+                </div>
+                <div class="p-field p-col-12 p-md-6">
+                    <label for="pays">pays</label>
+                    <input id="pays" type="text" pInputText formControlName="pays" > 
+                </div>
+
+                <div class="p-field p-col-12 p-md-3">
+                    <label for="ville">ville</label>
+                    <input id="ville" type="text" pInputText formControlName="ville"> 
+                </div>
+                <div class="p-field p-col-12 p-md-3">
+                    <label for="tel">numéro telephone</label>
+                    <input id="tel" type="tel" pInputText formControlName="tel"> 
+                </div>
+                <div class="p-field p-col-12 p-md-3">
+                    <label for="passe">changer mot de passe </label>
+                    
+                    <input id="passe" type="password" pInputText formControlName="passe" placeholder="*****" pPassword> 
+                </div>
+                <div class="p-field p-col-12 p-md-3">
+                    <label for="passe2">confirmer mot de passe</label>
+                    <input id="passe2" type="password" pInputText formControlName="passe2" placeholder="*****"> 
+                </div>
+            </div>
+            
+  
+          <footer>
+            <div class="p-d-flex p-jc-center">
+                <button pButton type="button" label="Enregistrer"  (click)="enregistrer()"class="p-mr-2 p-mb-2"></button>
+                <button pButton type="button" label="annuler" (click)="annuler()" class="p-mr-2 p-mb-2"></button>
+              </div>
+          
+          </footer>
+  
+        </p-card>
+     </form>
+    </div>
+  </div>
+  

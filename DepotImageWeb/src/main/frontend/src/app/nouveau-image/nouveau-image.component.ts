@@ -59,7 +59,7 @@ export class NouveauImageComponent implements OnInit {
       setTimeout(
         ()=>{
           this.router.navigate(['/accueil']);
-        },2000
+        },1500
       )
 
 

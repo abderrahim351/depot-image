@@ -8,6 +8,7 @@ export interface Utilisateur{
   pays:string;
   nom:string;
   prenoms:string;
+  role:string;
   motDePasse:string;
   dateNaissance:string;
   sex:string;

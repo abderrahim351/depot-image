@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import com.sdi.dimage.dao.entities.*;
 import com.sdi.dimage.dao.repositories.ImageRepository;
+import com.sdi.dimage.dao.repositories.UtlisateurRepository;
 import com.sdi.dimage.services.TestService;
 import com.sdi.dimage.services.UtilisateurService;
 
@@ -30,6 +31,7 @@ public class UtilisateurController {
 	private UtilisateurService ultservice;
 	@Autowired
 	private ImageRepository imageRepo;
+	
 
 	
 	@GetMapping("au1")
@@ -80,7 +82,12 @@ public class UtilisateurController {
 	    }
 	//modifier utilisateur
 		@PostMapping("/utilisateur/modifer")
-		public void modofier(@RequestBody UtilisateurModel utl) {
-		         this.ultservice.modifier(utl);
+		public void modifier(@RequestBody UtilisateurModel utl) {
+		          this.ultservice.modifier2(utl);
 		    }
+		//completer information
+				@PostMapping("/utilisateur/modifer2")
+				public void modofier(@RequestBody UtilisateurModel utl) {
+				          this.ultservice.modifier(utl);
+				    }		
 }

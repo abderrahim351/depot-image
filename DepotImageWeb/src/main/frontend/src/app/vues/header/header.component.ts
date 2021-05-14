@@ -19,6 +19,7 @@ export class HeaderComponent implements OnInit {
   ngOnInit(): void {
 
     this.loginService.currentUserSession().subscribe((u) => {
+      console.log(u);
       this.currentUser = u;
       this.createItems();
     });
@@ -70,13 +71,22 @@ export class HeaderComponent implements OnInit {
           routerLinkActiveOptions: { match: ['/gestion-utilisateur'] },
         },
         {
-          label: 'Bonjour '+this.currentUser.prenoms+' '+this.currentUser.nom,
+          label: 'Bonjour  '+this.currentUser.prenoms+' '+this.currentUser.nom,
           icon: 'pi pi-fw pi-user',
           items: [
             {
-              label: 'Mon compte',
-              icon: 'pi pi-fw ppi-user',
+              label: ' profil',
+              icon: 'pi pi-user',
+              
             },
+            {
+              label: 'vos informations',
+              icon: 'pi pi-user-edit',
+              routerLink: ['/information-profil'],
+              routerLinkActiveOptions: { match: ['/information-profil'] },
+              
+            },
+            
             {
               label: 'Déconnexion',
               icon: 'pi pi-fw pi-sign-out',

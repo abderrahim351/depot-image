@@ -74,18 +74,50 @@ public class UtilisateurService {
 	     }return false ;
 	}
 	//modifier utilisateur
-	public void modifier(UtilisateurModel utl) {
+	/*public void modifier(UtilisateurModel utl) {
 		for(int i=0; i<this.getUser().size();i++) {
 		if(this.getUser().get(i).getId().equals(utl.getId())) {
 			this.getUser().get(i).setIdentifiant(utl.getEmail());
 			this.getUser().get(i).setAdresseEmail(utl.getEmail());
 			this.getUser().get(i).setNom(utl.getNom());
 			this.getUser().get(i).setPrenoms(utl.getPrenom());
-			this.utRepository.save(this.getUser().get(i));
-		}
+			 this.utRepository.save(this.getUser().get(i));
 		}
 		
+		}
+	}*/
+	public void modifier(UtilisateurModel utl) {
+		for(int i=0; i<this.getUser().size();i++) {
+		if(this.getUser().get(i).getId().equals(utl.getId())) {
+			this.getUser().get(i).setIdentifiant(utl.getEmail());
+			this.getUser().get(i).setAdresseEmail(utl.getEmail());
+			this.getUser().get(i).setAdresse(utl.getAdresse());
+			this.getUser().get(i).setPays(utl.getPays());
+			this.getUser().get(i).setNom(utl.getNom());
+			this.getUser().get(i).setPrenoms(utl.getPrenom());
+			this.getUser().get(i).setVille(utl.getVille());
+			this.getUser().get(i).setTelMobile(utl.getTel());
+			this.getUser().get(i).setMotDePasse(utl.getPasse());
+			 this.utRepository.save(this.getUser().get(i));
+		}
+		
+		}
 		
 	}
+	public void modifier2(UtilisateurModel utl) {
+		for(int i=0; i<this.getUser().size();i++) {
+		if(this.getUser().get(i).getId().equals(utl.getId())) {
+			this.getUser().get(i).setIdentifiant(utl.getEmail());
+			this.getUser().get(i).setAdresseEmail(utl.getEmail());
+			this.getUser().get(i).setNom(utl.getNom());
+			this.getUser().get(i).setRole(utl.getRole());
+			this.getUser().get(i).setPrenoms(utl.getPrenom());
+			 this.utRepository.save(this.getUser().get(i));
+		}
+		
+		}
+		
+	}
+	
 	
 }
