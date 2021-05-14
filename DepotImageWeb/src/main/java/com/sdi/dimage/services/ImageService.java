@@ -6,6 +6,7 @@ import com.drew.imaging.ImageProcessingException;
 import com.drew.metadata.Directory;
 import com.drew.metadata.Metadata;
 import com.drew.metadata.Tag;
+import com.sdi.dimage.dao.entities.AbstractUtilisateurEntity;
 import com.sdi.dimage.dao.entities.DocumentEntity;
 import com.sdi.dimage.dao.entities.ImageEntity;
 import com.sdi.dimage.dao.entities.UtilisateurEntity;
@@ -22,7 +23,11 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.File;
 import java.io.IOException;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+
+import javax.transaction.Transactional;
 
 @Service
 public class ImageService {
@@ -145,26 +150,36 @@ imageRepo.save(this.img);
 
     }
 
-	public void uplodfile(Integer idDoc, MultipartFile imageFile,
-			UtilisateurSessionDto user) throws IOException {
+    @Transactional
+	public void uplodfile(Integer idDoc, List<MultipartFile> files,
+			UtilisateurSessionDto userSession) throws IOException {
 
 		DocumentEntity doc = documentRepositery.getOne(idDoc);
+		AbstractUtilisateurEntity user = utlisateurRepository.getOne(userSession.getId());
 		
-		ImageEntity img = new ImageEntity();
+		LocalDateTime now = LocalDateTime.now();
 		
-		img.setDocument(doc);
-		img.setContenu(imageFile.getBytes());
-		img.setTailleFichier(imageFile.getSize());
-		img.setTypeFichier(imageFile.getContentType());
+		List<ImageEntity> imageEntities = new ArrayList<>(files.size());
+		
+		for (int i = 0; i < files.size(); i++) {
+			MultipartFile mf = files.get(i);
+			ImageEntity img = new ImageEntity();
+			img.setDocument(doc);
+			img.setContenu(mf.getBytes());
+			img.setTailleFichier(mf.getSize());
+			img.setTypeFichier(mf.getContentType());
+			
+			img.setCreePar(user);
+			img.setCreeLe(now);
+			
+			imageEntities.add(img);
+			
+		}
 
-		img.setDescription(doc.getDescription());
 		
-		img.setCreePar(utlisateurRepository.getOne(user.getId()));
-		img.setCreeLe(LocalDateTime.now());
+		imageRepo.saveAll(imageEntities);
 		
-		imageRepo.save(img);
-		
-		doc.setImagePrincipal(img);
+		doc.setImagePrincipal(imageEntities.get(0));
 		
 		documentRepositery.save(doc);
 		

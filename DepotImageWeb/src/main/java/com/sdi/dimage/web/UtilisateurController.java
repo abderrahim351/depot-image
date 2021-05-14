@@ -1,4 +1,5 @@
 package com.sdi.dimage.web;
+
 import com.drew.imaging.ImageProcessingException;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -31,63 +32,61 @@ public class UtilisateurController {
 	private UtilisateurService ultservice;
 	@Autowired
 	private ImageRepository imageRepo;
-	
 
-	
 	@GetMapping("au1")
 	public String adduser1() {
 		UtilisateurEntity utl = new UtilisateurEntity();
-		utl.setIdentifiant("aymen@rien.do"); 
+		utl.setIdentifiant("aymen@rien.do");
 		utl.setAdresseEmail("aymen@rien.do");
 		utl.setPrenoms("Aymen");
 		utl.setNom("JAMAAOUI");
 		return service.adduser(utl);
 
 	}
-	
 
 	//afficher tous les utilisateurs
 	@GetMapping("/utilisateur")
 	public List<AbstractUtilisateurEntity> getuser() {
 
-
 		return this.service.getUser();
 	}
-	
+
 	//ajouter  utilisateur
-		@PostMapping("/utilisateur")
-		public void AddUser(@RequestBody UtilisateurModel utl) {
+	@PostMapping("/utilisateur")
+	public void addUser(@RequestBody UtilisateurModel utl) {
 
-			 service.role(utl);
+		ultservice.addUser(utl);
 
-		}
+	}
 
 	//supprimer utilisateur
 	@GetMapping("/utilisateur/{id}")
-	public void   SupprimerUtilisateur(@PathVariable Integer id) {
-		  this.service.SupprimerUtilisateur(id);
+	public void SupprimerUtilisateur(@PathVariable Integer id) {
+		this.service.SupprimerUtilisateur(id);
 
 	}
-	
+
 	//tester l'existance d'une email
 	@GetMapping("/utilisateur/test/{email}")
 	public boolean test_par_mail(@PathVariable String email) {
-	      return   this.ultservice.test_par_email(email);
-	    }
+		return this.ultservice.test_par_email(email);
+	}
 
 	//tester l'existance d'une email cas de modification
 	@PostMapping("/utilisateur/test_modification")
-	public boolean test_modification(@RequestBody UtilisateurEntity utl) {
-	      return   this.ultservice.test_modification(utl);
-	    }
+	public boolean testModification(@RequestBody UtilisateurEntity utl) {
+		return this.ultservice.testModification(utl);
+	}
+
 	//modifier utilisateur
-		@PostMapping("/utilisateur/modifer")
-		public void modifier(@RequestBody UtilisateurModel utl) {
-		          this.ultservice.modifier2(utl);
-		    }
-		//completer information
-				@PostMapping("/utilisateur/modifer2")
-				public void modofier(@RequestBody UtilisateurModel utl) {
-				          this.ultservice.modifier(utl);
-				    }		
+	@PostMapping("/utilisateur/modifer")
+	public void modifier(@RequestBody UtilisateurModel utl) {
+		this.ultservice.modifier(utl);
+	}
+
+	//completer information
+	@PostMapping("/utilisateur/modifer2")
+	public void modofier(@RequestBody UtilisateurModel utl) {
+		this.ultservice.modifierInformations(utl);
+	}
 }

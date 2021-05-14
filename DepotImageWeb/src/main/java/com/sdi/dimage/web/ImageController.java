@@ -50,12 +50,15 @@ public class ImageController extends AbstractController{
 
 	//enregistrer image
 	@PostMapping("/document/{idDoc}/upload")
-	public void fileUpload(@PathVariable Integer idDoc,  @RequestParam("image-file") MultipartFile imageFile, HttpServletRequest request)
+	public void fileUpload(@PathVariable Integer idDoc,  @RequestParam("files") List<MultipartFile> files, HttpServletRequest request)
 			throws IOException, ImageProcessingException {
 	
-		UtilisateurSessionDto user = getUserSession(request);
+		if (files.size()>0) {
+			UtilisateurSessionDto user = getUserSession(request);
+			
+			this.service.uplodfile(idDoc, files, user);
+		}
 		
-		this.service.uplodfile(idDoc, imageFile, user);
 	}
 
 	@GetMapping("/img")

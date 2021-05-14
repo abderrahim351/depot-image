@@ -27,12 +27,12 @@ interface role {
 
 
 export class ListeUtilisateurComponent implements OnInit {
-  
+
   roles:role[];
-  
+
   selectedrole:role;
   b1:boolean=false;
-  
+
   checked:boolean;
   utilisateurForm: FormGroup;
   sex: string;
@@ -42,9 +42,9 @@ export class ListeUtilisateurComponent implements OnInit {
   utl: Utilisateur
 
   b: boolean;
-  
 
- 
+
+
   submitted: boolean;
 
   constructor(private fb: FormBuilder, private messageService: MessageService, private confirmationService: ConfirmationService, private service: AdminServiceService) { }
@@ -67,7 +67,7 @@ export class ListeUtilisateurComponent implements OnInit {
         this.utilisateurs.values['b']=false;
       }
     })
-   
+
   }
   initUtiliateurForm() {
     this.utilisateurForm = this.fb.group({
@@ -86,7 +86,7 @@ export class ListeUtilisateurComponent implements OnInit {
       prenoms: [utl.prenoms, Validators.required],
       email: [utl.adresseEmail, Validators.email],
       role: [utl.role, Validators.required],
-      
+
 
 
     })
@@ -99,19 +99,19 @@ export class ListeUtilisateurComponent implements OnInit {
         if (this.b == true) {
           alert('utilisateur existe');
         }
-        
+
         else {
           this.service.ajouter_utilisateur({
             nom: this.utilisateurForm.get('nom').value,
             prenom: this.utilisateurForm.get('prenoms').value,
             email: this.utilisateurForm.get('email').value,
             role: this.utilisateurForm.get('role').value["name"],
-            
-            
+
+
           }).subscribe((data: any) => {
             this.utilisateurDialog=false;
             this.ngOnInit();
-            
+
           })
         }
 
@@ -138,12 +138,12 @@ export class ListeUtilisateurComponent implements OnInit {
           })
         }
         })
-        
+
     }
-    
+
   }
   openNew() {
-   
+
     this.submitted = false;
     this.utilisateurDialog = true;
   }
@@ -158,16 +158,16 @@ export class ListeUtilisateurComponent implements OnInit {
           if(this.utilisateurs[i].b==true){
             this.service.deletutilisateur(this.utilisateurs[i].id).subscribe((data:any)=>{
               console.log(data);
-              
-              
+
+
             })
           }
-          
+
 
         }this.messageService.add({severity:'success', summary: 'Successful', detail: 'Utilisateur Supprimé', life: 3000});
-        
+
         location.reload();
-        
+
 
 
     }
@@ -191,7 +191,7 @@ export class ListeUtilisateurComponent implements OnInit {
         console.log(utl.id);
         this.service.deletutilisateur(utl.id).subscribe((data) => {
           console.log("test");
-          
+
           this.ngOnInit();
         })
         this.messageService.add({ severity: 'success', summary: 'Suppression avec succés', detail: 'utilisateur supprime', life: 3000 });
@@ -205,12 +205,12 @@ export class ListeUtilisateurComponent implements OnInit {
     this.submitted = false;
     this.ngOnInit();
   }
-  
+
   selectiontous(){
     if(this.checked==true){
     for(let i=0 ; i<this.utilisateurs.length;i++){
       console.log("azerty");
-      
+
       this.utilisateurs[i].b=true;
       console.log(this.utilisateurs[i].b);
     }}
@@ -227,10 +227,10 @@ f1(b:boolean){
  if(b==false){
    this.checked=false;
  }
-  
+
 
     }
-    
+
 
 
   }

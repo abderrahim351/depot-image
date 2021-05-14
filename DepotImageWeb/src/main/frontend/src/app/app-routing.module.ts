@@ -11,7 +11,7 @@ import { NouveauImageComponent } from './nouveau-image/nouveau-image.component';
 const routes: Routes = [
   {path : '' , redirectTo : 'accueil', pathMatch: 'full'} ,
   {path : 'login' , component : LoginComponent },
-  {path : 'gestion-utilisateur' , component : ListeUtilisateurComponent },
+  {path : 'gestion-utilisateur' , component : ListeUtilisateurComponent, canActivate :  [AuthGuard] },
   {path : 'accueil' , component : AccueilComponent , canActivate :  [AuthGuard]},
   {path : 'nouvelle-image' , component : NouveauImageComponent , canActivate :  [AuthGuard]},
   {path : 'image/:id' , component : ImageDetailsComponent , canActivate :  [AuthGuard]},

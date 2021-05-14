@@ -55,12 +55,8 @@ export class NouveauImageComponent implements OnInit {
 
       this.pFileUpload.upload();
 
-      console.log("document ajouter");
-      setTimeout(
-        ()=>{
-          this.router.navigate(['/accueil']);
-        },1500
-      )
+
+
 
 
 
@@ -84,6 +80,7 @@ export class NouveauImageComponent implements OnInit {
     console.log('upload done !');
     this.block = false;
     this.messageService.add({severity: 'info', summary: 'File Uploaded', detail: ''});
+    this.router.navigate(['/accueil']);
 }
 
 }

@@ -35,8 +35,8 @@
 
     </div>
     <div class="p-col-6">
-      <p-fileUpload #pFileUpload styleClass="dimage-fileUpload" name="image-file" [showUploadButton]="false"
-        [showCancelButton]="false" (onUpload)="onUpload($event)" [previewWidth]="300" chooseLabel="choisir une image">
+      <p-fileUpload #pFileUpload styleClass="dimage-fileUpload" name="files" [showUploadButton]="false"
+        [showCancelButton]="false" multiple="multiple" (onUpload)="onUpload($event)" [previewWidth]="250" chooseLabel="choisir une image">
 
    <!-- <ng-template let-file pTemplate="file">
       <div class="p-fileupload-row ng-star-inserted">
