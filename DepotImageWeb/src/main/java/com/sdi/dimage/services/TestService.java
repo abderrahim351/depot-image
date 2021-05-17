@@ -119,63 +119,11 @@ public class TestService {
         this.userRepo.deleteById(id);
     }
 
-    //fonction image
-    /*public void AddImage(){
-        ImageEntity im=new ImageEntity();
-        im.setCreePar(userRepo.getOne(1));
-        imageRepo.save(im);
 
 
-
-
-    }*/
-
-
-   /* public List<UtilisateurDto> getall() {
-        return this.ut.findAll();
-    }
-
-    public UtilisateurDto testconnexion(String email,String passe) {
-        for (int i = 0; i < this.getall().size(); i++) {
-            if (this.getall().get(i).getEmail().equals(email) == true && this.getall().get(i).getMot_de_passe().equals(passe)== true) {
-                return this.getall().get(i);
-            }
-
-        }
-        return null;
-    }
-    //enregistrer utilisateur
-    public void enregistrer(UtilisateurDto utl){
-    utl.setMot_de_passe(this.random_password());
-        this.ut.save(utl);
-    }
-
-
-    //supprimer_utilisateur_par_son_id
-    public void SupprimerUtilisateur(Integer id){
-         this.userRepo.deleteById(id);
-    }
-
-
-    //test_email
- public boolean test_par_email(String mail){
-    for(int i=0;i<this.getall().size();i++){
-        if(this.getall().get(i).getEmail().equals(mail)==true){
-            return true;
-        }
-    }return false ;
- }
- public boolean test_modification(UtilisateurDto utl ){
-
-     for(int i=0;i<this.getall().size();i++){
-         System.out.println(this.getall().get(i).getEmail()+ +this.getall().get(i).getId());
-         if(this.getall().get(i).getEmail().equals(utl.getEmail())==true && (this.getall().get(i).getId())!=utl.getId()){
-             System.out.println(utl.getEmail()+ +utl.getId());
-             return true;
-         }
-     }return false ;
-
- }*/
+   
+   
+   
  //generer mot de passe
     public String random_password(){
         Random r =new Random() ;

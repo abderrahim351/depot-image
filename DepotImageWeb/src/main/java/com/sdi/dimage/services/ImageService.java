@@ -13,6 +13,7 @@ import com.sdi.dimage.dao.entities.UtilisateurEntity;
 import com.sdi.dimage.dao.repositories.DocumentRepositery;
 import com.sdi.dimage.dao.repositories.ImageRepository;
 import com.sdi.dimage.dao.repositories.UtlisateurRepository;
+import com.sdi.dimage.utils.DocImgModel;
 import com.sdi.dimage.utils.DocumentModel;
 import com.sdi.dimage.utils.UtilisateurSessionDto;
 import com.sun.tools.jconsole.JConsoleContext;
@@ -27,6 +28,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import javax.mail.Message;
 import javax.transaction.Transactional;
 
 @Service
@@ -190,9 +192,40 @@ imageRepo.save(this.img);
 		
 		return documentRepositery.getOne(idDoc).getImagePrincipal();
 	}
-	public String supprimerdoc(int id) {
+	public void supprimerdoc(int id) {
 		this.documentRepositery.deleteById(id);
-		return "supprimer";
 		
 	}
+	//
+	public DocImgModel detailePub(int id) {
+		DocImgModel detaille = new DocImgModel();
+		DocumentEntity doc = this.documentRepositery.getOne(id);
+		detaille.setNom(doc.getCreePar().getNom());
+		detaille.setPrenom(doc.getCreePar().getPrenoms());
+		detaille.setDescription(doc.getDescription());
+		detaille.setTitre(doc.getTitre());
+		detaille.setSoustitre(doc.getSousTitre());
+		detaille.setCreeLe(doc.getCreeLe());
+		return detaille;
+		
+		
+	}
+	public ImageEntity getImage(Integer idImg) {
+		
+		return this.imageRepo.getOne(idImg);
+	}
+	public void listeImage(int iddoc) {
+		List<Integer> imageId = new ArrayList<Integer>();
+		String a ="";
+		for (int i = 0; i < this.getphoto().size(); i++) {
+			if( this.getphoto().get(i).getDocument().getId().equals(iddoc)) {
+				imageId.add(this.getphoto().get(i).getId());
+				a=a+this.getphoto().get(i).getId();
+			}
+			
+			
+		}
+		
+	}
+	
 }

@@ -48,7 +48,7 @@ public class UtilisateurController {
 	@GetMapping("/utilisateur")
 	public List<AbstractUtilisateurEntity> getuser() {
 
-		return this.service.getUser();
+		return this.ultservice.getUser();
 	}
 
 	//ajouter  utilisateur
@@ -62,14 +62,14 @@ public class UtilisateurController {
 	//supprimer utilisateur
 	@GetMapping("/utilisateur/{id}")
 	public void SupprimerUtilisateur(@PathVariable Integer id) {
-		this.service.SupprimerUtilisateur(id);
+		this.ultservice.SupprimerUtilisateur(id);
 
 	}
 
 	//tester l'existance d'une email
 	@GetMapping("/utilisateur/test/{email}")
-	public boolean test_par_mail(@PathVariable String email) {
-		return this.ultservice.test_par_email(email);
+	public boolean testParEemail(@PathVariable String email) {
+		return this.ultservice.testParEemail(email);
 	}
 
 	//tester l'existance d'une email cas de modification
@@ -86,7 +86,7 @@ public class UtilisateurController {
 
 	//completer information
 	@PostMapping("/utilisateur/modifer2")
-	public void modofier(@RequestBody UtilisateurModel utl) {
+	public void modifierInformations(@RequestBody UtilisateurModel utl) {
 		this.ultservice.modifierInformations(utl);
 	}
 }

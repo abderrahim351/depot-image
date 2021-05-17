@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.mail.Message;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -66,15 +67,27 @@ public class ImageController extends AbstractController{
 		return this.service.getphoto();
 	}
 	@GetMapping("/doc/{id}")
-	public String supdoc(@PathVariable int id) {
-		return this.service.supprimerdoc(id);
+	public void supdoc(@PathVariable int id) {
+		 this.service.supprimerdoc(id);
 	}
-	//return image
+	//return image principale
 	@GetMapping("/document/img/{idDoc}")
 	@ResponseBody
-	public ResponseEntity<byte[]> imagePricipale(@PathVariable Integer idDoc, HttpServletRequest request) {
+	public ResponseEntity<byte[]> imagePrincipale(@PathVariable Integer idDoc, HttpServletRequest request) {
 		
 		ImageEntity img = service.getImagePrincipale(idDoc);
+		
+		HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(MediaType.valueOf(img.getTypeFichier()));
+
+		return new ResponseEntity<>(img.getContenu(), headers, HttpStatus.OK);
+	}
+	//return image 
+	@GetMapping("/img/{idImg}")
+	@ResponseBody
+	public ResponseEntity<byte[]> image(@PathVariable Integer idImg, HttpServletRequest request) {
+		
+		ImageEntity img = service.getImage(idImg);
 		
 		HttpHeaders headers = new HttpHeaders();
 		headers.setContentType(MediaType.valueOf(img.getTypeFichier()));
@@ -98,5 +111,17 @@ public class ImageController extends AbstractController{
 		
 		
 	}
+	//detaill publication
+	@GetMapping("/detaille/{id}")
+	public 	DocImgModel detaiilePub(@PathVariable int id) {
+		return this.service.detailePub(id);
+	}
+	
+	//id des images d'un document
+	@GetMapping("/liste_image/{iddoc}")
+	public 	void listeImage(@PathVariable int iddoc) {
+		 this.service.listeImage( iddoc);
+	}
+	
 
 }

@@ -1,6 +1,6 @@
 
 
-  <div class="p-grid">
+ <!--<div class="p-grid">
     <div class="p-col-6 dimage-img-doc p-ac-center p-as-center">
 
       <div class="p-as-center">
@@ -8,6 +8,29 @@
       </div>
 
       </div>
-    <div class="p-col-6">details d'images</div>
+    <div class="p-col-6">
+      <h1>
+        <div class="p-text-center">
+          {{detailleDoc.titre}}
+        </div>
+      </h1>
+      <h3>{{detailleDoc.soustitre}}</h3>
+      <div class="p-text-italic">{{detailleDoc.description}}</div>
+      <div class="p-text-nowrap p-text-truncate" style="width: 10rem"></div>
+      <div class="p-text-nowrap" style="width: 10rem">ajouter par: {{detailleDoc.nom}}   {{detailleDoc.prenom}}</div>
+      
+      
+    </div>
 
 </div>
+--> 
+<p-galleria [(value)]="images" [responsiveOptions]="responsiveOptions" [containerStyle]="{'max-width': '640px'}" [numVisible]="1"> 
+  <ng-template pTemplate="item" let-item>
+      <img src="api/document/img/{{idDoc}}" style="width: 100%;" />
+  </ng-template>
+  <!--<ng-template pTemplate="thumbnail" let-item>
+      <div class="p-grid p-nogutter p-justify-center">
+          <img [src]="item.thumbnailImageSrc" />
+      </div>
+  </ng-template>-->
+</p-galleria>

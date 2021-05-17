@@ -7,6 +7,8 @@ import java.util.List;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "utilisateur")
 @Inheritance
@@ -42,6 +44,7 @@ public abstract class AbstractUtilisateurEntity {
 
 	private String ville;
 	private String pays;
+	@JsonIgnore
 	@OneToMany(mappedBy = "creePar",cascade = CascadeType.REMOVE)
     private List<DocumentEntity> documents = new ArrayList<>();
 	

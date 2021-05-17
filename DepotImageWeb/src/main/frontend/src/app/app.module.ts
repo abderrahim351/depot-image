@@ -33,6 +33,7 @@ import { InputTextareaModule } from 'primeng/inputtextarea';
 import {PanelModule} from 'primeng/panel';
 import {MenubarModule} from 'primeng/menubar';
 import {MenuItem} from 'primeng/api';
+import {GalleriaModule} from 'primeng/galleria';
 
 import { ListeUtilisateurComponent } from './admin/liste-utilisateur/liste-utilisateur.component';
 import { HeaderComponent } from './vues/header/header.component';
@@ -94,7 +95,8 @@ import {ProgressSpinnerModule} from 'primeng/progressspinner';
     CarouselModule,
     DataViewModule,
     MenubarModule,
-    ProgressSpinnerModule
+    ProgressSpinnerModule,
+    GalleriaModule
   ],
   providers: [ MessageService, ConfirmationService,acceuilservice],
   bootstrap: [AppComponent],

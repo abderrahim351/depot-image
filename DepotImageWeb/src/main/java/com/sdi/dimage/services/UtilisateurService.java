@@ -109,10 +109,16 @@ public class UtilisateurService {
 	public List<AbstractUtilisateurEntity> getUser() {
 		return this.utRepository.findAll();
 	}
+	  //supprimer_utilisateur_par_son_id
+    public void SupprimerUtilisateur(Integer id){
+        this.utRepository.deleteById(id);
+    }
+
+
 
 	//test_email
 
-	public boolean test_par_email(String mail) {
+	public boolean testParEemail(String mail) {
 		for (int i = 0; i < this.utRepository.findAll().size(); i++) {
 			if (this.utRepository.findAll().get(i).getAdresseEmail()
 					.equals(mail) == true) {
@@ -137,39 +143,23 @@ public class UtilisateurService {
 		return false;
 	}
 
-	//modifier utilisateur
-	/*
-	 * public void modifier(UtilisateurModel utl) {
-	 * for(int i=0; i<this.getUser().size();i++) {
-	 * if(this.getUser().get(i).getId().equals(utl.getId())) {
-	 * this.getUser().get(i).setIdentifiant(utl.getEmail());
-	 * this.getUser().get(i).setAdresseEmail(utl.getEmail());
-	 * this.getUser().get(i).setNom(utl.getNom());
-	 * this.getUser().get(i).setPrenoms(utl.getPrenom());
-	 * this.utRepository.save(this.getUser().get(i));
-	 * }
-	 * 
-	 * }
-	 * }
-	 */
+
 	public void modifierInformations(UtilisateurModel utl) {
-		for (int i = 0; i < this.getUser().size(); i++) {
-			if (this.getUser().get(i).getId().equals(utl.getId())) {
-				this.getUser().get(i).setIdentifiant(utl.getEmail());
-				this.getUser().get(i).setAdresseEmail(utl.getEmail());
-				this.getUser().get(i).setAdresse(utl.getAdresse());
-				this.getUser().get(i).setPays(utl.getPays());
-				this.getUser().get(i).setNom(utl.getNom());
-				this.getUser().get(i).setPrenoms(utl.getPrenom());
-				this.getUser().get(i).setVille(utl.getVille());
-				this.getUser().get(i).setTelMobile(utl.getTel());
-				this.getUser().get(i).setMotDePasse(utl.getPasse());
-				this.utRepository.save(this.getUser().get(i));
-			}
+		 AbstractUtilisateurEntity user = utRepository.getOne(utl.getId());
+		 user.setIdentifiant(utl.getEmail());
+		 user.setAdresseEmail(utl.getEmail());
+		 user.setAdresse(utl.getAdresse());
+		 user.setPays(utl.getPays());
+		 user.setNom(utl.getNom());
+		 user.setPrenoms(utl.getPrenom());
+		 user.setVille(utl.getVille());
+		 user.setTelMobile(utl.getTel());
+		 user.setMotDePasse(utl.getPasse());
+			this.utRepository.save(user);
 
 		}
 
-	}
+	
 
 	public void modifier(UtilisateurModel utl) {
 		
