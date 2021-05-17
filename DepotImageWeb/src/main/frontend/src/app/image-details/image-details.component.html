@@ -18,15 +18,15 @@
       <div class="p-text-italic">{{detailleDoc.description}}</div>
       <div class="p-text-nowrap p-text-truncate" style="width: 10rem"></div>
       <div class="p-text-nowrap" style="width: 10rem">ajouter par: {{detailleDoc.nom}}   {{detailleDoc.prenom}}</div>
-      
-      
+
+
     </div>
 
 </div>
---> 
-<p-galleria [(value)]="images" [responsiveOptions]="responsiveOptions" [containerStyle]="{'max-width': '640px'}" [numVisible]="1"> 
+-->
+<p-galleria [(value)]="detailleDoc.idsImage" [responsiveOptions]="responsiveOptions" [containerStyle]="{'max-width': '640px'}" [numVisible]="1">
   <ng-template pTemplate="item" let-item>
-      <img src="api/document/img/{{idDoc}}" style="width: 100%;" />
+      <img src="api/img/{{item}}" style="width: 100%;" />
   </ng-template>
   <!--<ng-template pTemplate="thumbnail" let-item>
       <div class="p-grid p-nogutter p-justify-center">

@@ -13,6 +13,7 @@ import com.sdi.dimage.dao.entities.UtilisateurEntity;
 import com.sdi.dimage.dao.repositories.DocumentRepositery;
 import com.sdi.dimage.dao.repositories.ImageRepository;
 import com.sdi.dimage.dao.repositories.UtlisateurRepository;
+import com.sdi.dimage.utils.DocImgDetailsModel;
 import com.sdi.dimage.utils.DocImgModel;
 import com.sdi.dimage.utils.DocumentModel;
 import com.sdi.dimage.utils.UtilisateurSessionDto;
@@ -197,15 +198,20 @@ imageRepo.save(this.img);
 		
 	}
 	//
-	public DocImgModel detailePub(int id) {
-		DocImgModel detaille = new DocImgModel();
+	public DocImgDetailsModel detailePub(int id) {
+		DocImgDetailsModel detaille = new DocImgDetailsModel();
+		
 		DocumentEntity doc = this.documentRepositery.getOne(id);
+		
 		detaille.setNom(doc.getCreePar().getNom());
 		detaille.setPrenom(doc.getCreePar().getPrenoms());
 		detaille.setDescription(doc.getDescription());
 		detaille.setTitre(doc.getTitre());
 		detaille.setSoustitre(doc.getSousTitre());
 		detaille.setCreeLe(doc.getCreeLe());
+		
+		detaille.setIdsImage(imageRepo.listImagesParDoc(id));
+		
 		return detaille;
 		
 		
@@ -215,12 +221,14 @@ imageRepo.save(this.img);
 		return this.imageRepo.getOne(idImg);
 	}
 	public void listeImage(int iddoc) {
-		List<Integer> imageId = new ArrayList<Integer>();
-		String a ="";
-		for (int i = 0; i < this.getphoto().size(); i++) {
-			if( this.getphoto().get(i).getDocument().getId().equals(iddoc)) {
-				imageId.add(this.getphoto().get(i).getId());
-				a=a+this.getphoto().get(i).getId();
+		List<Integer> imageId = new ArrayList<>();
+		
+		
+		for (ImageEntity img : this.getphoto()) {
+			
+			
+			if( img.getDocument().getId().equals(iddoc)) {
+				imageId.add(img.getId());
 			}
 			
 			

@@ -1,62 +1,66 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ServiceService } from './service.service';
+import {
+  ImageDetailsModel,
+  ImageDetailsService,
+} from './image-details.service';
 export interface detaille {
-  IdDoc:number;
-  nom:string;
-  prenom:string;
-  titre:string;
-  soustitre:string;
-  description:string;
+  IdDoc: number;
+  nom: string;
+  prenom: string;
+  titre: string;
+  soustitre: string;
+  description: string;
 }
 
 @Component({
   selector: 'app-image-details',
   templateUrl: './image-details.component.html',
   styleUrls: ['./image-details.component.scss'],
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
 })
-
 export class ImageDetailsComponent implements OnInit {
 
-  idDoc:number;
-  detailleDoc:detaille={IdDoc:1,nom:"a",prenom:"b",titre:"c",soustitre:"description",description:"e"};
-  constructor(    private router: Router,
-    private route: ActivatedRoute , private service:ServiceService) { }
-    images: any[];
+  idDoc: number;
+  detailleDoc: ImageDetailsModel;
 
-    responsiveOptions:any[] = [
-      {
-          breakpoint: '1024px',
-          numVisible: 5
-      },
-      {
-          breakpoint: '768px',
-          numVisible: 3
-      },
-      {
-          breakpoint: '560px',
-          numVisible: 1
-      }
+  images: any[];
+
+  responsiveOptions: any[] = [
+    {
+      breakpoint: '1024px',
+      numVisible: 5,
+    },
+    {
+      breakpoint: '768px',
+      numVisible: 3,
+    },
+    {
+      breakpoint: '560px',
+      numVisible: 1,
+    },
   ];
+
+  constructor(
+    private router: Router,
+    private route: ActivatedRoute,
+    private service: ImageDetailsService
+  ) {}
+
   ngOnInit(): void {
-    this.service.getImages().then(images => this.images = images)
     if (this.route.snapshot.paramMap.get('id')) {
       this.idDoc = Number(this.route.snapshot.paramMap.get('id'));
-      this.service.detaille_pub(this.idDoc).subscribe((data:any)=>{
-        this.detailleDoc=data;
-        console.log(data);
-        this.service.get_liste_images(this.idDoc).subscribe((data:number[])=>{
-          console.log(data);
-        })
-      })
+      this.service
+        .detaillePub(this.idDoc)
+        .subscribe((data: ImageDetailsModel) => {
+          this.detailleDoc = data;
+          console.log('result ' + JSON.stringify(data));
+        });
 
       // recupertaion des details du doc et l'afficher
-
-    }else{
+    } else {
       this.idDoc = null;
+      this.detailleDoc = null;
     }
-
   }
-
 }

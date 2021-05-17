@@ -19,7 +19,7 @@ public abstract class AbstractUtilisateurEntity {
     @GeneratedValue(strategy = GenerationType.AUTO)
 
     private Integer id;
-    @Column(name = "identifiant")
+    @Column(name = "identifiant", unique = true)
     private String identifiant;
     private String nom;
     private String prenoms;
@@ -44,6 +44,7 @@ public abstract class AbstractUtilisateurEntity {
 
 	private String ville;
 	private String pays;
+	
 	@JsonIgnore
 	@OneToMany(mappedBy = "creePar",cascade = CascadeType.REMOVE)
     private List<DocumentEntity> documents = new ArrayList<>();

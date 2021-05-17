@@ -5,6 +5,7 @@ import com.sdi.dimage.dao.entities.AbstractUtilisateurEntity;
 import com.sdi.dimage.dao.entities.DocumentEntity;
 import com.sdi.dimage.dao.entities.ImageEntity;
 import com.sdi.dimage.services.ImageService;
+import com.sdi.dimage.utils.DocImgDetailsModel;
 import com.sdi.dimage.utils.DocImgModel;
 import com.sdi.dimage.utils.DocumentModel;
 import com.sdi.dimage.utils.UtilisateurSessionDto;
@@ -82,6 +83,8 @@ public class ImageController extends AbstractController{
 
 		return new ResponseEntity<>(img.getContenu(), headers, HttpStatus.OK);
 	}
+	
+	
 	//return image 
 	@GetMapping("/img/{idImg}")
 	@ResponseBody
@@ -94,8 +97,10 @@ public class ImageController extends AbstractController{
 
 		return new ResponseEntity<>(img.getContenu(), headers, HttpStatus.OK);
 	}
+	
+	
 	@GetMapping("/doc")
-	public ArrayList<DocImgModel> getdoc() {
+	public List<DocImgModel> getdoc() {
 		ArrayList<DocImgModel> l =new ArrayList<DocImgModel>(); 
 		
 		for(int i=0 ;i<this.service.getdoc().size();i++) {
@@ -112,15 +117,9 @@ public class ImageController extends AbstractController{
 		
 	}
 	//detaill publication
-	@GetMapping("/detaille/{id}")
-	public 	DocImgModel detaiilePub(@PathVariable int id) {
+	@GetMapping("/document/details/{id}")
+	public 	DocImgDetailsModel detailePub(@PathVariable int id) {
 		return this.service.detailePub(id);
-	}
-	
-	//id des images d'un document
-	@GetMapping("/liste_image/{iddoc}")
-	public 	void listeImage(@PathVariable int iddoc) {
-		 this.service.listeImage( iddoc);
 	}
 	
 
