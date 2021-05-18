@@ -34,6 +34,8 @@ import {PanelModule} from 'primeng/panel';
 import {MenubarModule} from 'primeng/menubar';
 import {MenuItem} from 'primeng/api';
 import {GalleriaModule} from 'primeng/galleria';
+import {SplitButtonModule} from 'primeng/splitbutton';
+import {BlockUIModule} from 'primeng/blockui';
 
 import { ListeUtilisateurComponent } from './admin/liste-utilisateur/liste-utilisateur.component';
 import { HeaderComponent } from './vues/header/header.component';
@@ -48,6 +50,8 @@ import {DataViewModule} from 'primeng/dataview';
 import { ImageDetailsComponent } from './image-details/image-details.component';
 import { InformationProfilComponent } from './information-profil/information-profil.component';
 import {ProgressSpinnerModule} from 'primeng/progressspinner';
+import { CommentaireComponent } from './commentaire/commentaire.component';
+import { CommentBlockComponent } from './commentaire/comment-block/comment-block.component';
 
 
 @NgModule({
@@ -60,7 +64,11 @@ import {ProgressSpinnerModule} from 'primeng/progressspinner';
       AccueilComponent,
       NouveauImageComponent,
       ImageDetailsComponent,
-      InformationProfilComponent
+      InformationProfilComponent,
+      CommentaireComponent,
+      CommentBlockComponent,
+
+
    ],
   imports: [
     BrowserModule,
@@ -96,7 +104,9 @@ import {ProgressSpinnerModule} from 'primeng/progressspinner';
     DataViewModule,
     MenubarModule,
     ProgressSpinnerModule,
-    GalleriaModule
+    GalleriaModule,
+    SplitButtonModule,
+    BlockUIModule
   ],
   providers: [ MessageService, ConfirmationService,acceuilservice],
   bootstrap: [AppComponent],

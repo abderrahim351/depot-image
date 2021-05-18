@@ -1,0 +1,55 @@
+<div class="comments">
+  <p-panel #Cmts header="Commentaires :" [toggleable]="true">
+    <p-blockUI [blocked]="blockedLoad" [target]="Cmts">
+      <div style="position:absolute;top:35%;left:50%;">
+        <p-progressSpinner [style]="{width: '25px', height: '25px'}" strokeWidth="8" animationDuration=".5s"></p-progressSpinner>
+      </div>
+    </p-blockUI>
+
+    <ng-template pTemplate="icons">
+      <span class="p-overlay-badge p-mr-5">
+        <i class="pi pi-comments"></i>
+        <span class="p-badge"> {{comments.length}}  </span>
+      </span>
+      <button pButton pRipple type="button" icon="pi pi-plus"
+        class="p-button-sm p-button-rounded p-button-success p-mr-2" (click)="showForm()"></button>
+    </ng-template>
+
+    <p-card #formCmt  *ngIf="displayedForm" styleClass=" p-mx-2 ">
+      <p-blockUI [blocked]="blockedForm" [target]="formCmt">
+        <div style="position:absolute;top:35%;left:50%;">
+          <p-progressSpinner [style]="{width: '25px', height: '25px'}" strokeWidth="8" animationDuration=".5s"></p-progressSpinner>
+        </div>
+      </p-blockUI>
+      <div class="p-grid">
+        <div class="p-col-fixed" style="width:80px">
+          <div class="user"><i class="pi pi-user"> </i></div>
+        </div>
+        <div class="p-col p-d-flex p-flex-column ">
+          <div [formGroup]="commentFG" class="text p-fluid">
+            <textarea id="descriptif" formControlName="comment" type="text" rows="4" pInputTextarea></textarea>
+          </div>
+          <small id="sortieSouhaitee-help" *ngIf="isInvalidRequired()"
+          class="p-invalid">Le commentaire ne doit pas être vide</small>
+        </div>
+      </div>
+      <p-footer>
+        <div class="p-d-flex p-jc-end">
+          <button pButton type="button" (click)="onCancel()"
+            class="p-button-raised p-button-secondary p-ml-4 p-mr-4" icon="pi pi-arrow-circle-left"
+            label="Annuler"></button>
+          <p-splitButton label="Ajouter" (onClick)="saveComment()" [icon]="iconBtn" [model]="items" [styleClass]="classBtn"></p-splitButton>
+
+        </div>
+
+      </p-footer>
+    </p-card>
+
+    <div class="p-grid p-flex-column">
+      <div *ngFor="let cmt of comments" class="p-col p-py-0">
+        <app-comment-block  [comment]="cmt" (modifier)="showForm(cmt)" (supprimer)="deleteComment(cmt.id)" ></app-comment-block>
+      </div>
+    </div>
+
+  </p-panel>
+</div>

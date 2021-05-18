@@ -20,6 +20,8 @@ public class DocumentEntity {
     private String titre;
     @Column(name ="sous_titre" )
     private String sousTitre;
+    
+    @Column(name ="description", length = 3000 )
     private String description;
     private Boolean estPublique;
     private String statut;
