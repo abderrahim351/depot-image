@@ -7,7 +7,7 @@
       [circular]="true"
         [numVisible]="5">
         <ng-template pTemplate="item" let-item>
-          <img src="api/img/{{item}}" class="photo-item" />
+         <button (click)="detaille(item)"><img src="api/img/{{item}}" class="photo-item" /></button> 
         </ng-template>
         <ng-template pTemplate="thumbnail" let-item>
           <div class="p-grid p-nogutter p-justify-center">
@@ -18,6 +18,19 @@
     </div>
 
   </div>
+  <p-dialog header="Title" [(visible)]="display">
+    <div class="p-grid">
+    <div class="p-col-6">
+    <img [src]="src" height="600px" width="600px">
+  </div>
+    <div class="p-col-6"><p-card *ngFor="let meta of metadata">
+      <div class="p-grid">
+        <div class="p-col-5 p-text-right p-as-end p-text-italic">{{meta.tag}}</div>
+        <div class="p-col-7 p-text-left doc-titre p-text-bold">{{meta.valeur}}</div>
+       
+      </div></p-card><app-commentaire [idDoc]="idDoc"></app-commentaire></div>
+    </div>
+</p-dialog>
   <div class="p-col-6">
 
     <p-card>
@@ -32,7 +45,7 @@
       <div class="p-col-7 p-text-left ">{{detailleDoc.nom}} {{detailleDoc.prenom}}</div>
     </div>
 
-    <app-commentaire></app-commentaire>
+    <app-commentaire [idDoc]="idDoc"></app-commentaire>
 
 </p-card>
 

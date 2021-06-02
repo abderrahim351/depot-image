@@ -4,4 +4,5 @@ export interface Document {
     prenom:string;
     titre:string;
     description:string;
+    type:string;
 }

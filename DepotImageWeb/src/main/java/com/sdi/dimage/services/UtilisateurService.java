@@ -78,15 +78,20 @@ public class UtilisateurService {
 		if (op.isEmpty()) {
 
 			// TODO cas ou l'email n'existe pas.
-			throw new NullPointerException();
+			
+			UtilisateurSessionDto utl =new UtilisateurSessionDto();
+			utl.setIdentifiant("faux_email");
+			return utl ;
 
 		}
 
 		AbstractUtilisateurEntity ut = op.get();
 
-		if (!ut.getMotDePasse().equals(login.getPassword())) {
+		 if (!ut.getMotDePasse().equals(login.getPassword())) {
 			// TODO cas mot de passe incorrecte.
-			throw new NullPointerException();
+			UtilisateurSessionDto utl =new UtilisateurSessionDto();
+			utl.setIdentifiant("faux_passe");
+			return utl ;
 		}
 
 		UtilisateurSessionDto usd = new UtilisateurSessionDto();
@@ -106,8 +111,8 @@ public class UtilisateurService {
 		return usd;
 	}
 
-	public List<AbstractUtilisateurEntity> getUser() {
-		return this.utRepository.findAll();
+	public List<AbstractUtilisateurEntity> getUser( Integer id) {
+		return this.utRepository.listUser(id);
 	}
 	  //supprimer_utilisateur_par_son_id
     public void SupprimerUtilisateur(Integer id){

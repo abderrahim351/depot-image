@@ -12,6 +12,11 @@ export interface detaille {
   soustitre: string;
   description: string;
 }
+export interface metadata {
+  Id: number;
+  tag: string;
+  valeur: string;
+}
 
 @Component({
   selector: 'app-image-details',
@@ -23,8 +28,9 @@ export class ImageDetailsComponent implements OnInit {
 
   idDoc: number;
   detailleDoc: ImageDetailsModel;
-
+  display: boolean;
   images: any[];
+  metadata:metadata[];
 
   responsiveOptions: any[] = [
     {
@@ -40,6 +46,8 @@ export class ImageDetailsComponent implements OnInit {
       numVisible: 1,
     },
   ];
+  src: string;
+  
 
   constructor(
     private router: Router,
@@ -62,5 +70,19 @@ export class ImageDetailsComponent implements OnInit {
       this.idDoc = null;
       this.detailleDoc = null;
     }
+
   }
+  detaille(i : number){
+    console.log(i);
+    
+    this.display=true;
+    this.src="api/img/"+i;
+    console.log(this.src);
+    this.service.getMetadata(i).subscribe((data:any[])=>{
+     
+      this.metadata=data;
+      console.log(this.metadata);
+    })
+  }
+  
 }

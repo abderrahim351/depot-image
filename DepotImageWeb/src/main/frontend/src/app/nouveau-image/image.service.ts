@@ -8,7 +8,7 @@ export interface documentModel {
   titre: string;
   sousTitre: string;
   description: string;
-  publique:boolean;
+  type:string;
   
 }
 export interface imageModel {

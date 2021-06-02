@@ -29,7 +29,7 @@ interface role {
 export class ListeUtilisateurComponent implements OnInit {
 
   roles:role[];
-
+  x:CurrentUser;
   selectedrole:role;
   b1:boolean=false;
 
@@ -47,7 +47,7 @@ export class ListeUtilisateurComponent implements OnInit {
 
   submitted: boolean;
 
-  constructor(private fb: FormBuilder, private messageService: MessageService, private confirmationService: ConfirmationService, private service: AdminServiceService) { }
+  constructor(private fb: FormBuilder, private messageService: MessageService, private confirmationService: ConfirmationService, private service: AdminServiceService , private logs:LoginService) { }
 
   ngOnInit() {
     this.roles=[
@@ -57,15 +57,21 @@ export class ListeUtilisateurComponent implements OnInit {
 
     ];
     this.initUtiliateurForm();
+    this.logs.currentUserSession().subscribe((data)=>{
+      this.x=data;
 
-    this.service.get_utilisateurs().subscribe((data: any) => {
-
+    })
+    this.service.get_utilisateurs(this.x.id).subscribe((data: any) => {
+     
       this.utilisateurs = data;
       this.modifier = false;
       this.utl=null;
       for(let i=0;i<this.utilisateurs.length;i++){
         this.utilisateurs.values['b']=false;
+
       }
+     
+
     })
 
   }
@@ -131,7 +137,6 @@ export class ListeUtilisateurComponent implements OnInit {
             nom:this.utl.nom,
             prenom:this.utl.prenoms,
             email:this.utl.adresseEmail,
-            role:this.utilisateurForm.get('role').value["name"],
           }).subscribe((data: any) => {
             this.utilisateurDialog=false;
             this.ngOnInit();

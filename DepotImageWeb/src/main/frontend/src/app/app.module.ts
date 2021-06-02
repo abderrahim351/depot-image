@@ -66,7 +66,7 @@ import { CommentBlockComponent } from './commentaire/comment-block/comment-block
       ImageDetailsComponent,
       InformationProfilComponent,
       CommentaireComponent,
-      CommentBlockComponent,
+      CommentBlockComponent
 
 
    ],

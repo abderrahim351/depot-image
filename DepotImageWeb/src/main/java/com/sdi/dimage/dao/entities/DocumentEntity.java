@@ -25,8 +25,17 @@ public class DocumentEntity {
     private String description;
     private Boolean estPublique;
     private String statut;
+    private String type;
     
-    @JoinColumn(name = "id_image_principal", referencedColumnName = "id" )
+    public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
+	@JoinColumn(name = "id_image_principal", referencedColumnName = "id" )
     @OneToOne
     private ImageEntity imagePrincipal;
     

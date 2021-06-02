@@ -4,6 +4,7 @@ import com.drew.imaging.ImageProcessingException;
 import com.sdi.dimage.dao.entities.AbstractUtilisateurEntity;
 import com.sdi.dimage.dao.entities.DocumentEntity;
 import com.sdi.dimage.dao.entities.ImageEntity;
+import com.sdi.dimage.dao.entities.ImageMetadataEntity;
 import com.sdi.dimage.services.ImageService;
 import com.sdi.dimage.utils.DocImgDetailsModel;
 import com.sdi.dimage.utils.DocImgModel;
@@ -110,6 +111,7 @@ public class ImageController extends AbstractController{
 			aux.setTitre(this.service.getdoc().get(i).getSousTitre());
 			aux.setDescription(this.service.getdoc().get(i).getDescription());
 			aux.setIdDoc(this.service.getdoc().get(i).getId());
+			aux.setType(this.service.getdoc().get(i).getType());
 			l.add(aux);
 		}
 		return l;
@@ -121,6 +123,11 @@ public class ImageController extends AbstractController{
 	public 	DocImgDetailsModel detailePub(@PathVariable int id) {
 		return this.service.detailePub(id);
 	}
+	//metadata image publication
+		@GetMapping("/img/details/{id}")
+		public 	List<ImageMetadataEntity> detaileimg(@PathVariable int id) {
+			return this.service.getmeta(id);
+		}
 	
 
 }

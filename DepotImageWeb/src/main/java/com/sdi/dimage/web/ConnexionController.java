@@ -1,7 +1,6 @@
 package com.sdi.dimage.web;
 
-import javax.servlet.http.HttpServletRequest;
-
+import javax.servlet.http.HttpServletRequest;import org.apache.commons.lang3.ObjectUtils.Null;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,16 +20,16 @@ public class ConnexionController extends AbstractController {
 	private UtilisateurService uService;
 
 	@PostMapping("login")
-	public void login(@RequestBody LoginModel login,
+	public UtilisateurSessionDto login(@RequestBody LoginModel login,
 			HttpServletRequest request) {
 
 		System.out.println("Login : " + login.getUsername());
 
 		UtilisateurSessionDto usd = uService.chercherUtilisateur(login);
-		System.out.println("1" + usd.toString());
+
 
 		createUserSession(request, usd);
-
+		return usd ;
 	}
 
 	@PostMapping("logout")

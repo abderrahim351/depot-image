@@ -1,7 +1,8 @@
-import { CommentaireService } from './commentaire.service';
+import { Commentaire, CommentaireService } from './commentaire.service';
 import { Component, OnInit, ViewEncapsulation, Input } from '@angular/core';
 import { CommentaireDto, User } from './commentaire-dto';
 import { MenuItem } from 'primeng/api';
+import { CurrentUser, LoginService } from 'src/app/login/login.service';
 import {
   FormControl,
   FormGroup,
@@ -21,21 +22,30 @@ export class CommentaireComponent implements OnInit {
   blockedForm = false;
   blockedLoad = false;
   comments: CommentaireDto[] = [];
-
+  comments1: Commentaire[] = [];
   param: CommentaireDto;
 
-  @Input() idDemande: number;
+  @Input() idDoc: number;
 
   iconBtn = 'pi pi-comment';
   classBtn = 'comment-btn p-button-info';
   typeComment = 'simple';
   items: MenuItem[];
-
+  currentUser: CurrentUser;
   commentFG: FormGroup;
 
-  constructor(private service: CommentaireService, private fb: FormBuilder) {}
+  constructor(private service: CommentaireService, private fb: FormBuilder,private loginService: LoginService) {}
 
   ngOnInit(): void {
+    console.log(this.idDoc);
+    this.service.listCommentaire(this.idDoc).subscribe((data:any[])=>{
+      this.comments1=data;
+      console.log(this.comments1.length);
+    })
+    this.loginService.currentUserSession().subscribe((u) => {
+      console.log(u);
+      this.currentUser = u;
+    });
     this.items = [
       {
         label: 'Simple',
@@ -101,7 +111,9 @@ export class CommentaireComponent implements OnInit {
     });
   }
 
-  load(withLoading: boolean = true): void {
+ load(withLoading: boolean = true): void {
+
+
 
     if (withLoading) {
       this.blockedLoad = true;
@@ -109,13 +121,27 @@ export class CommentaireComponent implements OnInit {
       this.blockedLoad = false;
     }
 
-    this.service.listByIdDemande(this.idDemande).then((res) => {
+    this.service.listByIdDemande(this.idDoc).then((res) => {
       this.comments = res;
       this.blockedLoad = false;
     });
   }
 
   saveComment(): void {
+    this.service.ajouterCommentaire({
+      creerpar:this.currentUser.id,
+      docId :this.idDoc,
+      contenu :this.commentFG.get('comment').value,
+      type :"commeantaire",
+      creerle:null,
+      nom:null,
+      prenom:null
+  
+    }).subscribe((data)=>{
+      console.log("commentaire ajouter");
+      
+    })
+
     if (this.commentFG.valid) {
       this.param.commentaire = this.commentFG.get('comment').value;
 
@@ -132,7 +158,7 @@ export class CommentaireComponent implements OnInit {
       this.displayedForm = false;
       this.param = null;
 
-      /*
+     /* 
       this.blockedForm = true;
       this.service.save(this.idDemande, this.param).then((res) => {
         this.blockedForm = false;
@@ -140,9 +166,11 @@ export class CommentaireComponent implements OnInit {
         this.param = null;
         this.load();
       });
-      */
+     */ 
     } else {
       this.commentFG.get('comment').markAsDirty();
+          console.log(this.param.commentaire = this.commentFG.get('comment').value);
+    
     }
   }
 

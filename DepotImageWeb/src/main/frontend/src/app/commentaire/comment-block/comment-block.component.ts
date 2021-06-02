@@ -1,8 +1,9 @@
 import { Component, EventEmitter, Input, OnInit, Output, ViewEncapsulation } from '@angular/core';
-import { ConfirmationService } from 'primeng/api';
+import { ConfirmationService, MessageService } from 'primeng/api';
 import { CurrentUser, LoginService } from 'src/app/login/login.service';
 
-import { CommentaireDto } from '../commentaire-dto';
+import { CommentaireService } from '../commentaire.service';
+import { Commentaire } from '../commentaire.service';
 
 @Component({
   selector: 'app-comment-block',
@@ -11,7 +12,7 @@ import { CommentaireDto } from '../commentaire-dto';
   encapsulation: ViewEncapsulation.None,
 })
 export class CommentBlockComponent implements OnInit {
-  @Input() comment: CommentaireDto;
+  @Input() comment: Commentaire;
 
   @Output() modifier = new EventEmitter();
 
@@ -19,11 +20,11 @@ export class CommentBlockComponent implements OnInit {
 
   currentAuth: CurrentUser;
 
-  constructor(private loginService: LoginService, private confirmationService: ConfirmationService) {}
+  constructor(private messageService: MessageService , private loginService: LoginService, private confirmationService: ConfirmationService,private CommentaireService : CommentaireService ) {}
 
   ngOnInit(): void {
     this.loginService.currentUserSession().subscribe((u) => {
-      console.log(u);
+     
       this.currentAuth = u;
     });
   }
@@ -47,15 +48,15 @@ export class CommentBlockComponent implements OnInit {
   }
 
   showEditBtn(): boolean {
-    return this.comment.ecritPar.id === this.currentAuth.id;
+    return this.comment.creerpar === this.currentAuth.id;
   }
 
   showDeleteBtn(): boolean {
-    return false;
+    return this.comment.creerpar === this.currentAuth.id;
   }
 
   actionText(): string {
-    switch (this.comment.action) {
+    switch (this.comment.type) {
       case 'CREATE':
         return 'Création';
       case 'UPDATE':
@@ -65,20 +66,25 @@ export class CommentBlockComponent implements OnInit {
       case 'DISCHARGE_REQUESTED':
         return 'Changement du statut : déchargement demandé';
     }
-    return this.comment.action;
+    return this.comment.type;
   }
 
-  supprimerButtonAction(): void {
+  supprimerButtonAction(id : number): void {
     this.confirmationService.confirm({
-      key: 'odn-warn',
-      message:
-        'Voulez-vous vraiment supprimer ce commentaire ?',
-      header: 'Suppression du commentaire ',
+      message: 'vous étes sure de supprimer ce commentaire?',
+      header: 'Confirm',
       icon: 'pi pi-exclamation-triangle',
-      defaultFocus: 'reject',
       accept: () => {
-         this.supprimer.emit();
-      },
-    });
-  }
+      this.CommentaireService.supprimerCommentaire(id).subscribe((data)=>{
+        this.ngOnInit();
+      })
+     },
+   });
+ }
+  
+  showConfirm() {
+    
+    
+}
+
 }

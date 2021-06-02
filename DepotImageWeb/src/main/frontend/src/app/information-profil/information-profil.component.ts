@@ -4,6 +4,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MessageService } from 'primeng/api';
 import { CurrentUser, LoginService } from 'src/app/login/login.service';
 import {SericeService} from './serice.service';
+import pdfMake from 'pdfmake/build/pdfmake';
+import pdfFonts from 'pdfmake/build/vfs_fonts';
+pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 @Component({
   selector: 'app-information-profil',
@@ -16,7 +19,7 @@ export class InformationProfilComponent implements OnInit {
   constructor(private loginService: LoginService,private fb: FormBuilder,private modifierservice: SericeService,private messageService: MessageService) { }
   currentUser: CurrentUser;
   a:string;
-  
+  src="api/img/47";
   ngOnInit(): void {
     this.loginService.currentUserSession().subscribe((u) => {
       console.log(u);
@@ -57,7 +60,7 @@ console.log(this.a);
   passe:this.profilForm.get("passe").value,
         }).subscribe((data:any)=>{
           console.log("modofcication termine");
-          this.messageService.add({severity:'success', summary:'Service Message', detail:'Via MessageService'});
+          this.messageService.add({severity:'success', summary:'modification termineer', detail:''});
           
         })
         
@@ -71,6 +74,10 @@ console.log(this.a);
       
       annuler(){
         this.ngOnInit();
+      }
+      generatepdf(){
+        const documentDefinition =this.src;
+       pdfMake.createPdf(this.src).open();
       }
     
 

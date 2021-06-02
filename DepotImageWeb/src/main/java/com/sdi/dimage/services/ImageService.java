@@ -9,8 +9,10 @@ import com.drew.metadata.Tag;
 import com.sdi.dimage.dao.entities.AbstractUtilisateurEntity;
 import com.sdi.dimage.dao.entities.DocumentEntity;
 import com.sdi.dimage.dao.entities.ImageEntity;
+import com.sdi.dimage.dao.entities.ImageMetadataEntity;
 import com.sdi.dimage.dao.entities.UtilisateurEntity;
 import com.sdi.dimage.dao.repositories.DocumentRepositery;
+import com.sdi.dimage.dao.repositories.ImageMetadataRepositery;
 import com.sdi.dimage.dao.repositories.ImageRepository;
 import com.sdi.dimage.dao.repositories.UtlisateurRepository;
 import com.sdi.dimage.utils.DocImgDetailsModel;
@@ -22,6 +24,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
 import java.time.LocalDateTime;
@@ -40,6 +43,8 @@ public class ImageService {
     private DocumentRepositery documentRepositery;
     @Autowired
     private UtlisateurRepository utlisateurRepository;
+    @Autowired
+    private ImageMetadataRepositery metarepository;
     
     
     private ImageEntity img =new ImageEntity();
@@ -47,7 +52,7 @@ public class ImageService {
     private String ch;
     private TestService serv=new TestService();
     private UtilisateurEntity utl =new UtilisateurEntity();
-
+    
     private int taille ;
     
     /*public void uplodfile(MultipartFile file ) throws IOException, ImageProcessingException {
@@ -117,7 +122,11 @@ public class ImageService {
 
 imageRepo.save(this.img);
     }*/
+    //liste des metadata
+    public List<ImageMetadataEntity> getmeta(int idimg){
+       return this.metarepository.listMetadata(idimg);
 
+    }
     //liste des images
     public List<ImageEntity> getphoto(){
        return this.imageRepo.findAll();
@@ -134,6 +143,7 @@ imageRepo.save(this.img);
         doc.setSousTitre(document.getSousTitre());
         doc.setDescription(document.getDescription());
         doc.setEstPublique(document.getPublique());
+        doc.setType(document.getType());
         System.out.print(document.getPublique());
         doc.setStatut(null);
         //doc.setImages(null);
@@ -174,6 +184,71 @@ imageRepo.save(this.img);
 			
 			img.setCreePar(user);
 			img.setCreeLe(now);
+			
+			 try {
+				Metadata metadata = ImageMetadataReader.readMetadata(new ByteArrayInputStream(mf.getBytes()));
+				
+
+				 for (Directory directory : metadata.getDirectories()) {
+					 for (Tag tag : directory.getTags()) {
+						 ImageMetadataEntity meta=new ImageMetadataEntity();
+						 meta.setImage(img);
+						 switch (tag.getTagName()){
+
+	                       case "Image Width":
+
+	                    	meta.setTag(tag.getTagName());
+	                    	meta.setValeur(tag.getDescription());
+	                    	this.metarepository.save(meta);
+	                        break;
+	                       case "Image Height":
+
+		                    	meta.setTag(tag.getTagName());
+		                    	meta.setValeur(tag.getDescription());
+		                    	this.metarepository.save(meta);
+		                        break;
+	                       case "Make":
+
+		                    	meta.setTag(tag.getTagName());
+		                    	meta.setValeur(tag.getDescription());
+		                    	this.metarepository.save(meta);
+		                        break;
+	                       case "Model":
+
+		                    	meta.setTag(tag.getTagName());
+		                    	meta.setValeur(tag.getDescription());
+		                    	this.metarepository.save(meta);
+		                        break;
+	                       case "Date/Time":
+
+		                    	meta.setTag(tag.getTagName());
+		                    	meta.setValeur(tag.getDescription());
+		                    	this.metarepository.save(meta);
+		                        break;
+		                        
+	                      
+						 }
+	                  /*  case "Image Height":
+	                       this.img.setHauteur(tag.getDescription());
+	                    break;
+
+	                    case "File Name":
+	                        this.img.setName(tag.getDescription());
+	                    break;
+						 
+						 meta.setTag(tag.getTagName());
+						 meta.setValeur(tag.getDescription());*/
+	                       
+						 
+						 System.out.println("================================"+tag.getTagName()+ "  =>"+tag);
+					 }
+				 }
+				
+				
+				 }catch (ImageProcessingException | IOException e) {
+				
+				e.printStackTrace();
+			}
 			
 			imageEntities.add(img);
 			

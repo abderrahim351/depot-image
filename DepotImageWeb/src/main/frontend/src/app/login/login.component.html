@@ -11,6 +11,9 @@
             <label for="password">Mot de passe</label>
             <input id="password" type="password" formControlName="password" [feedback]="false" pPassword> 
           </div>
+          <span style="color: red;" *ngIf="testConnexion=='faux_passe'">Le mot de passe entré est incorrect</span>
+          <span style="color: red;"*ngIf="testConnexion=='faux_email'">compte inexistant,verifier votre adresse email et votre mot de passe</span>
+          
         </div>
 
         <footer>

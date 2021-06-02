@@ -22,14 +22,21 @@ export interface modifierutl {
   role:string;
   
 }
+export interface modifierutl2 {
+  id:number;
+  nom: string;
+  prenom: string;
+  email:string;
+  
+}
 @Injectable({
   providedIn: 'root'
 })
 export class AdminServiceService {
   constructor(private http: HttpClient) { }
 
-  get_utilisateurs(){
-    return this.http.get('api/utilisateur',optionRequete);
+  get_utilisateurs(x:number){
+    return this.http.get('api/liste_utilisateurs/'+x);
   }
 
   deletutilisateur(id: any){
@@ -39,7 +46,7 @@ export class AdminServiceService {
     console.log(x);
     return this.http.post('api/utilisateur',x,optionRequete);
   }
-  modifier_utilisateur(x:modifierutl){
+  modifier_utilisateur(x:modifierutl2){
     console.log(x);
     return this.http.post('api/utilisateur/modifer',x,optionRequete);
   }

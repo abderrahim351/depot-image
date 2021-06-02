@@ -13,7 +13,20 @@ public class DocImgModel {
 	private String sousTitre;
 	private LocalDateTime creeLe;
 	private String description;
+	private String type;
 	
+	public String getSousTitre() {
+		return sousTitre;
+	}
+	public void setSousTitre(String sousTitre) {
+		this.sousTitre = sousTitre;
+	}
+	public String getType() {
+		return type;
+	}
+	public void setType(String type) {
+		this.type = type;
+	}
 	public Integer getIdDoc() {
 		return idDoc;
 	}

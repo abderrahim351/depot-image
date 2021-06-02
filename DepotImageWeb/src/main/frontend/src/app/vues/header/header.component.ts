@@ -41,7 +41,7 @@ export class HeaderComponent implements OnInit {
 
         },
         {
-          label: 'Nouvelle Image',
+          label: 'Nouvelle publication',
           icon: 'pi pi-fw pi-image',
           routerLink: ['/nouvelle-image'],
           routerLinkActiveOptions: { match: ['/nouvelle-image'] },
@@ -69,6 +69,7 @@ export class HeaderComponent implements OnInit {
           icon: 'pi pi-fw pi-users',
           routerLink: ['/gestion-utilisateur'],
           routerLinkActiveOptions: { match: ['/gestion-utilisateur'] },
+          visible:this.isAdmin(),
         },
         {
           label: 'Bonjour  '+this.currentUser.prenoms+' '+this.currentUser.nom,
@@ -117,4 +118,12 @@ export class HeaderComponent implements OnInit {
         this.router.navigate(['/login']);
       });
   }
-}
+  isAdmin(){
+    if (this.currentUser.groupe=="utilisateur" ){
+      return false ;}
+      else{
+        return true;
+      }
+    }
+  }
+

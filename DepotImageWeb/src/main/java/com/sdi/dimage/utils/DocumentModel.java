@@ -6,7 +6,16 @@ public class DocumentModel {
     private String sousTitre;
     private String description;
     private Boolean publique=false ;
-    public String getTitre() {
+    private String type;
+    public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
+	public String getTitre() {
         return titre;
     }
 

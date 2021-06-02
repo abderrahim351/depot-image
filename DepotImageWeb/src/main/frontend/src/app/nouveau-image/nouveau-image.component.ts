@@ -20,6 +20,7 @@ export class NouveauImageComponent implements OnInit {
   checked: boolean = false;
   imageForm:FormGroup;
    publique1:string;
+   type:string;
 
 
 
@@ -33,9 +34,7 @@ export class NouveauImageComponent implements OnInit {
       titre: ["", [Validators.required]],
       sousTitre: ["", Validators.required],
       description: ["", Validators.required],
-      publique: [false, Validators.required],
-
-
+      
     });
     this.publiquefn();
   }
@@ -45,16 +44,19 @@ export class NouveauImageComponent implements OnInit {
       titre: this.imageForm.get('titre').value,
       sousTitre: this.imageForm.get('sousTitre').value,
       description: this.imageForm.get('description').value,
-      publique: this.imageForm.get('publique').value,
+      type: this.type,
+     
+      
 
 
     }).subscribe((data:any)=>{
       console.log(data);
+      console.log(this.type);
+     
 
       this.pFileUpload.url = 'api/document/'+data+'/upload';
-
       this.pFileUpload.upload();
-
+     
 
 
 
@@ -76,11 +78,17 @@ export class NouveauImageComponent implements OnInit {
   }
 
   onUpload($event) {
-
+    
     console.log('upload done !');
     this.block = false;
     this.messageService.add({severity: 'info', summary: 'File Uploaded', detail: ''});
     this.router.navigate(['/accueil']);
 }
 
+typeimg(){
+  this.type="image";
+}
+typefile(){
+  this.type="file";
+}
 }

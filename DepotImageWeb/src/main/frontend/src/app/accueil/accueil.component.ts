@@ -14,6 +14,7 @@ import { Router } from '@angular/router';
 })
 export class AccueilComponent implements OnInit {
   url = 'api/document/img/2';
+  src="api/img/47";
   a = 2;
   products: Product[];
   documents: Document[];

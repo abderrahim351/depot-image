@@ -35,6 +35,10 @@ export class ImageDetailsService {
       .then(res => <Image[]>res.data)
       .then(data => { return data; });
     }
+    getMetadata(id : number)
+    {
+      return this.http.get('api/img/details/'+id);
+    }
 
     }
 

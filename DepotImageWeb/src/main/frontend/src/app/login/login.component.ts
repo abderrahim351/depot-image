@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { LoginService } from './login.service';
+import { CurrentUser, LoginService } from './login.service';
 
 @Component({
   selector: 'app-login',
@@ -11,6 +11,7 @@ import { LoginService } from './login.service';
 })
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
+  testConnexion:String;
 
   constructor(private fb: FormBuilder,
     private router: Router,
@@ -30,13 +31,27 @@ export class LoginComponent implements OnInit {
         username: this.loginForm.get('username').value,
         password: this.loginForm.get('password').value,
       })
-      .subscribe((data:any)=>{
+      .subscribe((data:CurrentUser)=>{
         console.log(data);
+        this.testConnexion=data.identifiant;
+       if(data.identifiant=='faux_email'){
+         console.log("verifier votre adresse email et votre mot de passe");
+       }
+       else if(data.identifiant=='faux_passe'){
+        console.log("verifier votre mot de passe");
+       }
+       else{
         this.router.navigate(['/accueil']);
+       }
+       
+          
+       
+       
       })
       
       
-        ;
+      
+        
 
   }
 

@@ -6,21 +6,24 @@
       </div>
       <div class="p-col p-grid">
         <div class="p-col-6 p-text-italic p-text-bold ">
-          {{comment.ecritPar.nom}} {{comment.ecritPar.prenom}} ({{comment.ecritPar.uniteOrganisationnelle}})
-          <button *ngIf="showEditBtn()" pButton pRipple type="button" label="Modifier"
-            (click)="modifier.emit()" class="p-button-sm p-button-help p-button-text p-ml-2"></button>
-          <button *ngIf="showDeleteBtn()" pButton pRipple type="button" label="Supprimer"
-          (click)="supprimerButtonAction()" class="p-button-sm p-button-danger p-button-text p-ml-2"></button>
+          {{comment.nom}} {{comment.prenom}} 
+          
+         
         </div>
         <div class="p-col-6 p-text-right p-text-italic p-text-bold " style="font-size: 0.7rem;">
-          le {{comment.date}}
+          le {{comment.creerle}}
         </div>
         <div *ngIf="showAction()" class="p-col-12  p-text-bold p-mt-0 p-pt-0" style="font-size: 0.9rem;">
           {{actionText()}}
         </div>
         <div class="p-col-12 text ">
-          {{comment.commentaire}}
+          {{comment.contenu}}
         </div>
+        <button *ngIf="showEditBtn()" pButton pRipple type="button" label="Modifier"
+            (click)="modifier.emit()" class="p-button-sm p-button-help p-button-text p-ml-2"></button>
+            <p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="10000" rejectButtonStyleClass="p-button-text"></p-confirmDialog>    
+                <button *ngIf="showDeleteBtn()" pButton pRipple type="button" label="Supprimer"
+        (click)="supprimerButtonAction(comment.id)" class="p-button-sm p-button-danger p-button-text p-ml-2"></button>
       </div>
     </div>
   </ng-template>
