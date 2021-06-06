@@ -33,6 +33,7 @@ import { InputTextareaModule } from 'primeng/inputtextarea';
 import {PanelModule} from 'primeng/panel';
 import {MenubarModule} from 'primeng/menubar';
 import {MenuItem} from 'primeng/api';
+import {TabViewModule} from 'primeng/tabview';
 import {GalleriaModule} from 'primeng/galleria';
 import {SplitButtonModule} from 'primeng/splitbutton';
 import {BlockUIModule} from 'primeng/blockui';
@@ -52,6 +53,7 @@ import { InformationProfilComponent } from './information-profil/information-pro
 import {ProgressSpinnerModule} from 'primeng/progressspinner';
 import { CommentaireComponent } from './commentaire/commentaire.component';
 import { CommentBlockComponent } from './commentaire/comment-block/comment-block.component';
+import { ImageMetasComponent } from './image-metas/image-metas.component';
 
 
 @NgModule({
@@ -66,7 +68,8 @@ import { CommentBlockComponent } from './commentaire/comment-block/comment-block
       ImageDetailsComponent,
       InformationProfilComponent,
       CommentaireComponent,
-      CommentBlockComponent
+      CommentBlockComponent,
+      ImageMetasComponent
 
 
    ],
@@ -106,7 +109,8 @@ import { CommentBlockComponent } from './commentaire/comment-block/comment-block
     ProgressSpinnerModule,
     GalleriaModule,
     SplitButtonModule,
-    BlockUIModule
+    BlockUIModule,
+    TabViewModule
   ],
   providers: [ MessageService, ConfirmationService,acceuilservice],
   bootstrap: [AppComponent],

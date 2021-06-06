@@ -6,10 +6,10 @@ import {Document} from './document';
 })
 export class documentservice {
 
-  constructor(private httpclient:HttpClient) { 
+  constructor(private httpclient:HttpClient) {
 
   }
   getdoc(){
-    return this.httpclient.get<Document>('api/doc');
+    return this.httpclient.get<Document>('api/documents');
   }
 }

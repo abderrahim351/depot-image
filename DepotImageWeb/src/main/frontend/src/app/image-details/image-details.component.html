@@ -1,53 +1,44 @@
 <div class="p-grid">
+
   <div class="p-col-6 dimage-img-doc p-ac-center p-as-center">
 
     <div class="dimages-display-div">
-      <p-galleria [(value)]="detailleDoc.idsImage" [responsiveOptions]="responsiveOptions"
-      [showItemNavigators]="true"
-      [circular]="true"
-        [numVisible]="5">
+      <p-galleria [(value)]="detailleDoc.idsImage" [responsiveOptions]="responsiveOptions" [showItemNavigators]="true"
+        [circular]="true" [numVisible]="5" [(activeIndex)]="activeIndex">
         <ng-template pTemplate="item" let-item>
-         <button (click)="detaille(item)"><img src="api/img/{{item}}" class="photo-item" /></button> 
+          <button (click)="detaille(item)"><img src="api/img/{{item}}" class="photo-item" /></button>
         </ng-template>
         <ng-template pTemplate="thumbnail" let-item>
           <div class="p-grid p-nogutter p-justify-center">
-            <img src="api/img/{{item}}" class="photo-thumbnail"/>
+            <img src="api/img/{{item}}" class="photo-thumbnail" />
           </div>
         </ng-template>
       </p-galleria>
     </div>
 
+    <app-image-metas></app-image-metas>
+
   </div>
-  <p-dialog header="Title" [(visible)]="display">
-    <div class="p-grid">
-    <div class="p-col-6">
-    <img [src]="src" height="600px" width="600px">
-  </div>
-    <div class="p-col-6"><p-card *ngFor="let meta of metadata">
-      <div class="p-grid">
-        <div class="p-col-5 p-text-right p-as-end p-text-italic">{{meta.tag}}</div>
-        <div class="p-col-7 p-text-left doc-titre p-text-bold">{{meta.valeur}}</div>
-       
-      </div></p-card><app-commentaire idImg=8 type="document"[idDoc]="idDoc"></app-commentaire></div>
-    </div>
-</p-dialog>
+
+
+
   <div class="p-col-6">
 
     <p-card>
-    <div class="p-grid">
-      <div class="p-col-5 p-text-right p-as-end p-text-italic">Titre: </div>
-      <div class="p-col-7 p-text-left doc-titre p-text-bold">{{detailleDoc.titre}}</div>
-      <div class="p-col-5 p-text-right p-text-italic">Sous-titre: </div>
-      <div class="p-col-7 p-text-left doc-sous-titre p-text-bold">{{detailleDoc.soustitre}}</div>
-      <div class="p-col-5 p-text-right p-text-italic">Description: </div>
-      <div class="p-col-7 p-text-left ">{{detailleDoc.description}}</div>
-      <div class="p-col-5 p-text-right p-text-italic">Créé par: </div>
-      <div class="p-col-7 p-text-left ">{{detailleDoc.nom}} {{detailleDoc.prenom}}</div>
-    </div>
+      <div class="p-grid">
+        <div class="p-col-5 p-text-right p-as-end p-text-italic">Titre: </div>
+        <div class="p-col-7 p-text-left doc-titre p-text-bold">{{detailleDoc.titre}}</div>
+        <div class="p-col-5 p-text-right p-text-italic">Sous-titre: </div>
+        <div class="p-col-7 p-text-left doc-sous-titre p-text-bold">{{detailleDoc.soustitre}}</div>
+        <div class="p-col-5 p-text-right p-text-italic">Description: </div>
+        <div class="p-col-7 p-text-left ">{{detailleDoc.description}}</div>
+        <div class="p-col-5 p-text-right p-text-italic">Créé par: </div>
+        <div class="p-col-7 p-text-left ">{{detailleDoc.nom}} {{detailleDoc.prenom}}</div>
+      </div>
 
-    <app-commentaire [idDoc]="idDoc"></app-commentaire>
+      <app-commentaire [idDoc]="idDoc"></app-commentaire>
 
-</p-card>
+    </p-card>
 
   </div>
 

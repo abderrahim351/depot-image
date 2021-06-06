@@ -33,16 +33,6 @@ public class UtilisateurController {
 	@Autowired
 	private ImageRepository imageRepo;
 
-	@GetMapping("au1")
-	public String adduser1() {
-		GestionnaireEntity utl = new GestionnaireEntity();
-		utl.setIdentifiant("aymen@rien.do");
-		utl.setAdresseEmail("aymen@rien.do");
-		utl.setPrenoms("Aymen");
-		utl.setNom("JAMAAOUI");
-		return service.addGestionnaire(utl);
-
-	}
 
 	//afficher tous les utilisateurs
 	@GetMapping("/liste_utilisateurs/{id}")

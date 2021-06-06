@@ -44,62 +44,7 @@ public class TestService {
     	System.out.print(this.userRepo.findAll());
         return this.userRepo.findAll();
     }
-    
-    public String role(UtilisateurModel utl) {
-    	
-    	if(utl.getRole().equals("gestionnaire")) {
-    		GestionnaireEntity gest =new GestionnaireEntity();
-    		gest.setAdresseEmail(utl.getEmail());
-    		gest.setIdentifiant(utl.getEmail());
-    		gest.setNom(utl.getNom());
-    		gest.setPrenoms(utl.getPrenom());
-    		return this.addGestionnaire(gest);
-    	}
-    	else if(utl.getRole().equals("utilisateur")) {
-    		UtilisateurEntity utlis = new UtilisateurEntity();
-    		utlis.setAdresseEmail(utl.getEmail());
-    		utlis.setIdentifiant(utl.getEmail());
-    		utlis.setNom(utl.getNom());
-    		utlis.setPrenoms(utl.getPrenom());
-    		return this.adduser(utlis);
-    		
-    	}
-    	else {
-    		AdministrateurEntity admin = new AdministrateurEntity();
-    		admin.setAdresseEmail(utl.getEmail());
-    		admin.setIdentifiant(utl.getEmail());
-    		admin.setNom(utl.getNom());
-    		admin.setPrenoms(utl.getPrenom());
-    		return this.addAdmin(admin);
-    	}
-    	}
-    //ajouter utilisateurs
-    public String adduser(UtilisateurEntity utl) {
-        String a = this.random_password();
-        utl.setMotDePasse(a);
-        userRepo.save(utl);
 
-        this.sendmail( utl.getAdresseEmail(), utl.getNom(), utl.getPrenoms(),"utilisateur",a);
-        return "utilisateur enregistrer";
-    }
-    //ajouter gestionnaire
-    public String addGestionnaire(GestionnaireEntity utl) {
-        String a = this.random_password();
-        utl.setMotDePasse(a);
-
-        userRepo.save(utl);
-        this.sendmail( utl.getAdresseEmail(), utl.getNom(), utl.getPrenoms(),"gestionnaire",a);
-        return "gestionnaire enregistrer";
-    }
-    //ajouter administrateur
-    public String addAdmin(AdministrateurEntity utl) {
-
-        String a = this.random_password();
-        utl.setMotDePasse(a);
-        userRepo.save(utl);
-        this.sendmail( utl.getAdresseEmail(), utl.getNom(), utl.getPrenoms(),"administrateur",a);
-        return "administrateur enregistrer";
-    }
 
 
 

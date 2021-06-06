@@ -32,6 +32,8 @@ export class ImageDetailsComponent implements OnInit {
   images: any[];
   metadata:metadata[];
 
+  activeIndex: number = 0;
+
   responsiveOptions: any[] = [
     {
       breakpoint: '1024px',
@@ -47,7 +49,7 @@ export class ImageDetailsComponent implements OnInit {
     },
   ];
   src: string;
-  
+
 
   constructor(
     private router: Router,
@@ -74,15 +76,15 @@ export class ImageDetailsComponent implements OnInit {
   }
   detaille(i : number){
     console.log(i);
-    
+
     this.display=true;
     this.src="api/img/"+i;
     console.log(this.src);
     this.service.getMetadata(i).subscribe((data:any[])=>{
-     
+
       this.metadata=data;
       console.log(this.metadata);
     })
   }
-  
+
 }

@@ -1,9 +1,18 @@
 package com.sdi.dimage.dao.entities;
 
 
-import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.Set;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 @Entity
 @Table(name = "image")
@@ -22,14 +31,6 @@ public class ImageEntity {
     private Long tailleFichier;
     
     private LocalDateTime creeLe;
-    private String type;
-    private String resolution;
-    private String largeur;
-    private String hauteur;
-    private String appareil;
-    private String lieu;
-    private String description;
-    private String metadata;
     
     @ManyToOne
     private AbstractUtilisateurEntity creePar;
@@ -41,28 +42,24 @@ public class ImageEntity {
     
     @OneToMany
     private Set<CommentaireEntity> commentaires;
-    
-    @OneToOne
-    private ImageEntity aPartirDe ;
 
+	public Integer getId() {
+		return id;
+	}
 
-    public String getName() {
-        return name;
-    }
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
-    public void setName(String name) {
-        this.name = name;
-    }
+	public String getName() {
+		return name;
+	}
 
-    public Integer getId() {
-        return id;
-    }
+	public void setName(String name) {
+		this.name = name;
+	}
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public byte[] getContenu() {
+	public byte[] getContenu() {
 		return contenu;
 	}
 
@@ -71,122 +68,53 @@ public class ImageEntity {
 	}
 
 	public String getTypeFichier() {
-        return typeFichier;
-    }
+		return typeFichier;
+	}
 
-    public void setTypeFichier(String typeFichier) {
-        this.typeFichier = typeFichier;
-    }
+	public void setTypeFichier(String typeFichier) {
+		this.typeFichier = typeFichier;
+	}
 
-    public Long getTailleFichier() {
-        return tailleFichier;
-    }
+	public Long getTailleFichier() {
+		return tailleFichier;
+	}
 
-    public void setTailleFichier(Long tailleFichier) {
-        this.tailleFichier = tailleFichier;
-    }
+	public void setTailleFichier(Long tailleFichier) {
+		this.tailleFichier = tailleFichier;
+	}
 
-    public LocalDateTime getCreeLe() {
-        return creeLe;
-    }
+	public LocalDateTime getCreeLe() {
+		return creeLe;
+	}
 
-    public void setCreeLe(LocalDateTime creeLe) {
-        this.creeLe = creeLe;
-    }
+	public void setCreeLe(LocalDateTime creeLe) {
+		this.creeLe = creeLe;
+	}
 
-    public String getType() {
-        return type;
-    }
+	public AbstractUtilisateurEntity getCreePar() {
+		return creePar;
+	}
 
-    public void setType(String type) {
-        this.type = type;
-    }
+	public void setCreePar(AbstractUtilisateurEntity creePar) {
+		this.creePar = creePar;
+	}
 
-    public String getResolution() {
-        return resolution;
-    }
+	public DocumentEntity getDocument() {
+		return document;
+	}
 
-    public void setResolution(String resolution) {
-        this.resolution = resolution;
-    }
+	public void setDocument(DocumentEntity document) {
+		this.document = document;
+	}
 
-    public String getLargeur() {
-        return largeur;
-    }
+	public Set<CommentaireEntity> getCommentaires() {
+		return commentaires;
+	}
 
-    public void setLargeur(String largeur) {
-        this.largeur = largeur;
-    }
+	public void setCommentaires(Set<CommentaireEntity> commentaires) {
+		this.commentaires = commentaires;
+	}
 
-    public String getHauteur() {
-        return hauteur;
-    }
+    
 
-    public void setHauteur(String hauteur) {
-        this.hauteur = hauteur;
-    }
-
-    public String getAppareil() {
-        return appareil;
-    }
-
-    public void setAppareil(String appareil) {
-        this.appareil = appareil;
-    }
-
-    public String getLieu() {
-        return lieu;
-    }
-
-    public void setLieu(String lieu) {
-        this.lieu = lieu;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public String getMetadata() {
-        return metadata;
-    }
-
-    public void setMetadata(String metadata) {
-        this.metadata = metadata;
-    }
-
-    public AbstractUtilisateurEntity getCreePar() {
-        return creePar;
-    }
-
-    public void setCreePar(AbstractUtilisateurEntity creePar) {
-        this.creePar = creePar;
-    }
-
-    public DocumentEntity getDocument() {
-        return document;
-    }
-
-    public void setDocument(DocumentEntity document) {
-        this.document = document;
-    }
-
-    public Set<CommentaireEntity> getCommentaires() {
-        return commentaires;
-    }
-
-    public void setCommentaires(Set<CommentaireEntity> commentaires) {
-        this.commentaires = commentaires;
-    }
-
-    public ImageEntity getaPartirDe() {
-        return aPartirDe;
-    }
-
-    public void setaPartirDe(ImageEntity aPartirDe) {
-        this.aPartirDe = aPartirDe;
-    }
 }

@@ -1,5 +1,16 @@
 package com.sdi.dimage.services;
 
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.transaction.Transactional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.drew.imaging.ImageMetadataReader;
 import com.drew.imaging.ImageProcessingException;
@@ -10,7 +21,6 @@ import com.sdi.dimage.dao.entities.AbstractUtilisateurEntity;
 import com.sdi.dimage.dao.entities.DocumentEntity;
 import com.sdi.dimage.dao.entities.ImageEntity;
 import com.sdi.dimage.dao.entities.ImageMetadataEntity;
-import com.sdi.dimage.dao.entities.UtilisateurEntity;
 import com.sdi.dimage.dao.repositories.DocumentRepositery;
 import com.sdi.dimage.dao.repositories.ImageMetadataRepositery;
 import com.sdi.dimage.dao.repositories.ImageRepository;
@@ -18,162 +28,113 @@ import com.sdi.dimage.dao.repositories.UtlisateurRepository;
 import com.sdi.dimage.utils.DocImgDetailsModel;
 import com.sdi.dimage.utils.DocImgModel;
 import com.sdi.dimage.utils.DocumentModel;
+import com.sdi.dimage.utils.GroupeMetadataModel;
+import com.sdi.dimage.utils.MetaModel;
 import com.sdi.dimage.utils.UtilisateurSessionDto;
-import com.sun.tools.jconsole.JConsoleContext;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
-
-import java.io.ByteArrayInputStream;
-import java.io.File;
-import java.io.IOException;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-
-import javax.mail.Message;
-import javax.transaction.Transactional;
 
 @Service
 public class ImageService {
-    @Autowired
-    private ImageRepository imageRepo;
-    @Autowired
-    private DocumentRepositery documentRepositery;
-    @Autowired
-    private UtlisateurRepository utlisateurRepository;
-    @Autowired
-    private ImageMetadataRepositery metarepository;
-    
-    
-    private ImageEntity img =new ImageEntity();
-    private int S;
-    private String ch;
-    private TestService serv=new TestService();
-    private UtilisateurEntity utl =new UtilisateurEntity();
-    
-    private int taille ;
-    
-    /*public void uplodfile(MultipartFile file ) throws IOException, ImageProcessingException {
-        File f =new File("C:\\Users\\abder\\OneDrive\\Desktop\\depot-image\\DepotImageWeb\\src\\main\\frontend\\src\\assets\\"+file.getOriginalFilename());
-        f.createNewFile();
-        System.out.println(file.toString());
-        file.transferTo(f);
-        Metadata metadata = ImageMetadataReader.readMetadata(new File("C:\\Users\\abder\\OneDrive\\Desktop\\depot-image\\DepotImageWeb\\src\\main\\frontend\\src\\assets\\" + file.getOriginalFilename()));
-        this.utl.setNom("jamaaoui");
-        this.utl.setAdresseEmail("abderrahim@gmail");
-        //this.img.setCheminFichier("assets/" + file.getOriginalFilename());
-        this.img.setCreePar(null);
-        this.img.setDescription("azerty");
-        this.img.setaPartirDe(null);
-        
-        this.img.setCommentaires(null);
-        
-        this.img.setDocument(this.documentRepositery.findById(2).get());
-        this.img.setLieu("kairouan");
-        this.img.setMetadata("metadata");
-        this.img.setResolution("500");
-        this.img.setTypeFichier("image");
+	@Autowired
+	private ImageRepository imageRepo;
+	@Autowired
+	private DocumentRepositery documentRepositery;
+	@Autowired
+	private UtlisateurRepository utlisateurRepository;
+	@Autowired
+	private ImageMetadataRepositery metarepository;
 
 
-        for (Directory directory : metadata.getDirectories()) {
-            for (Tag tag : directory.getTags()) {
-                switch (tag.getTagName()){
+	//liste des metadata
+	public List<GroupeMetadataModel> metadatas(int idimg) {
+		List<ImageMetadataEntity> listMestaEntities =  metarepository.listMetadata(idimg);
+		
+		
+		List<GroupeMetadataModel> listMetaModels = new ArrayList<>();
+		
+		GroupeMetadataModel gmmTmp = null;
+		for (ImageMetadataEntity ime : listMestaEntities) {
+			
+			if (gmmTmp==null || !ime.getDirectory().equals(gmmTmp.getTitreGroupe())) {
+				gmmTmp = new GroupeMetadataModel();
+				gmmTmp.setTitreGroupe(ime.getDirectory());
+				listMetaModels.add(gmmTmp);
+			}
+			MetaModel imm = new MetaModel();
+			imm.setTag(ime.getTag());
+			imm.setValeur(ime.getValeur());
+			
+			gmmTmp.getTags().add(imm);
+			
+		}
+		
+		return listMetaModels;
 
-                       case "Image Width":
+	}
 
-                    this.img.setLargeur(tag.getDescription());
-                        break;
+	//liste des images
+	public List<ImageEntity> getphoto() {
+		return this.imageRepo.findAll();
 
-                    case "Image Height":
-                       this.img.setHauteur(tag.getDescription());
-                    break;
+	}
 
-                    case "File Name":
-                        this.img.setName(tag.getDescription());
-                    break;
+	public List<DocImgModel> documents() {
+		
+		List<DocumentEntity> documents = documentRepositery.findAll();
+		
+		ArrayList<DocImgModel> listModels =new ArrayList<>(documents.size()); 
+		
+		for (DocumentEntity de : documents) {
+			DocImgModel aux =new DocImgModel();
+			aux.setNom(de.getCreePar().getNom());
+			aux.setPrenom(de.getCreePar().getPrenoms());
+			
+			aux.setTitre(de.getTitre());
+			aux.setSoustitre(de.getSousTitre());
+			
+			aux.setDescription(de.getDescription());
+			aux.setIdDoc(de.getId());
+			aux.setType(de.getType());
+			listModels.add(aux);
+		}
+		
+		return listModels;
+	}
 
-                    case "File Size": {
-                       this.S=tag.getDescription().indexOf(" ");
-                        this.ch=tag.getDescription().substring(0,this.S);
-                        this.taille=Integer.parseInt(this.ch);
-                        System.out.println(this.taille);
-                        //this.img.setTailleFichier(this.taille);
-                        break;
-                    }
-                    case "File Modified Date":
-                        //this.img.setCreeLe(tag.getDescription());
-                        break;
-                    case "Detected File Type Long Name":
-                        this.img.setAppareil(tag.getDescription());
-                        break;
-                    case "Detected File Type Name":
-                        this.img.setType(tag.getDescription());
-                        break;
+	public Integer enregistrerdoc(DocumentModel document,
+			UtilisateurSessionDto user) {
 
+		DocumentEntity doc = new DocumentEntity();
+		doc.setTitre(document.getTitre());
+		doc.setSousTitre(document.getSousTitre());
+		doc.setDescription(document.getDescription());
+		doc.setEstPublique(document.getPublique());
+		doc.setType(document.getType());
+		System.out.print(document.getPublique());
+		doc.setStatut(null);
+		//doc.setImages(null);
+		//doc.setImagePrincipal(null);
 
-                }
+		doc.setCreePar(utlisateurRepository.getOne(user.getId()));
+		doc.setCommentaires(null);
+		doc.setCreeLe(LocalDateTime.now());
 
-                }
+		documentRepositery.save(doc);
+		return doc.getId();
 
-            }
+	}
 
-
-imageRepo.save(this.img);
-    }*/
-    //liste des metadata
-    public List<ImageMetadataEntity> getmeta(int idimg){
-       return this.metarepository.listMetadata(idimg);
-
-    }
-    //liste des images
-    public List<ImageEntity> getphoto(){
-       return this.imageRepo.findAll();
-
-    }
-    public List<DocumentEntity> getdoc(){
-        return this.documentRepositery.findAll();
-    }
-
-    public Integer enregistrerdoc(DocumentModel document, UtilisateurSessionDto user){
-
-        DocumentEntity doc =new DocumentEntity();
-        doc.setTitre(document.getTitre());
-        doc.setSousTitre(document.getSousTitre());
-        doc.setDescription(document.getDescription());
-        doc.setEstPublique(document.getPublique());
-        doc.setType(document.getType());
-        System.out.print(document.getPublique());
-        doc.setStatut(null);
-        //doc.setImages(null);
-        //doc.setImagePrincipal(null);
-        
-
-
-        doc.setCreePar(utlisateurRepository.getOne(user.getId()));
-        doc.setCommentaires(null);
-        doc.setCreeLe(LocalDateTime.now());
-       
-
-        documentRepositery.save(doc) ;
-        return doc.getId();
-       
-
-
-    }
-
-    @Transactional
+	@Transactional
 	public void uplodfile(Integer idDoc, List<MultipartFile> files,
 			UtilisateurSessionDto userSession) throws IOException {
 
 		DocumentEntity doc = documentRepositery.getOne(idDoc);
-		AbstractUtilisateurEntity user = utlisateurRepository.getOne(userSession.getId());
-		
+		AbstractUtilisateurEntity user = utlisateurRepository
+				.getOne(userSession.getId());
+
 		LocalDateTime now = LocalDateTime.now();
-		
+
 		List<ImageEntity> imageEntities = new ArrayList<>(files.size());
-		
+
 		for (int i = 0; i < files.size(); i++) {
 			MultipartFile mf = files.get(i);
 			ImageEntity img = new ImageEntity();
@@ -181,138 +142,98 @@ imageRepo.save(this.img);
 			img.setContenu(mf.getBytes());
 			img.setTailleFichier(mf.getSize());
 			img.setTypeFichier(mf.getContentType());
-			
+
 			img.setCreePar(user);
 			img.setCreeLe(now);
-			
-			 try {
-				Metadata metadata = ImageMetadataReader.readMetadata(new ByteArrayInputStream(mf.getBytes()));
-				
 
-				 for (Directory directory : metadata.getDirectories()) {
-					 
-					 System.out.println("*************************************=>"+directory.getName());
-					 System.out.println("*************************************=>"+directory.getTags());
-					 
-					 for (Tag tag : directory.getTags()) {
-						 ImageMetadataEntity meta=new ImageMetadataEntity();
-						 meta.setImage(img);
-						 switch (tag.getTagName()){
+			try {
+				Metadata metadata = ImageMetadataReader
+						.readMetadata(new ByteArrayInputStream(mf.getBytes()));
 
-	                       case "Image Width":
+				List<ImageMetadataEntity> metas = new ArrayList<>();
 
-	                    	meta.setTag(tag.getTagName());
-	                    	meta.setValeur(tag.getDescription());
-	                    	this.metarepository.save(meta);
-	                        break;
-	                       case "Image Height":
+				for (Directory directory : metadata.getDirectories()) {
 
-		                    	meta.setTag(tag.getTagName());
-		                    	meta.setValeur(tag.getDescription());
-		                    	this.metarepository.save(meta);
-		                        break;
-	                       case "Make":
+					String directoryName = directory.getName();
 
-		                    	meta.setTag(tag.getTagName());
-		                    	meta.setValeur(tag.getDescription());
-		                    	this.metarepository.save(meta);
-		                        break;
-	                       case "Model":
+					for (Tag tag : directory.getTags()) {
+						ImageMetadataEntity meta = new ImageMetadataEntity();
+						meta.setImage(img);
+						meta.setDirectory(directoryName);
+						meta.setTag(tag.getTagName());
+						meta.setValeur(tag.getDescription());
 
-		                    	meta.setTag(tag.getTagName());
-		                    	meta.setValeur(tag.getDescription());
-		                    	this.metarepository.save(meta);
-		                        break;
-	                       case "Date/Time":
+						metas.add(meta);
 
-		                    	meta.setTag(tag.getTagName());
-		                    	meta.setValeur(tag.getDescription());
-		                    	this.metarepository.save(meta);
-		                        break;
-		                        
-	                      
-						 }
-	                  /*  case "Image Height":
-	                       this.img.setHauteur(tag.getDescription());
-	                    break;
+					}
+				}
 
-	                    case "File Name":
-	                        this.img.setName(tag.getDescription());
-	                    break;
-						 
-						 meta.setTag(tag.getTagName());
-						 meta.setValeur(tag.getDescription());*/
-	                       
-						 
-						 
-					 }
-				 }
-				
-				
-				 }catch (ImageProcessingException | IOException e) {
-				
+				if (!metas.isEmpty()) {
+					metarepository.saveAll(metas);
+				}
+
+			} catch (ImageProcessingException | IOException e) {
+
 				e.printStackTrace();
 			}
-			
+
 			imageEntities.add(img);
-			
+
 		}
 
-		
 		imageRepo.saveAll(imageEntities);
-		
+
 		doc.setImagePrincipal(imageEntities.get(0));
-		
+
 		documentRepositery.save(doc);
-		
+
 	}
 
 	public ImageEntity getImagePrincipale(Integer idDoc) {
 
-		
 		return documentRepositery.getOne(idDoc).getImagePrincipal();
 	}
+
 	public void supprimerdoc(int id) {
 		this.documentRepositery.deleteById(id);
-		
+
 	}
+
 	//
 	public DocImgDetailsModel detailePub(int id) {
 		DocImgDetailsModel detaille = new DocImgDetailsModel();
-		
+
 		DocumentEntity doc = this.documentRepositery.getOne(id);
-		
+
 		detaille.setNom(doc.getCreePar().getNom());
 		detaille.setPrenom(doc.getCreePar().getPrenoms());
 		detaille.setDescription(doc.getDescription());
 		detaille.setTitre(doc.getTitre());
 		detaille.setSoustitre(doc.getSousTitre());
 		detaille.setCreeLe(doc.getCreeLe());
-		
+
 		detaille.setIdsImage(imageRepo.listImagesParDoc(id));
-		
+
 		return detaille;
-		
-		
+
 	}
+
 	public ImageEntity getImage(Integer idImg) {
-		
+
 		return this.imageRepo.getOne(idImg);
 	}
+
 	public void listeImage(int iddoc) {
 		List<Integer> imageId = new ArrayList<>();
-		
-		
+
 		for (ImageEntity img : this.getphoto()) {
-			
-			
-			if( img.getDocument().getId().equals(iddoc)) {
+
+			if (img.getDocument().getId().equals(iddoc)) {
 				imageId.add(img.getId());
 			}
-			
-			
+
 		}
-		
+
 	}
-	
+
 }

@@ -3,6 +3,8 @@ package com.sdi.dimage.services;
 import java.util.List;
 import java.util.Optional;
 
+import javax.annotation.PostConstruct;
+
 import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
@@ -27,7 +29,22 @@ public class UtilisateurService {
     @Autowired
     private  JavaMailSender javaMailSender;
 	
-	
+    @PostConstruct
+    private void postConstruct() {
+    	
+    	if (utRepository.count()==0) {
+			AdministrateurEntity adm = new AdministrateurEntity();
+			adm.setIdentifiant("admin@dimage.tn");
+			adm.setAdresseEmail("admin@dimage.tn");
+			adm.setPrenoms("Abderrahim");
+			adm.setNom("JAMAAOUI");
+			adm.setMotDePasse("Azerty1?");
+			utRepository.save(adm);
+		}
+    	
+    }
+    
+    
     public void addUser(UtilisateurModel utl) {
     	
     	AbstractUtilisateurEntity user =null;

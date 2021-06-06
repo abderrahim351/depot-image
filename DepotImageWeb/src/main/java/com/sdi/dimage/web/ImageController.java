@@ -1,43 +1,54 @@
 package com.sdi.dimage.web;
 
-import com.drew.imaging.ImageProcessingException;
-import com.sdi.dimage.dao.entities.AbstractUtilisateurEntity;
-import com.sdi.dimage.dao.entities.DocumentEntity;
-import com.sdi.dimage.dao.entities.ImageEntity;
-import com.sdi.dimage.dao.entities.ImageMetadataEntity;
-import com.sdi.dimage.services.ImageService;
-import com.sdi.dimage.utils.DocImgDetailsModel;
-import com.sdi.dimage.utils.DocImgModel;
-import com.sdi.dimage.utils.DocumentModel;
-import com.sdi.dimage.utils.UtilisateurSessionDto;
+import java.io.IOException;
+import java.util.List;
 
-import net.bytebuddy.asm.Advice.This;
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
-
-import javax.mail.Message;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.io.File;
-import java.io.FileOutputStream;
+import com.drew.imaging.ImageProcessingException;
+import com.sdi.dimage.dao.entities.ImageEntity;
+import com.sdi.dimage.services.ImageService;
+import com.sdi.dimage.utils.DocImgDetailsModel;
+import com.sdi.dimage.utils.DocImgModel;
+import com.sdi.dimage.utils.DocumentModel;
+import com.sdi.dimage.utils.GroupeMetadataModel;
+import com.sdi.dimage.utils.UtilisateurSessionDto;
 
 @RestController
 @RequestMapping("/api")
 public class ImageController extends AbstractController{
 	@Autowired
 	private ImageService service;
+	
+	
+	@GetMapping("/documents")
+	public List<DocImgModel> documents() {
+		
+		return this.service.documents();
+				
+	}
+	
+	//metadata image publication
+	@GetMapping("/img/metas/{id}")
+	public 	List<GroupeMetadataModel> metadatas(@PathVariable int id) {
+		return this.service.metadatas(id);
+	}
+	
 
 	//enregistrer document )
 	@PostMapping("document")
@@ -100,34 +111,13 @@ public class ImageController extends AbstractController{
 	}
 	
 	
-	@GetMapping("/doc")
-	public List<DocImgModel> getdoc() {
-		ArrayList<DocImgModel> l =new ArrayList<DocImgModel>(); 
-		
-		for(int i=0 ;i<this.service.getdoc().size();i++) {
-			DocImgModel aux =new DocImgModel();
-			aux.setNom(this.service.getdoc().get(i).getCreePar().getNom());
-			aux.setPrenom(this.service.getdoc().get(i).getCreePar().getPrenoms());
-			aux.setTitre(this.service.getdoc().get(i).getSousTitre());
-			aux.setDescription(this.service.getdoc().get(i).getDescription());
-			aux.setIdDoc(this.service.getdoc().get(i).getId());
-			aux.setType(this.service.getdoc().get(i).getType());
-			l.add(aux);
-		}
-		return l;
-		
-		
-	}
+
 	//detaill publication
 	@GetMapping("/document/details/{id}")
 	public 	DocImgDetailsModel detailePub(@PathVariable int id) {
 		return this.service.detailePub(id);
 	}
-	//metadata image publication
-		@GetMapping("/img/details/{id}")
-		public 	List<ImageMetadataEntity> detaileimg(@PathVariable int id) {
-			return this.service.getmeta(id);
-		}
+
 	
 
 }
