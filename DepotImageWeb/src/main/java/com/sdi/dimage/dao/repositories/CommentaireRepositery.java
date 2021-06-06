@@ -12,7 +12,9 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface CommentaireRepositery extends JpaRepository<CommentaireEntity,Integer> {
 	@Query(" from CommentaireEntity as com where com.document.id = :idDoc")
-	List<CommentaireEntity> listCommentaires(Integer idDoc);
+	List<CommentaireEntity> listCommentairesDoc(Integer idDoc);
+	@Query(" from CommentaireEntity as com where com.image.id = :idImg")
+	List<CommentaireEntity> listCommentairesImg(Integer idImg);
 	
 
 }

@@ -12,6 +12,16 @@ export interface Commentaire {
   prenom:string;
   
 }
+export interface Commentaire1 {
+  creerpar :number;
+  imgId :number;
+  contenu :string;
+  type :string;
+  creerle:string;
+  nom:string;
+  prenom:string;
+  
+}
 
 
 const httpOptions = {
@@ -42,10 +52,16 @@ export class CommentaireService {
   ajouterCommentaire(x:Commentaire){
     return this.http.post('api/commentaire/',x);
   }
+  ajouterCommentaireImage(x:Commentaire){
+    return this.http.post('api/commentaire/image',x);
+  }
   listCommentaire(x:number){
     return this.http.get('api/commentaire/'+x);
   }
   supprimerCommentaire(id : number){
     return this.http.get('api/commentaire/delete/'+id);
+  }
+  modifierCommentaire(a:Commentaire){
+    return this.http.post('api/commentaire/modifier/',a);
   }
 }

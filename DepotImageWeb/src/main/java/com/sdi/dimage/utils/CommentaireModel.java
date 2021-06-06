@@ -6,6 +6,7 @@ public class CommentaireModel {
 	private Integer id;
 	private Integer creerpar;
 	private Integer docId;
+	private Integer imgId;
 	private String contenu;
 	private String type;
 	private LocalDateTime creerle;
@@ -61,6 +62,12 @@ public class CommentaireModel {
 	}
 	public void setDocId(Integer docId) {
 		this.docId = docId;
+	}
+	public Integer getImgId() {
+		return imgId;
+	}
+	public void setImgId(Integer imgId) {
+		this.imgId = imgId;
 	}
 	
 	

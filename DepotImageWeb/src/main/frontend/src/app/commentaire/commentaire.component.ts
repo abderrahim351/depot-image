@@ -1,7 +1,7 @@
 import { Commentaire, CommentaireService } from './commentaire.service';
 import { Component, OnInit, ViewEncapsulation, Input } from '@angular/core';
 import { CommentaireDto, User } from './commentaire-dto';
-import { MenuItem } from 'primeng/api';
+import { MenuItem, MessageService } from 'primeng/api';
 import { CurrentUser, LoginService } from 'src/app/login/login.service';
 import {
   FormControl,
@@ -24,8 +24,12 @@ export class CommentaireComponent implements OnInit {
   comments: CommentaireDto[] = [];
   comments1: Commentaire[] = [];
   param: CommentaireDto;
+  modifier:boolean;
+  commentaire:Commentaire;
 
   @Input() idDoc: number;
+  @Input() idImg: number;
+  @Input() type: string;
 
   iconBtn = 'pi pi-comment';
   classBtn = 'comment-btn p-button-info';
@@ -34,13 +38,17 @@ export class CommentaireComponent implements OnInit {
   currentUser: CurrentUser;
   commentFG: FormGroup;
 
-  constructor(private service: CommentaireService, private fb: FormBuilder,private loginService: LoginService) {}
+  constructor(private service: CommentaireService, private fb: FormBuilder,private loginService: LoginService,private messageService: MessageService) {}
 
   ngOnInit(): void {
+    
+    this.modifier=false;
     console.log(this.idDoc);
+    console.log(this.type);
+    
     this.service.listCommentaire(this.idDoc).subscribe((data:any[])=>{
       this.comments1=data;
-      console.log(this.comments1.length);
+      console.log(data);
     })
     this.loginService.currentUserSession().subscribe((u) => {
       console.log(u);
@@ -91,24 +99,47 @@ export class CommentaireComponent implements OnInit {
   }
 
   showForm(pParam: CommentaireDto = new CommentaireDto()): void {
+    
+    if(this.modifier==false){
     this.param = pParam;
     this.iconBtn = 'pi pi-comment';
     this.classBtn = 'comment-btn p-button-info';
     this.typeComment = 'simple';
     this.commentFG = this.fb.group({
       comment: [
+        
         this.param.commentaire ? this.param.commentaire : '',
         this.param.type === 'ACTION' ? null : Validators.required,
       ],
     });
+    console.log(this.commentFG.value);}
+    else{
+
+      this.param = pParam;
+      this.iconBtn = 'pi pi-comment';
+      this.classBtn = 'comment-btn p-button-info';
+      this.typeComment = 'simple';
+      this.commentFG = this.fb.group({
+        comment: [
+          
+          this.param.commentaire ? this.param.commentaire :this.commentaire.contenu,
+          this.param.type === 'ACTION' ? null : Validators.required,
+        ],
+      });
+      console.log(this.commentFG.value);
+
+    }
     this.displayedForm = true;
+
   }
 
-  deleteComment(id: number): void {
-    this.blockedLoad = true;
-    this.service.delete(id).then((res) => {
-      this.load();
-    });
+  deleteComment(a:boolean): void {
+    console.log(a);
+    if(a==true){
+    this.ngOnInit();
+    this.messageService.add({severity:'error', summary: 'Error', detail: 'commentaire supprimer'});
+    }
+  
   }
 
  load(withLoading: boolean = true): void {
@@ -128,6 +159,7 @@ export class CommentaireComponent implements OnInit {
   }
 
   saveComment(): void {
+    
     this.service.ajouterCommentaire({
       creerpar:this.currentUser.id,
       docId :this.idDoc,
@@ -139,8 +171,12 @@ export class CommentaireComponent implements OnInit {
   
     }).subscribe((data)=>{
       console.log("commentaire ajouter");
+      this.messageService.add({severity:'success', summary: 'Success', detail: 'commentaire ajouter'});
+      this.ngOnInit();
       
     })
+   
+    
 
     if (this.commentFG.valid) {
       this.param.commentaire = this.commentFG.get('comment').value;
@@ -178,6 +214,8 @@ export class CommentaireComponent implements OnInit {
     this.blockedForm = false;
     this.displayedForm = false;
     this.param = null;
+   
+    this.ngOnInit();
   }
 
   isInvalidRequired(): boolean {
@@ -187,5 +225,24 @@ export class CommentaireComponent implements OnInit {
       (this.commentFG.get('comment').dirty ||
         this.commentFG.get('comment').touched)
     );
+  }
+  modifierComment( a :Commentaire){
+    this.modifier=true;
+      console.log(a.contenu);
+      this.commentaire=a;
+      this.showForm();
+      this.displayedForm = true;
+      
+    
+  }
+  modifierCommentaire(){
+    
+   this.commentaire.contenu=this.commentFG.get('comment').value;
+   console.log(this.commentaire);
+   this.service.modifierCommentaire(this.commentaire).subscribe((data)=>{
+     console.log("modification terminer");
+     this.messageService.add({severity:'success', summary: 'success', detail: 'commentaire MODIFIER'});
+     this.ngOnInit();
+   })
   }
 }

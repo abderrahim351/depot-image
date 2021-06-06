@@ -16,5 +16,4 @@ public class DocImgDetailsModel extends DocImgModel {
 	}
 
 	
-	
 }

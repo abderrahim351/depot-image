@@ -190,6 +190,10 @@ imageRepo.save(this.img);
 				
 
 				 for (Directory directory : metadata.getDirectories()) {
+					 
+					 System.out.println("*************************************=>"+directory.getName());
+					 System.out.println("*************************************=>"+directory.getTags());
+					 
 					 for (Tag tag : directory.getTags()) {
 						 ImageMetadataEntity meta=new ImageMetadataEntity();
 						 meta.setImage(img);
@@ -240,7 +244,7 @@ imageRepo.save(this.img);
 						 meta.setValeur(tag.getDescription());*/
 	                       
 						 
-						 System.out.println("================================"+tag.getTagName()+ "  =>"+tag);
+						 
 					 }
 				 }
 				
