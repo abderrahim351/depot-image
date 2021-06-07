@@ -7,15 +7,13 @@ import { Product } from './product';
 import { Document } from './document';
 import { documentservice } from './document.service';
 import { Router } from '@angular/router';
+import { CurrentUser, LoginService } from '../login/login.service';
 @Component({
   selector: 'app-accueil',
   templateUrl: './accueil.component.html',
   styleUrls: ['./accueil.component.scss'],
 })
 export class AccueilComponent implements OnInit {
-  url = 'api/document/img/2';
-  src="api/img/47";
-  a = 2;
   products: Product[];
   documents: Document[];
 
@@ -24,27 +22,35 @@ export class AccueilComponent implements OnInit {
   sortOrder: number;
 
   sortField: string;
+  currentUser: CurrentUser;
+
 
   constructor(
-    private productService: acceuilservice,
-
+    private loginService: LoginService,
     private docservice: documentservice,
     private router: Router
   ) {}
 
   ngOnInit() {
+
+    this.loginService.currentUserSession().subscribe((u) => {
+
+      this.currentUser = u;
+      this.load();
+    });
+
+  }
+
+
+  load(){
     this.docservice.getdoc().subscribe((data: any) => {
       this.documents = data;
       console.log(this.documents);
     });
-    this.productService.getProducts().then((data) => (this.products = data));
+  }
 
-    this.sortOptions = [
-      { label: 'Price High to Low', value: '!price' },
-      { label: 'Price Low to High', value: 'price' },
-    ];
-
-
+  isEditable(document: Document) : boolean{
+    return document.creeParId === this.currentUser.id;
   }
 
   onSortChange(event) {

@@ -31,8 +31,8 @@
         <div class="product-list-item">
 
 
+          <p-card styleClass="product-grid-item">
 
-          <div class="product-grid-item card">
             <div class="product-grid-item-top">
               <div>
                 <i class="pi pi-pencil"></i>
@@ -46,9 +46,16 @@
 
 
             </div>
-
-
+            <ng-template pTemplate="footer" >
+              <div class="p-d-flex p-jc-end" *ngIf="isEditable(document)">
+          <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success p-mr-2"
+            ></button>
+          <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning"
+            ></button>
           </div>
+          </ng-template>
+          </p-card>
+
         </div>
       </div>
     </ng-template>

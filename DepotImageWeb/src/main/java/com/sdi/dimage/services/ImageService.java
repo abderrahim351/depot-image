@@ -81,6 +81,7 @@ public class ImageService {
 			DocImgModel aux =new DocImgModel();
 			aux.setNom(de.getCreePar().getNom());
 			aux.setPrenom(de.getCreePar().getPrenoms());
+			aux.setCreeParId(de.getCreePar().getId());
 			
 			aux.setTitre(de.getTitre());
 			aux.setSoustitre(de.getSousTitre());

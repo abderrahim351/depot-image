@@ -14,6 +14,7 @@ public class DocImgModel {
 	private LocalDateTime creeLe;
 	private String description;
 	private String type;
+	private Integer creeParId;
 	
 	public String getSousTitre() {
 		return sousTitre;
@@ -68,6 +69,12 @@ public class DocImgModel {
 	}
 	public void setDescription(String description) {
 		this.description = description;
+	}
+	public Integer getCreeParId() {
+		return creeParId;
+	}
+	public void setCreeParId(Integer creeParId) {
+		this.creeParId = creeParId;
 	}
 
 	

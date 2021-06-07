@@ -15,7 +15,7 @@ const routes: Routes = [
   {path : 'accueil' , component : AccueilComponent , canActivate :  [AuthGuard]},
   {path : 'nouvelle-image' , component : NouveauImageComponent , canActivate :  [AuthGuard]},
   {path : 'image/:id' , component : ImageDetailsComponent , canActivate :  [AuthGuard]},
-  {path : 'information-profil' , component : InformationProfilComponent , canActivate :  [AuthGuard]}
+  {path : 'information-profil' , component : InformationProfilComponent , canActivate :  [AuthGuard]},
 
 ];
 
