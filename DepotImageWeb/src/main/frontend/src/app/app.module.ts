@@ -32,11 +32,11 @@ import { MessageService } from 'primeng/api';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import {PanelModule} from 'primeng/panel';
 import {MenubarModule} from 'primeng/menubar';
-import {MenuItem} from 'primeng/api';
 import {TabViewModule} from 'primeng/tabview';
 import {GalleriaModule} from 'primeng/galleria';
 import {SplitButtonModule} from 'primeng/splitbutton';
 import {BlockUIModule} from 'primeng/blockui';
+import {TreeTableModule} from 'primeng/treetable';
 
 import { ListeUtilisateurComponent } from './admin/liste-utilisateur/liste-utilisateur.component';
 import { HeaderComponent } from './vues/header/header.component';
@@ -110,7 +110,8 @@ import { ImageMetasComponent } from './image-metas/image-metas.component';
     GalleriaModule,
     SplitButtonModule,
     BlockUIModule,
-    TabViewModule
+    TabViewModule,
+    TreeTableModule,
   ],
   providers: [ MessageService, ConfirmationService,acceuilservice],
   bootstrap: [AppComponent],

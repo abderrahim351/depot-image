@@ -15,8 +15,14 @@ public class ImageMetadataEntity {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
     private Integer id;
+    
+    @Column(name = "directory")
     private String directory;
+    
+    @Column(name = "tag")
     private String tag ;
+    
+    @Column(name = "valeur")
     private String valeur ;
     @JsonIgnore
     @OneToOne

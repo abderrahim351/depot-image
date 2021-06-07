@@ -26,7 +26,7 @@ import com.sdi.dimage.services.ImageService;
 import com.sdi.dimage.utils.DocImgDetailsModel;
 import com.sdi.dimage.utils.DocImgModel;
 import com.sdi.dimage.utils.DocumentModel;
-import com.sdi.dimage.utils.GroupeMetadataModel;
+import com.sdi.dimage.utils.MetaTreeNodeModel;
 import com.sdi.dimage.utils.UtilisateurSessionDto;
 
 @RestController
@@ -45,7 +45,7 @@ public class ImageController extends AbstractController{
 	
 	//metadata image publication
 	@GetMapping("/img/metas/{id}")
-	public 	List<GroupeMetadataModel> metadatas(@PathVariable int id) {
+	public 	List<MetaTreeNodeModel> metadatas(@PathVariable int id) {
 		return this.service.metadatas(id);
 	}
 	

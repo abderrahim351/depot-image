@@ -28,8 +28,7 @@ import com.sdi.dimage.dao.repositories.UtlisateurRepository;
 import com.sdi.dimage.utils.DocImgDetailsModel;
 import com.sdi.dimage.utils.DocImgModel;
 import com.sdi.dimage.utils.DocumentModel;
-import com.sdi.dimage.utils.GroupeMetadataModel;
-import com.sdi.dimage.utils.MetaModel;
+import com.sdi.dimage.utils.MetaTreeNodeModel;
 import com.sdi.dimage.utils.UtilisateurSessionDto;
 
 @Service
@@ -45,25 +44,20 @@ public class ImageService {
 
 
 	//liste des metadata
-	public List<GroupeMetadataModel> metadatas(int idimg) {
+	public List<MetaTreeNodeModel> metadatas(int idimg) {
 		List<ImageMetadataEntity> listMestaEntities =  metarepository.listMetadata(idimg);
 		
 		
-		List<GroupeMetadataModel> listMetaModels = new ArrayList<>();
+		List<MetaTreeNodeModel> listMetaModels = new ArrayList<>();
 		
-		GroupeMetadataModel gmmTmp = null;
+		MetaTreeNodeModel gmmTmp = null;
 		for (ImageMetadataEntity ime : listMestaEntities) {
 			
-			if (gmmTmp==null || !ime.getDirectory().equals(gmmTmp.getTitreGroupe())) {
-				gmmTmp = new GroupeMetadataModel();
-				gmmTmp.setTitreGroupe(ime.getDirectory());
+			if (gmmTmp==null || !ime.getDirectory().equals(gmmTmp.getData().getDirectory())) {
+				gmmTmp = new MetaTreeNodeModel(ime.getDirectory());
 				listMetaModels.add(gmmTmp);
 			}
-			MetaModel imm = new MetaModel();
-			imm.setTag(ime.getTag());
-			imm.setValeur(ime.getValeur());
-			
-			gmmTmp.getTags().add(imm);
+			gmmTmp.getChildren().add(new MetaTreeNodeModel(ime.getTag(), ime.getValeur()));
 			
 		}
 		

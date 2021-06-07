@@ -1,14 +1,24 @@
 <div>
-  <h5>Les Metadatas : </h5>
-  <p-tabView>
-    <p-tabPanel header="Header 1">
-       Content 1
-    </p-tabPanel>
-    <p-tabPanel header="Header 2">
-        Content 2
-    </p-tabPanel>
-    <p-tabPanel header="Header 3">
-        Content 3
-    </p-tabPanel>
-</p-tabView>
+  <p-treeTable [value]="metasTree" styleClass="p-treetable-sm">
+    <ng-template pTemplate="caption">
+      Les Metadatas :
+  </ng-template>
+    <ng-template pTemplate="header">
+        <tr>
+            <th>directory</th>
+            <th>tag</th>
+            <th>valeur</th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-rowNode let-rowData="rowData">
+        <tr>
+            <td>
+                <p-treeTableToggler [rowNode]="rowNode"></p-treeTableToggler>
+                {{rowData.directory}}
+            </td>
+            <td>{{rowData.tag}}</td>
+            <td>{{rowData.valeur}}</td>
+        </tr>
+    </ng-template>
+</p-treeTable>
 </div>
