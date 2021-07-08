@@ -54,6 +54,7 @@ import {ProgressSpinnerModule} from 'primeng/progressspinner';
 import { CommentaireComponent } from './commentaire/commentaire.component';
 import { CommentBlockComponent } from './commentaire/comment-block/comment-block.component';
 import { ImageMetasComponent } from './image-metas/image-metas.component';
+import { InscriptionComponent } from './inscription/inscription.component';
 
 
 @NgModule({
@@ -69,7 +70,8 @@ import { ImageMetasComponent } from './image-metas/image-metas.component';
       InformationProfilComponent,
       CommentaireComponent,
       CommentBlockComponent,
-      ImageMetasComponent
+      ImageMetasComponent,
+      InscriptionComponent
 
 
    ],

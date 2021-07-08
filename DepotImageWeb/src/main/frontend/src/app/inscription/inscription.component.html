@@ -1,0 +1,47 @@
+<div class="p-grid">
+    <div class="p-col-6 p-offset-1" >
+      </div>
+    <div class="p-col-4 p-offset-4">
+      <form [formGroup]="InscriptionForm" (ngSubmit)="inscrire()" >
+        <p-card header="Inscription">
+          
+            
+            <div class="p-fluid p-my-3">
+                <div class="p-formgroup-inline">
+                    <div class="p-field">
+                        <label for="firstname5" class="p-sr-only">nom</label>
+                        <input id="firstname5" type="text" pInputText placeholder="nom" formControlName="nom"> 
+                    </div>
+                    <div class="p-field">
+                        <label for="lastname5" class="p-sr-only">prenom</label>
+                        <input id="lastname5" type="text" pInputText placeholder="prenom"formControlName="prenom"> 
+                    </div>
+                    
+                    
+                </div>
+                <div class="p-field">
+                  <label for="username">Adresse e-mail</label>
+                  <input id="username" type="text"  pInputText formControlName="adresse">
+                </div>
+                <div class="p-field">
+                  <label for="password">Mot de passe</label>
+                  <input id="password" type="password"placeholder="*****" pPassword formControlName="passe"> 
+                </div>
+                <div class="p-field">
+                    <label for="password"> confirmer le mot de passe </label>
+                    <input id="password" type="password" placeholder="*****"pPassword formControlName="passe2"> 
+                  </div>
+                
+              </div>
+              <button pButton pRipple type="button" label="enregistrer" (click)="inscrire()"></button>
+          
+  
+          <footer>
+           
+          </footer>
+  
+        </p-card>
+      </form>
+    </div>
+  </div>
+  

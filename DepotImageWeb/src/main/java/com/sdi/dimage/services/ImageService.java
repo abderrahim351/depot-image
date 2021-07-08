@@ -231,4 +231,9 @@ public class ImageService {
 
 	}
 
+	public void supprimerDoc(Integer idDoc) {
+		// TODO Auto-generated method stub
+		this.documentRepositery.deleteById(idDoc);
+	}
+
 }

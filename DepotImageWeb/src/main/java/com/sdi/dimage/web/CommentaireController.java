@@ -48,4 +48,5 @@ public List<CommentaireModel> listeCommentairesImage(@PathVariable Integer idImg
 public void ajouterCommentaireImage(@RequestBody CommentaireModel com) {
 	 this.service.ajouterCommentaireImg(com);
 }
+
 }

@@ -117,7 +117,10 @@ public class ImageController extends AbstractController{
 	public 	DocImgDetailsModel detailePub(@PathVariable int id) {
 		return this.service.detailePub(id);
 	}
-
+	@GetMapping("/document/{idDoc}")
+	public void supprimerDoc(@PathVariable Integer idDoc) {
+		 this.service.supprimerDoc(idDoc);
+	}
 	
 
 }

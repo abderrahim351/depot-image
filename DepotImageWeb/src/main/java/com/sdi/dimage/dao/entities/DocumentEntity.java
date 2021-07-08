@@ -39,7 +39,7 @@ public class DocumentEntity {
     @OneToOne
     private ImageEntity imagePrincipal;
     
-    @OneToMany
+    @OneToMany(mappedBy = "document",cascade = CascadeType.REMOVE)
     private Set<CommentaireEntity> commentaires;
     @JoinColumn(name = "cree_par_id", referencedColumnName = "id")
     @ManyToOne()

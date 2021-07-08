@@ -137,7 +137,7 @@ export class CommentaireComponent implements OnInit {
     console.log(a);
     if(a==true){
     this.ngOnInit();
-    this.messageService.add({severity:'error', summary: 'Error', detail: 'commentaire supprimer'});
+    this.messageService.add({severity:'error', summary: 'supprimer', detail: 'commentaire supprimer'});
     }
   
   }

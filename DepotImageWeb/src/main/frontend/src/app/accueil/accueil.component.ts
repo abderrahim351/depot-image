@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { from } from 'rxjs';
-import { SelectItem } from 'primeng/api';
+import { ConfirmationService, MessageService, SelectItem } from 'primeng/api';
 import { PrimeNGConfig } from 'primeng/api';
 import { acceuilservice } from './acceuilservice';
 import { Product } from './product';
@@ -28,7 +28,8 @@ export class AccueilComponent implements OnInit {
   constructor(
     private loginService: LoginService,
     private docservice: documentservice,
-    private router: Router
+    private router: Router, private confirmationService: ConfirmationService,
+    private messageService: MessageService
   ) {}
 
   ngOnInit() {
@@ -68,4 +69,28 @@ export class AccueilComponent implements OnInit {
   afficherDocument(idDoc: number) {
     this.router.navigateByUrl('image/' + idDoc);
   }
+  deleteDoc(doc: Document) {
+    console.log("testr");
+    
+    this.confirmationService.confirm({
+      message: 'vous étes sure de supprimer cette publication?',
+      header: 'Confirm',
+      icon: 'pi pi-exclamation-triangle',
+      accept: () => {
+        this.docservice.supprimerdoc(doc.idDoc).subscribe((data)=>{
+          this.messageService.add({ severity: 'success', summary: 'Suppression avec succés', detail: 'publication supprime', life: 3000 });
+          this.load();
+
+        })
+
+
+
+    }
+  })
+    
+    
+    
+    }
+      
 }
+

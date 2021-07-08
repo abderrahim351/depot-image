@@ -75,11 +75,7 @@ export class HeaderComponent implements OnInit {
           label: 'Bonjour  '+this.currentUser.prenoms+' '+this.currentUser.nom,
           icon: 'pi pi-fw pi-user',
           items: [
-            {
-              label: ' profil',
-              icon: 'pi pi-user',
-              
-            },
+           
             {
               label: 'vos informations',
               icon: 'pi pi-user-edit',
@@ -103,6 +99,12 @@ export class HeaderComponent implements OnInit {
           icon: 'pi pi-fw pi-sign-in',
           routerLink: ['/login'],
           routerLinkActiveOptions: { match: ['/login'] },
+        },
+        {
+          label: 'inscription',
+          icon: 'pi pi-user-plus',
+          routerLink: ['/inscrire'],
+          routerLinkActiveOptions: { match: ['/inscrire'] },
         },
       ];
     }

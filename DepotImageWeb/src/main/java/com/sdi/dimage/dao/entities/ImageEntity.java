@@ -4,6 +4,7 @@ package com.sdi.dimage.dao.entities;
 import java.time.LocalDateTime;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -31,11 +32,20 @@ public class ImageEntity {
     private Long tailleFichier;
     
     private LocalDateTime creeLe;
-    
+    @OneToMany(mappedBy = "image",cascade = CascadeType.REMOVE)
+    private Set<ImageMetadataEntity> metadata;
     @ManyToOne
     private AbstractUtilisateurEntity creePar;
     
-    // id of document
+    public Set<ImageMetadataEntity> getMetadata() {
+		return metadata;
+	}
+
+	public void setMetadata(Set<ImageMetadataEntity> metadata) {
+		this.metadata = metadata;
+	}
+
+	// id of document
     @JoinColumn(name = "fk_id_document", referencedColumnName = "id")
     @ManyToOne
     private DocumentEntity document;

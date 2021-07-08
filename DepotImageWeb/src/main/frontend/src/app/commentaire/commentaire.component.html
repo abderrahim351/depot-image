@@ -38,8 +38,9 @@
           <button pButton type="button" (click)="onCancel()"
             class="p-button-raised p-button-secondary p-ml-4 p-mr-4" icon="pi pi-arrow-circle-left"
             label="Annuler"></button>
-          <p-splitButton label="Ajouter" (onClick)="saveComment()" [icon]="iconBtn" [model]="items" [styleClass]="classBtn"></p-splitButton>
-
+           
+          <p-splitButton  label="Ajouter" *ngIf="modifier==false" (onClick)="saveComment()" [icon]="iconBtn" [model]="items" [styleClass]="classBtn"></p-splitButton>
+          <button pButton *ngIf="modifier==true" pRipple type="button" label="modifier" (click)="modifierCommentaire()" icon="pi pi-comment" class="p-button-raised p-button-warning"></button>
         </div>
 
       </p-footer>
@@ -47,9 +48,8 @@
 
     <div class="p-grid p-flex-column">
       <div *ngFor="let cmt of comments1" class="p-col p-py-0">
-        <app-comment-block  [comment]="cmt" (modifier)="showForm(cmt)" (supprimer)="deleteComment(cmt.id)" ></app-comment-block>
+        <app-comment-block   [comment]="cmt" (modifier)="modifierComment($event)" (supprimer)="deleteComment($event)" ></app-comment-block>
       </div>
     </div>
-
   </p-panel>
 </div>

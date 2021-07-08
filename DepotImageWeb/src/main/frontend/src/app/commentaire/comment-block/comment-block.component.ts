@@ -70,21 +70,25 @@ export class CommentBlockComponent implements OnInit {
   }
 
   supprimerButtonAction(id : number): void {
+
+    console.log("test")
     this.confirmationService.confirm({
-      message: 'vous étes sure de supprimer ce commentaire?',
-      header: 'Confirm',
+      message: 'supprimer ce commentaire',
+      header: 'Confirmation',
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
       this.CommentaireService.supprimerCommentaire(id).subscribe((data)=>{
-        this.ngOnInit();
+        this.supprimer.emit(true);
       })
-     },
-   });
- }
-  
+     }})}
   showConfirm() {
     
     
 }
+modifierCommentaire(a : Commentaire): void{
+console.log(a.contenu);
+this.modifier.emit(a.contenu);
 
+
+}
 }

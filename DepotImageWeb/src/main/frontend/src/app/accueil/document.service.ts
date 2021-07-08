@@ -12,4 +12,7 @@ export class documentservice {
   getdoc(){
     return this.httpclient.get<Document>('api/documents');
   }
+  supprimerdoc(idDoc : number){
+    return this.httpclient.get('api/document/'+idDoc);
+  }
 }
