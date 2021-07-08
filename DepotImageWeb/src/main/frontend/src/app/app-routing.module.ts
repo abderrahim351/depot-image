@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AccueilComponent } from './accueil/accueil.component';
+import { ListeInscriptionsComponent } from './admin/liste-inscriptions/liste-inscriptions.component';
 import { ListeUtilisateurComponent } from './admin/liste-utilisateur/liste-utilisateur.component';
 import { ImageDetailsComponent } from './image-details/image-details.component';
 import { InformationProfilComponent } from './information-profil/information-profil.component';
@@ -14,6 +15,7 @@ const routes: Routes = [
   {path : 'login' , component : LoginComponent },
   {path : 'inscrire' , component : InscriptionComponent },
   {path : 'gestion-utilisateur' , component : ListeUtilisateurComponent, canActivate :  [AuthGuard] },
+  {path : 'inscriptions' , component : ListeInscriptionsComponent, canActivate :  [AuthGuard] },
   {path : 'accueil' , component : AccueilComponent , canActivate :  [AuthGuard]},
   {path : 'nouvelle-image' , component : NouveauImageComponent , canActivate :  [AuthGuard]},
   {path : 'image/:id' , component : ImageDetailsComponent , canActivate :  [AuthGuard]},

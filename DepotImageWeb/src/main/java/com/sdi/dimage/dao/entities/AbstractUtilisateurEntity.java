@@ -33,6 +33,9 @@ public abstract class AbstractUtilisateurEntity {
 @Column(name = "mot_de_passe")
     private String motDePasse;
 	private String codePostale;
+	
+	private Boolean actif;
+	private String jeton;
 
 	public List<DocumentEntity> getDocuments() {
 		return documents;
@@ -162,4 +165,22 @@ public abstract class AbstractUtilisateurEntity {
     public void setPays(String pays) {
         this.pays = pays;
     }
+
+	public Boolean getActif() {
+		return actif;
+	}
+
+	public void setActif(Boolean actif) {
+		this.actif = actif;
+	}
+
+	public String getJeton() {
+		return jeton;
+	}
+
+	public void setJeton(String jeton) {
+		this.jeton = jeton;
+	}
+    
+    
 }

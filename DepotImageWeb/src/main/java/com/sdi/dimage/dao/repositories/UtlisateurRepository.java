@@ -15,6 +15,9 @@ public interface UtlisateurRepository extends JpaRepository<AbstractUtilisateurE
 
 	Optional<AbstractUtilisateurEntity> findOneByIdentifiant(String identifiant);
 
-	@Query(" from AbstractUtilisateurEntity as utl where utl.id != :idutl ")
+	@Query(" from AbstractUtilisateurEntity as utl where utl.id != :idutl and utl.actif = true")
 	List<AbstractUtilisateurEntity> listUser(Integer idutl);
+	
+	@Query(" from AbstractUtilisateurEntity as utl where  utl.actif = false")
+	List<AbstractUtilisateurEntity> liste_inscriptions();
 }

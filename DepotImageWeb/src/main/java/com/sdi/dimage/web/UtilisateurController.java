@@ -14,6 +14,7 @@ import com.sdi.dimage.services.UtilisateurService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import com.sdi.dimage.utils.InscriptionModel;
 import com.sdi.dimage.utils.LoginModel;
 import com.sdi.dimage.utils.UtilisateurModel;
 
@@ -41,6 +42,20 @@ public class UtilisateurController {
 		return this.ultservice.getUser(id);
 	}
 
+	@GetMapping("/liste_inscriptions")
+	public List<AbstractUtilisateurEntity> liste_inscriptions() {
+
+		return this.ultservice.liste_inscriptions();
+	}
+	
+	
+	//supprimer utilisateur
+	@GetMapping("/activer/inscription/{id}")
+	public void activer(@PathVariable Integer id) {
+		this.ultservice.activer(id);
+
+	}
+	
 	//ajouter  utilisateur
 	@PostMapping("/utilisateur")
 	public void addUser(@RequestBody UtilisateurModel utl) {
@@ -79,4 +94,10 @@ public class UtilisateurController {
 	public void modifierInformations(@RequestBody UtilisateurModel utl) {
 		this.ultservice.modifierInformations(utl);
 	}
+	
+	@PostMapping("/inscrire")
+	public void inscrire(@RequestBody InscriptionModel utl) {
+		this.ultservice.inscrire(utl);
+	}
+	
 }

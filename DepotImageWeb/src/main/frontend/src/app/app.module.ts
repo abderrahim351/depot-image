@@ -55,6 +55,7 @@ import { CommentaireComponent } from './commentaire/commentaire.component';
 import { CommentBlockComponent } from './commentaire/comment-block/comment-block.component';
 import { ImageMetasComponent } from './image-metas/image-metas.component';
 import { InscriptionComponent } from './inscription/inscription.component';
+import { ListeInscriptionsComponent } from './admin/liste-inscriptions/liste-inscriptions.component';
 
 
 @NgModule({
@@ -71,7 +72,8 @@ import { InscriptionComponent } from './inscription/inscription.component';
       CommentaireComponent,
       CommentBlockComponent,
       ImageMetasComponent,
-      InscriptionComponent
+      InscriptionComponent,
+      ListeInscriptionsComponent
 
 
    ],

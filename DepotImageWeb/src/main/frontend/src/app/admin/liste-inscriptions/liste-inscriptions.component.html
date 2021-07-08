@@ -1,0 +1,60 @@
+<p-toast></p-toast>
+<div class="card ">
+
+  <p-table #dt [value]="utilisateurs" [rows]="5" [paginator]="true"
+    [globalFilterFields]="['name','country.name','representative.name','status']" [rowHover]="true" dataKey="id"
+    currentPageReportTemplate="De {first} a {last} des {totalRecords} inscriptions" [showCurrentPageReport]="true">
+    <ng-template pTemplate="caption">
+      <div class="p-d-flex p-ai-center p-jc-between">
+
+        <ng-template pTemplate="left"></ng-template>
+
+        <button pButton pRipple icon="pi pi-trash" class="p-button-danger" (click)="deleteSelectedProducts()"></button>
+
+
+
+
+
+      </div>
+    </ng-template>
+    <ng-template pTemplate="header">
+      <tr>
+        <th style="width: 3rem">
+          <p-checkbox [(ngModel)]="checked" binary="true" inputId="binary" (onChange)="selectiontous()"></p-checkbox>
+        </th>
+        <th pSortableColumn="nom">nom </th>
+        <th pSortableColumn="prenom">prenom </th>
+        <th pSortableColumn="email">email</th>
+        <th></th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-utilisateur>
+
+      <tr>
+        <td>
+
+          <p-checkbox [(ngModel)]="utilisateur.b" binary="true" inputId="binary" (onChange)="f1(utilisateur.b)">
+          </p-checkbox>
+        </td>
+        <td>{{utilisateur.nom}}</td>
+        <td>{{utilisateur.prenoms }}</td>
+        <td>{{utilisateur.adresseEmail}}</td>
+
+        <td>
+          <button pButton pRipple icon="pi pi-unlock" class="p-button-rounded p-button-help p-mr-2"
+            (click)="editutl(utilisateur)"></button>
+          <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning"
+            (click)="deleteutl(utilisateur)"></button>
+        </td>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="summary">
+      <div class="p-d-flex p-ai-center p-jc-between">
+        Ona on totale {{utilisateurs ? utilisateurs.length : 0 }} inscriptions.
+      </div>
+    </ng-template>
+  </p-table>
+</div>
+
+
+<p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>

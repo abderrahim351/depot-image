@@ -67,23 +67,37 @@ export class HeaderComponent implements OnInit {
         {
           label: 'Utilisateurs',
           icon: 'pi pi-fw pi-users',
-          routerLink: ['/gestion-utilisateur'],
-          routerLinkActiveOptions: { match: ['/gestion-utilisateur'] },
           visible:this.isAdmin(),
+          items: [
+            {
+              label: 'Utilisateurs',
+              icon: 'pi pi-fw pi-users',
+              routerLink: ['/gestion-utilisateur'],
+              routerLinkActiveOptions: { match: ['/gestion-utilisateur'] },
+              visible:this.isAdmin()
+            },
+            {
+              label: 'Inscriptions',
+              icon: 'pi pi-fw pi-users',
+              routerLink: ['/inscriptions'],
+              routerLinkActiveOptions: { match: ['/inscriptions'] },
+              visible:this.isAdmin()
+            },
+          ]
         },
         {
           label: 'Bonjour  '+this.currentUser.prenoms+' '+this.currentUser.nom,
           icon: 'pi pi-fw pi-user',
           items: [
-           
+
             {
               label: 'vos informations',
               icon: 'pi pi-user-edit',
               routerLink: ['/information-profil'],
               routerLinkActiveOptions: { match: ['/information-profil'] },
-              
+
             },
-            
+
             {
               label: 'Déconnexion',
               icon: 'pi pi-fw pi-sign-out',

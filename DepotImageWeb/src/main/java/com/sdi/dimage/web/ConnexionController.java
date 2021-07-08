@@ -27,8 +27,10 @@ public class ConnexionController extends AbstractController {
 
 		UtilisateurSessionDto usd = uService.chercherUtilisateur(login);
 
-
-		createUserSession(request, usd);
+		if (login.getUsername().equals(usd.getIdentifiant())) {
+			createUserSession(request, usd);
+		}
+		
 		return usd ;
 	}
 

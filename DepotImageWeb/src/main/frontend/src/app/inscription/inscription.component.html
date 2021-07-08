@@ -1,47 +1,81 @@
 <div class="p-grid">
-    <div class="p-col-6 p-offset-1" >
-      </div>
-    <div class="p-col-4 p-offset-4">
-      <form [formGroup]="InscriptionForm" (ngSubmit)="inscrire()" >
-        <p-card header="Inscription">
-          
-            
-            <div class="p-fluid p-my-3">
-                <div class="p-formgroup-inline">
-                    <div class="p-field">
-                        <label for="firstname5" class="p-sr-only">nom</label>
-                        <input id="firstname5" type="text" pInputText placeholder="nom" formControlName="nom"> 
-                    </div>
-                    <div class="p-field">
-                        <label for="lastname5" class="p-sr-only">prenom</label>
-                        <input id="lastname5" type="text" pInputText placeholder="prenom"formControlName="prenom"> 
-                    </div>
-                    
-                    
-                </div>
-                <div class="p-field">
-                  <label for="username">Adresse e-mail</label>
-                  <input id="username" type="text"  pInputText formControlName="adresse">
-                </div>
-                <div class="p-field">
-                  <label for="password">Mot de passe</label>
-                  <input id="password" type="password"placeholder="*****" pPassword formControlName="passe"> 
-                </div>
-                <div class="p-field">
-                    <label for="password"> confirmer le mot de passe </label>
-                    <input id="password" type="password" placeholder="*****"pPassword formControlName="passe2"> 
-                  </div>
-                
-              </div>
-              <button pButton pRipple type="button" label="enregistrer" (click)="inscrire()"></button>
-          
-  
-          <footer>
-           
-          </footer>
-  
-        </p-card>
-      </form>
+  <div class="p-col-6 p-offset-1" >
     </div>
+  <div class="p-col-4 p-offset-4">
+    <form [formGroup]="inscriptionForm" (ngSubmit)="onSubmit()" >
+
+
+
+
+      <p-card header="Inscription">
+
+
+        <div class="p-fluid p-formgrid p-grid">
+
+          <div class="p-field p-col-12 p-md-6">
+              <label for="nom">Nom</label>
+              <input id="nom" type="text" formControlName="nom" pInputText>
+              <small *ngIf="isInvalidRequired(inscriptionForm.controls['nom'])" class="p-error">
+                Veuillez saisir votre nom</small>
+          </div>
+
+
+          <div class="p-field p-col-12 p-md-6">
+              <label for="prenom">Prénom</label>
+              <input id="prenom" type="text" formControlName="prenom" pInputText>
+              <small *ngIf="isInvalidRequired(inscriptionForm.controls['prenom'])" class="p-error">
+                Veuillez saisir votre prénom</small>
+          </div>
+
+
+          <div class="p-field p-col-12 ">
+              <label for="adresseEmail">Adresse e-mail</label>
+              <input id="adresseEmail" type="text"  pInputText formControlName="adresseEmail">
+              <small *ngIf="isInvalidRequired(inscriptionForm.controls['adresseEmail'])" class="p-error">
+                Veuillez saisir votre adresse e-mail</small>
+              <small *ngIf="isInvalidEmail()" class="p-error">
+                Votre adresse e-mail doit être une adresse électronique syntaxiquement correcte.</small>
+          </div>
+
+
+
+
+
+          <div class="p-field p-col-12 p-my-5 ">
+              <label for="motDePasse">Mot de passe</label>
+              <p-password  id="motDePasse"  formControlName="motDePasse" weakLabel="Faible"
+              mediumLabel="Moyen" strongLabel="Fort" [toggleMask]="true" ></p-password>
+              <small *ngIf="isInvalidPassword1()" class="p-error">
+                Le mot de passe doit être composé de chiffres et lettres et doit contenir une majuscule et un caractère spécial.</small>
+
+          </div>
+
+
+
+          <div class="p-field p-col-12 p-my-5 ">
+              <label for="motDePasse2">confirmer le mot de passe </label>
+              <p-password  id="passe2"  formControlName="motDePasse2" weakLabel="Faible"
+              mediumLabel="Moyen" strongLabel="Fort" [toggleMask]="true"></p-password>
+
+          <small *ngIf="isInvalidPassword2()" class="p-error">
+            les mots de passe saisis ne sont pas identiques.</small>
+          </div>
+
+      </div>
+
+
+
+            <button pButton pRipple type="button" label="enregistrer" (click)="onSubmit()"></button>
+
+
+        <footer>
+
+        </footer>
+
+      </p-card>
+    </form>
   </div>
-  
+</div>
+
+
+<p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="10000" rejectButtonStyleClass="p-button-text"></p-confirmDialog>
